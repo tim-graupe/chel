@@ -1,11 +1,36 @@
 .App {
   text-align: center;
+  background-color: #333;
+  color: aqua;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  text-align: center;
+  background-color: #333;
+  color: aqua;
 }
+
+#todaysGamesFeed {
+  background-color: #333;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+#todaysGamesFeed div {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.feedCard{
+  border: white 10px;
+  margin: 10px;
+}
+
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -32,6 +57,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { TodaysGames } from "./components/todaysgames";
+import { Standings } from "./components/standings";
 function App() {
+  //set up routers so each route can be its own top level component to use state and send down to its individual children.
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter className="App">
+      <Routes>
+        <Route path="/" element={<TodaysGames />} />
+        <Route path="/todaysgames" element={<TodaysGames />} />
+        <Route path="/standings" element={<Standings />} />
+        {/* <Route path='/schedule' element={<Schedule />} />
+        <Route path='/account' element={<Account />} />
+        <Route path='/stats' element={<Stats />} /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
