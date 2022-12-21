@@ -1,105 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "../style sheets/standings.css";
+import { Conference } from "./standings_components/conference";
+import { Division } from "./standings_components/division";
+import { Wildcard } from "./standings_components/wildcard";
+import { League } from "./standings_components/league";
+import { StandingsNav } from "./standings_components/standings_nav";
 export const Standings = () => {
-  const [eastern, setEastern] = useState([]);
-  const [western, setWestern] = useState([]);
-  const [currentConf, setCurrentConf] = useState([]);
+  const [table, setTable] = useState("division");
 
-  useEffect(() => {
-    getEastern();
-    getWestern();
-  }, []);
-
-
-  const getEastern = () => {
-    fetch("https://statsapi.web.nhl.com/api/v1/standings", {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((response) =>
-        setCurrentConf(
-          eastern
-            .concat(
-              response.records[0].teamRecords,
-              response.records[1].teamRecords
-            )
-            .sort((a, b) => b.pointsPercentage - a.pointsPercentage)
-        )
-      )
-      .catch((err) => console.error(err));
+  const onChange = (e) => {
+    setTable(e);
   };
 
-  const getWestern = () => {
-    fetch("https://statsapi.web.nhl.com/api/v1/standings", {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((response) =>
-        setWestern(
-          western
-            .concat(
-              response.records[2].teamRecords,
-              response.records[3].teamRecords
-            )
-            .sort((a, b) => b.points - a.points)
-        )
-      )
-      .catch((err) => console.error(err));
-  };
-
-
-  return (
-    <div id="table-container">
-      <button
-        onClick={() => {
-            setWestern(currentConf)
-          setCurrentConf(eastern);
-        }}
-      >
-        Eastern
-      </button>
-      <button
-        onClick={() => {
-          setEastern(currentConf)
-          setCurrentConf(western);
-        }}
-      >
-        Western
-      </button>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col" id="division-row"></th>
-            <th scope="col">W</th>
-            <th scope="col">L</th>
-            <th scope="col">OTL</th>
-            <th scope="col">GP</th>
-            <th scope="col">P</th>
-            <th scope="col">G</th>
-            <th scope="col">GA</th>
-            <th scozpe="col">Diff</th>
-          </tr>
-        </thead>
-
-        {currentConf.map((team) => {
-          return (
-            <tbody>
-              <tr>
-                <td>{team.team.name}</td>
-                <td>{team.leagueRecord.wins}</td>
-                <td>{team.leagueRecord.losses}</td>
-                <td>{team.leagueRecord.ot}</td>
-                <td>{team.gamesPlayed}</td>
-                <td>{team.points}</td>
-                <td>{team.goalsScored}</td>
-                <td>{team.goalsAgainst}</td>
-                <td>{team.goalsScored - team.goalsAgainst}</td>
-              </tr>
-            </tbody>
-          );
-        })}
-      </table>
-    </div>
-  );
+  if (table === "division") {
+    return (
+      <>
+        <StandingsNav onChange={onChange} />
+        <Division />;
+      </>
+    );
+  } else if (table === "wildcard") {
+    return (
+      <>
+        <StandingsNav onChange={onChange} />
+        <Wildcard />;
+      </>
+    );
+  } else if (table === "conference") {
+    return (
+      <>
+        <StandingsNav onChange={onChange} />
+        <Conference />;
+      </>
+    );
+  } else {
+    return (
+      <>
+        <StandingsNav onChange={onChange} />
+        <League />;
+      </>
+    );
+  }
 };

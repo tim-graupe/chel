@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-
-import "../style sheets/standings.css";
-export const Standings = () => {
+import "../../style sheets/standings.css"
+export function Conference(){
   const [eastern, setEastern] = useState([]);
   const [western, setWestern] = useState([]);
   const [currentConf, setCurrentConf] = useState([]);

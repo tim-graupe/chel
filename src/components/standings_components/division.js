@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../style sheets/standings.css";
+import "../../style sheets/standings.css";
 
-export const Standings = () => {
+export function Division(){
   const [standings, setStandings] = useState([]);
   useEffect(() => {
     const todaysGames = () => {
