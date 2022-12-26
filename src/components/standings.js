@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import "../style sheets/standings.css";
-import { Conference } from "./standings_components/conference";
-import { Division } from "./standings_components/division";
-import { Wildcard } from "./standings_components/wildcard";
-import { League } from "./standings_components/league";
-import { StandingsNav } from "./standings_components/standings_nav";
+import { Conference } from "./standings/conference";
+import { Division } from "./standings/division";
+import { Wildcard } from "./standings/wildcard";
+import { League } from "./standings/league";
+import { StandingsNav } from "./standings/standings_nav";
 export const Standings = () => {
   const [table, setTable] = useState("division");
 

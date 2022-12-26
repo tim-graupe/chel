@@ -1,0 +1,23 @@
+.schedule-cards {
+    list-style: none;
+
+    right: 0px;
+    width: auto;
+    border: 3px solid white;
+    padding: 10px;
+}
+
+
+
+.schedule-cards{
+   display: inline-block;
+}
+#team-stat-boxes{
+    display: inline-block;
+}
+
+.team-stat-box{
+    text-align: center;
+    width: 50%;
+    float: left;
+}
