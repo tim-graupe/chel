@@ -26,7 +26,7 @@ export const PlayerProfile = (props) => {
           <div id="bio-div">
             <p className="bio-details">
               Birthplace {props.playerBio.birthCity},{" "}
-              {props.playerBio.birthCountry} {props.playerBio.currentAge}
+              {props.playerBio.birthCountry}
             </p>
             <p className="bio-details">Born {props.playerBio.birthDate}</p>
 

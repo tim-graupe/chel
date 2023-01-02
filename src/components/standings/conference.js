@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../../style sheets/standings.css"
-export function Conference(){
+import "../../style sheets/standings.css";
+export function Conference() {
   const [eastern, setEastern] = useState([]);
   const [western, setWestern] = useState([]);
   const [currentConf, setCurrentConf] = useState([]);
@@ -9,8 +9,6 @@ export function Conference(){
     getEastern();
     getWestern();
   }, []);
-
-
   const getEastern = () => {
     fetch("https://statsapi.web.nhl.com/api/v1/standings", {
       mode: "cors",
@@ -28,7 +26,6 @@ export function Conference(){
       )
       .catch((err) => console.error(err));
   };
-
   const getWestern = () => {
     fetch("https://statsapi.web.nhl.com/api/v1/standings", {
       mode: "cors",
@@ -46,13 +43,11 @@ export function Conference(){
       )
       .catch((err) => console.error(err));
   };
-
-
   return (
     <div id="table-container">
       <button
         onClick={() => {
-            setWestern(currentConf)
+          setWestern(currentConf);
           setCurrentConf(eastern);
         }}
       >
@@ -60,7 +55,7 @@ export function Conference(){
       </button>
       <button
         onClick={() => {
-          setEastern(currentConf)
+          setEastern(currentConf);
           setCurrentConf(western);
         }}
       >
@@ -80,12 +75,11 @@ export function Conference(){
             <th scozpe="col">Diff</th>
           </tr>
         </thead>
-
         {currentConf.map((team) => {
           return (
-            <tbody>
+            <tbody key={team.team.name}>
               <tr>
-                <td>{team.team.name}</td>
+                <td><img src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`} alt="team-logo" className="logos"/>{team.team.name}</td>
                 <td>{team.leagueRecord.wins}</td>
                 <td>{team.leagueRecord.losses}</td>
                 <td>{team.leagueRecord.ot}</td>
@@ -93,7 +87,7 @@ export function Conference(){
                 <td>{team.points}</td>
                 <td>{team.goalsScored}</td>
                 <td>{team.goalsAgainst}</td>
-                <td>{team.goalsScored - team.goalsAgainst}</td>
+                <td>{team.goalsScored-team.goalsAgainst}</td>
               </tr>
             </tbody>
           );
@@ -101,4 +95,4 @@ export function Conference(){
       </table>
     </div>
   );
-};
+}

@@ -26,7 +26,7 @@ const showLeaders = (teamID) =>{
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id)
-                        props.showGoalLeaders(team.id)
+                        props.showLeaders(team.id)
                       }}
                     >
                       {team.name}
@@ -45,7 +45,7 @@ const showLeaders = (teamID) =>{
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id);
-                        props.showGoalLeaders(team.id)
+                        props.showLeaders(team.id)
                       }}
                     >
                       {team.name}
@@ -63,7 +63,7 @@ const showLeaders = (teamID) =>{
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id);
-                        props.showGoalLeaders(team.id)
+                        props.showLeaders(team.id)
                       }}
                     >
                       {team.name}
@@ -81,7 +81,7 @@ const showLeaders = (teamID) =>{
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id);
-                        props.showGoalLeaders(team.id)
+                        props.showLeaders(team.id)
                       }}
                     >
                       {team.name}

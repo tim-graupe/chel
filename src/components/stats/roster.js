@@ -36,7 +36,9 @@ export const Roster = (props) => {
     return <></>;
   } else {
     return (
-      <div id="roster-table">
+      <div>
+       
+              <div id="roster-table">
         <table>
           <caption>Centers</caption>
           <thead>
@@ -169,6 +171,7 @@ export const Roster = (props) => {
           playerStats={playerStats}
           playerBio={playerBio}
         />
+      </div>
       </div>
     );
   }

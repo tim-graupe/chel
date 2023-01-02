@@ -1,23 +1,61 @@
-.schedule-cards {
-    list-style: none;
+#schedule-container{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    right: 0px;
-    width: auto;
-    border: 3px solid white;
+.schedule-logos{
+    max-width: 20%;
+}
+
+#team-stats-table{
+    max-width: 15%;
+    border: 1px solid;
+}
+
+#team-stats-table > th, td{
+    border-bottom: 1px solid #ddd;
+}
+
+#preview-left-col{
+    min-width: 33%;
+}
+
+#preview-mid-col{
+    max-width:25%;
+}
+
+.players-to-watch{
+border-collapse: collapse;
+    
+}
+
+.preview-table-stats-logos{
+    max-height: 20%;
+}
+
+.players-to-watch-team-logos{
+    max-width: 20%;
+}
+
+#home-roster-table{
+    display: none;
+}
+
+#preview-container{
+   display: flex;
+   flex-direction: row;
+}
+
+#recap-highlights{
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+    white-space: nowrap;
+    width: 66%;
+}
+
+.highlight-div{
     padding: 10px;
 }
 
-
-
-.schedule-cards{
-   display: inline-block;
-}
-#team-stat-boxes{
-    display: inline-block;
-}
-
-.team-stat-box{
-    text-align: center;
-    width: 50%;
-    float: left;
-}

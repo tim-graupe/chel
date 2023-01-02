@@ -38,3 +38,8 @@ tr:nth-child(even) {
 tr {
     color: white;
 }
+.logos{
+    max-width: 33%;
+    float: left;
+}
+

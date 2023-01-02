@@ -27,6 +27,7 @@ export const Stats = () => {
         )
         .catch((err) => console.error(err));
     };
+
     const getAtlantic = () => {
       fetch("https://statsapi.web.nhl.com/api/v1/teams", {
         mode: "cors",
@@ -88,7 +89,7 @@ export const Stats = () => {
       .catch((err) => console.error(err));
   }
 
-  const showGoalLeaders = (teamID) => {
+  const showLeaders = (teamID) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=timeOnIcePerGame&season=20222023`, {
       mode: "cors",
     })
@@ -106,7 +107,7 @@ export const Stats = () => {
         pacific={pacific}
         showTeamStats={showTeamStats}
         showRoster = {showRoster}
-        showGoalLeaders={showGoalLeaders}
+        showLeaders={showLeaders}
       />
       <TeamStats team={team} />
       <div id="roster-container">

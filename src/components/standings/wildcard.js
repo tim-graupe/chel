@@ -102,8 +102,9 @@ export function Wildcard(){
     <div id="table-container">
       {leaders.map((team) => {
         return (
-          <table>
+          <table key={team.division.id}>
             <thead>
+              <tr key={team.division.id}>
               <th scope="col" id="division-row">
                 {team.division.name}
               </th>
@@ -115,13 +116,14 @@ export function Wildcard(){
               <th scope="col">G</th>
               <th scope="col">GA</th>
               <th scope="col">Diff</th>
+              </tr>
             </thead>
 
-            <tbody>
+            <tbody key={team.division.id}>
               {team.teamRecords.slice(0, 3).map((record) => {
                 return (
                   <tr key={record.team.id}>
-                    <td>{record.team.name}</td>
+                    <td><img src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${record.team.id}.svg`} alt="team-logo" className="logos"/>{record.team.name}</td>
                     <td>{record.leagueRecord.wins}</td>
                     <td>{record.leagueRecord.losses}</td>
                     <td>{record.leagueRecord.ot}</td>
@@ -139,6 +141,7 @@ export function Wildcard(){
 
       <table>
         <thead>
+          <tr>
           <th scope="col" id="division-row">
             Eastern - Wildcard
           </th>
@@ -150,12 +153,13 @@ export function Wildcard(){
           <th scope="col">G</th>
           <th scope="col">GA</th>
           <th scope="col">Diff</th>
+          </tr>
         </thead>
         {wildcardEast.map((team) => {
           return (
-            <tbody>
-              <tr>
-                <td>{team.team.name}</td>
+            <tbody key={team.team.name}>
+              <tr id={team.team.id}>
+                <td> <img src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`} alt="team-logo" className="logos"/>{team.team.name}</td>
                 <td>{team.leagueRecord.wins}</td>
                 <td>{team.leagueRecord.losses}</td>
                 <td>{team.leagueRecord.ot}</td>
@@ -171,7 +175,8 @@ export function Wildcard(){
 
       <table>
         <thead>
-          <th scope="col" id="division-row">
+        <tr>
+        <th scope="col" id="division-row">
             Western - Wildcard
           </th>
           <th scope="col">W</th>
@@ -182,12 +187,13 @@ export function Wildcard(){
           <th scope="col">G</th>
           <th scope="col">GA</th>
           <th scope="col">Diff</th>
+        </tr>
         </thead>
         {wildcardWest.map((team) => {
           return (
-            <tbody>
-              <tr>
-                <td>{team.team.name}</td>
+            <tbody key={team.team.name}>
+              <tr key={team.team.id}>
+                <td> <img src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${team.team.id}.svg`} alt="team-logo" className="logos"/>{team.team.name}</td>
                 <td>{team.leagueRecord.wins}</td>
                 <td>{team.leagueRecord.losses}</td>
                 <td>{team.leagueRecord.ot}</td>
