@@ -59,3 +59,29 @@ border-collapse: collapse;
     padding: 10px;
 }
 
+.pbp-pic{
+    border-radius: 50%;
+    max-height: auto;
+    max-width: 20%;
+}
+
+.pbp-details{
+    display: inline-block;
+}
+
+.pbp-events{
+    list-style-type: none;
+    padding: 0;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 33%
+}
+
+.pbp-event-box{
+}
+.pbp-type{
+    border: solid 1px;
+    width: fit-content;
+    text-align: center;
+}

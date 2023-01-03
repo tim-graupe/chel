@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 
 export const TeamStats = (props) => {
   const stats = props.props;
-
+  const [scratches, setScratches] = useState([])
   if (stats.game === undefined || stats.game === null || stats === undefined) {
     return <></>;
   } else {
@@ -21,17 +21,20 @@ export const TeamStats = (props) => {
     return (
       <div id="team-stats-container">
         <table>
-          <tr>
-            <td></td>
-            <td>SOG</td>
-            <td>FO%</td>
-            <td>PP</td>
-            <td>PIM</td>
-            <td>HITS</td>
-            <td>BLKS</td>
-            <td>GVA</td>
+        <thead>
+        <tr>
+            <th></th>
+            <th>SOG</th>
+            <th>FO%</th>
+            <th>PP</th>
+            <th>PIM</th>
+            <th>HITS</th>
+            <th>BLKS</th>
+            <th>GVA</th>
           </tr>
-          <tr>
+        </thead>
+        <tbody>
+        <tr>
             <td>
               {" "}
               <img
@@ -150,6 +153,7 @@ export const TeamStats = (props) => {
               }
             </td>
           </tr>
+        </tbody>
         </table>
 
         <table
@@ -451,24 +455,24 @@ export const TeamStats = (props) => {
         <section id="officials-section">
           <h1>Additional Game Information</h1>
           <h3>Officials</h3>
-          <p>
+          <div>
             {" "}
             Referees{" "}
             {stats.game.liveData.boxscore.officials
               .filter((offical) => offical.officialType === "Referee")
               .map((official) => {
-                return <p>{official.official.fullName}</p>;
+                return <p key={official.official.id}>{official.official.fullName}</p>;
               })}
-          </p>
-          <p>
+          </div>
+          <div>
             {" "}
             Linesman{" "}
             {stats.game.liveData.boxscore.officials
               .filter((offical) => offical.officialType === "Linesman")
               .map((official) => {
-                return <p>{official.official.fullName}</p>;
+                return <p key={official.official.id}>{official.official.fullName}</p>;
               })}
-          </p>
+          </div>
           <h3>Head Coaches</h3>
           <p>
             {stats.game.liveData.boxscore.teams.away.team.name}{" "}

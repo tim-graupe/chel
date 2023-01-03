@@ -3,6 +3,7 @@ import { Boxscore } from "./boxscore";
 import "../../style sheets/schedule.css";
 import { Preview } from "./preview";
 import { GameCenter } from "./gamecenter";
+import { PlayByPlay } from "./playByPlay";
 
 export const Schedule = () => {
   const [schedule, setSchedule] = useState([]);
@@ -88,15 +89,18 @@ export const Schedule = () => {
     <div id="schedule-container">
       {schedule.map((games) => {
         return (
-          <>
+          <div key={games.date}>
             <h1>{games.date}</h1>
             <table id="schedule-day-container">
+              <thead>
               <tr>
-                <td>Matchup</td>
-                <td>Status</td>
-                <td>Game Info</td>
+                <th>Matchup</th>
+                <th>Status</th>
+                <th>Game Info</th>
               </tr>
-              {games.games.map((game) => {
+              </thead>
+            <tbody>
+            {games.games.map((game) => {
                 return (
                   <tr key={game.gamePk}>
                     <td>
@@ -138,15 +142,18 @@ export const Schedule = () => {
                   </tr>
                 );
               })}
+            </tbody>
             </table>
-          </>
+          </div>
         );
       })}
     </div>
       <div id="preview-container">
       <Preview content={content} teams={teams} home={teams[0]} away ={teams[1]}setGameSelected={setGameSelected} getGoalies={getGoalies} />
       </div>
-            <GameCenter game={game} content={content}/>
+      <div id="gamecenter-container">
+      <GameCenter game={game} content={content}/>
+      </div>
 
    </>
   );
