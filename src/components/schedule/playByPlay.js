@@ -1,26 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { GameCenterContext } from "../../dispatch/dispatch";
 
-export const PlayByPlay = (props) => {
-  let plays = props.props;
+export const PlayByPlay = () => {
+  const game = useContext(GameCenterContext)
+  // let plays = props.props;
   const [currentPeriod, setCurrentPeriod] = useState(1)
-  if (plays.game === null || plays === undefined) {
+  if (game.gameCenter.gameCenter === null || game === undefined) {
     return <></>;
   } else {
     return (
       <ul className="pbp-events">
-        {plays.game.liveData.linescore.periods.map((period) => {
+        {game.gameCenter.gameCenter.liveData.linescore.periods.map((period) => {
             return (
                 <button key={period.num}onClick={()=> {
                     setCurrentPeriod(period.num)
                 }}>{period.num}</button>
             )
         })}
-        {plays.game.liveData.plays.allPlays
+        {game.gameCenter.gameCenter.liveData.plays.allPlays
           .filter(
             (play) =>
               play.about.period === currentPeriod &&
               play.result.event !== "Stoppage" &&
               play.result.event !== "Period End" &&
+              play.result.event !== "Official Challenge" &&
               play.result.event !== "Game Scheduled" &&
               play.result.event !== "Period Ready" &&
               play.result.event !== "Period Start" &&
@@ -28,6 +31,7 @@ export const PlayByPlay = (props) => {
               play.result.event !== "Game Official" &&
               play.result.event !== "Game End"
           )
+          //Shot, Blocked Shot, Hit,  Faceoff, Missed Shot, Goal, Takeaway, Giveaway, Penalty
           .map((play) => {
             return (
               <li key={play.about.eventIdx} className="pbp-event-box">
@@ -47,6 +51,26 @@ export const PlayByPlay = (props) => {
                     </div>
                   );
                 })}
+              </li>
+            );
+          })}
+
+{game.gameCenter.gameCenter.liveData.plays.allPlays
+          .filter(
+            (play) =>
+              play.about.period === currentPeriod &&
+              play.result.event === "Period End" &&
+              play.result.event === "Game Official" &&
+              play.result.event === "Game End"
+          )
+          .map((play) => {
+            return (
+              <li key={play.about.eventIdx} className="pbp-event-box">
+                <p className="pbp-type">
+                  {play.about.periodTimeRemaining} {play.result.event}
+                </p>
+                <p>{play.result.description}</p>
+
               </li>
             );
           })}

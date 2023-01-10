@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { PlayerProfile } from "./playerProfile";
-export const Roster = (props) => {
+import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
+export const Roster = () => {
   const [playerID, setPlayerID] = useState(null);
   const [playerBio, setPlayerBio] = useState(null);
   const [playerStats, setPlayerStats] = useState([]);
+  const [leaders, setLeaders] = useContext(LeadersContext)
+  const [roster, setRoster] = useContext(RosterContext)
   function test(player) {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear`,
@@ -32,7 +35,7 @@ export const Roster = (props) => {
   }
 
 
-  if (props.roster === null) {
+  if (roster === null) {
     return <></>;
   } else {
     return (
@@ -47,7 +50,7 @@ export const Roster = (props) => {
               <th>No</th>
             </tr>
           </thead>
-          {props.roster
+          {roster
             .filter((player) => player.position.abbreviation === "C")
             .map((player) => {
               return (
@@ -74,7 +77,7 @@ export const Roster = (props) => {
               <th>No</th>
             </tr>
           </thead>
-          {props.roster
+          {roster
             .filter(
               (player) =>
                 player.position.abbreviation === "LW" ||
@@ -110,7 +113,7 @@ export const Roster = (props) => {
               <th>No</th>
             </tr>
           </thead>
-          {props.roster
+          {roster
             .filter((player) => player.position.abbreviation === "D")
             .map((player) => {
               return (
@@ -142,7 +145,7 @@ export const Roster = (props) => {
               <th>No</th>
             </tr>
           </thead>
-          {props.roster
+          {roster
             .filter((player) => player.position.abbreviation === "G")
             .map((player) => {
               return (

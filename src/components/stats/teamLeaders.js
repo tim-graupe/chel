@@ -1,13 +1,15 @@
-import React from "react"
+import React, { useContext } from "react"
+import { LeadersContext } from "../../dispatch/dispatch";
 
-export const TeamLeaders = (props) => {
-    if (props.leaders.length < 1){
+export const TeamLeaders = () => {
+    const [leaders, setLeaders] = useContext(LeadersContext)
+    if (leaders[0] === undefined){
         return <></>
     } else {
     return (
         <table id="roster-table"><caption>Team Leaders</caption>
         <thead><th colSpan="2">Points Leaders</th></thead>
-        {props.leaders[0].leaders.map((player) => {
+        {leaders[0].leaders.map((player) => {
             return (
                 <tr><td><img
                 src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
@@ -20,7 +22,7 @@ export const TeamLeaders = (props) => {
         })}
 
 <thead><th colSpan="2">Goals Scored</th></thead>
-        {props.leaders[1].leaders.map((player) => {
+        {leaders[1].leaders.map((player) => {
             return (
                 <tr><td><img
                 src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
@@ -33,7 +35,7 @@ export const TeamLeaders = (props) => {
         })}
 
 <thead><th colSpan="2">Assists</th></thead>
-        {props.leaders[2].leaders.map((player) => {
+        {leaders[2].leaders.map((player) => {
             return (
                 <tr><td><img
                 src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
@@ -46,7 +48,7 @@ export const TeamLeaders = (props) => {
         })}
 
 <thead><th colSpan="2">+/-</th></thead>
-        {props.leaders[3].leaders.map((player) => {
+        {leaders[3].leaders.map((player) => {
             return (
                 <tr><td><img
                 src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}

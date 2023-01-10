@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../style sheets/stats.css";
 import { StatsNav } from "./statsnav";
 import { TeamStats } from "./teamStats";
 import { Roster } from "./roster";
 import { TeamLeaders } from "./teamLeaders";
+import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
 export const Stats = () => {
-  const [roster, setRoster] = useState(null)
-  const [leaders, setLeaders] = useState([])
+  const [roster, setRoster] = useContext(RosterContext)
+  const [leaders, setLeaders] = useContext(LeadersContext)
   const [team, setTeam] = useState(null);
   const [metro, setMetro] = useState([]);
   const [atlantic, setAtlantic] = useState([]);
@@ -90,7 +91,7 @@ export const Stats = () => {
   }
 
   const showLeaders = (teamID) => {
-    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=timeOnIcePerGame&season=20222023`, {
+    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=gaa&leaderCategories=timeOnIcePerGame&leaderCategories=shutouts&season=20222023`, {
       mode: "cors",
     })
       .then((response) => response.json())
@@ -111,8 +112,8 @@ export const Stats = () => {
       />
       <TeamStats team={team} />
       <div id="roster-container">
-      <Roster roster={roster}/>
-      <TeamLeaders leaders={leaders} />
+      <Roster/>
+      <TeamLeaders />
     </div>
     </div>
   );

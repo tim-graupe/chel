@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../../style sheets/stats.css";
-
+import { RosterContext } from "../../dispatch/dispatch";
 export const TeamStats = (props) => {
+const [roster, setRoster] = useContext(RosterContext)
 
   
   if (props.team === null) {

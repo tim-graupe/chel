@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import "../../style sheets/standings.css";
+import { LeadersContext } from "../../dispatch/dispatch";
 export function League() {
-  const [leaders, setLeaders] = useState([]);
+  const [leaders, setLeaders] = useState(LeadersContext);
 
   useEffect(() => {
     getLeague();

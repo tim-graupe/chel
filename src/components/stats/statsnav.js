@@ -1,19 +1,8 @@
 import React, { useState } from "react";
+import { LeadersContext } from "../../dispatch/dispatch";
 
 export const StatsNav = (props) => {
-const [leaders, setLeaders] = useState([])
-const showLeaders = (teamID) =>{
 
-  fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/?expand=team.roster`, {
-    mode: "cors",
-  })
-    .then((response) => response.json())
-    .then((response) => setLeaders(response.teams[0].roster.roster))
-    
-    .catch((err) => console.error(err));
-
-  
-}
     return (
         <div id="container">
           <div id="list-container">

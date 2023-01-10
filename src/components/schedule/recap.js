@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GameCenterContext } from "../../dispatch/dispatch";
+import { Link } from "react-router-dom";
 
-export const Recap = (props) => {
-    const media = props.props
-    if (media.content === null) {
+export const Recap = () => {
+    const media = useContext(GameCenterContext)
+    if (media.content === null || media.content.content.editorial.recap.items[0] === undefined || media.content.content.editorial === undefined) {
         return <></>
     }
     return (
         <div id="recap-container">
-            <h2>{media.content.editorial.recap.items[0].headline}</h2>
-            <h4>{media.content.editorial.recap.items[0].subhead}</h4>
-            <p>By {media.content.editorial.recap.items[0].contributor.contributors[0].name} / {media.content.editorial.recap.items[0].contributor.source}</p>
-            <video width={media.content.editorial.recap.items[0].media.playbacks[2].width} height={media.content.editorial.recap.items[0].media.playbacks[2].height} controls>
-                <source src={media.content.editorial.recap.items[0].media.playbacks[2].url} title="recap" />
+            {media.content.content.editorial.recap.items.map((headline) => {
+                return (
+                    <>
+                    <h1><strong>{headline.headline}</strong></h1>
+                    <h2>{headline.subhead}</h2>
+                    <p>{headline.contributor.contributors.map((contributor) => {
+                        return <>{contributor.name} / {headline.contributor.source}</>
+                    })}</p>
+                    </>
+                )
+            })}
+
+            <video width={media.content.content.editorial.recap.items[0].media.playbacks[2].width} height={media.content.content.editorial.recap.items[0].media.playbacks[2].height} controls>
+                <source src={media.content.content.editorial.recap.items[0].media.playbacks[2].url} title="recap" />
             </video>
         <p id="recap-blurb">
-        {media.content.editorial.recap.items[0].seoDescription}
-
+        {media.content.content.editorial.recap.items[0].seoDescription}
+        <a href={`http://www.nhl.com/${media.content.content.editorial.recap.items[0].url }`}>Read More</a>
         </p>
 
-        <div id="recap-highlights">
-        {media.content.highlights.scoreboard.items.map((highlight) => {
+         <div id="recap-highlights">
+        {media.content.content.highlights.scoreboard.items.map((highlight) => {
             return (
                 <div className="highlight-div">
                                         <video width={highlight.playbacks[0].width} height={highlight.playbacks[0].height} controls >

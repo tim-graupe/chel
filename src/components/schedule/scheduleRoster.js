@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { PreviewContext } from "../../dispatch/dispatch";
 
-export const ScheduleRoster = (props) => {
+export const ScheduleRoster = () => {
   const [team, setTeam] = useState("away");
+  const [preview, setPreview] = useContext(PreviewContext)
 
   useEffect(() => {
     const changeTable = () => {
@@ -28,14 +30,14 @@ export const ScheduleRoster = (props) => {
               setTeam("home");
             }}
           >
-            {props.teams[0].teamName}
+            {preview[0].teamName}
           </td>
           <td
             onClick={() => {
               setTeam("away");
             }}
           >
-            {props.teams[1].teamName}
+            {preview[1].teamName}
           </td>
         </tr>
         <tr>
@@ -44,7 +46,7 @@ export const ScheduleRoster = (props) => {
           <td>Pos</td>
         </tr>
         <tbody>
-          {props.teams[0].roster.roster.map((team) => {
+          {preview[0].roster.roster.map((team) => {
             return (
               <tr>
                 <td>{team.jerseyNumber}</td>
@@ -55,7 +57,7 @@ export const ScheduleRoster = (props) => {
           })}
         </tbody>
         <tbody id="home-roster-table">
-          {props.teams[1].roster.roster.map((team) => {
+          {preview[1].roster.roster.map((team) => {
             return (
               <tr>
                 <td>{team.jerseyNumber}</td>
@@ -77,14 +79,14 @@ export const ScheduleRoster = (props) => {
               setTeam("home");
             }}
           >
-            {props.teams[0].teamName}
+            {preview[0].teamName}
           </td>
           <td
             onClick={() => {
               setTeam("away");
             }}
           >
-            {props.teams[1].teamName}
+            {preview[1].teamName}
           </td>
         </tr>
         <tr>
@@ -93,7 +95,7 @@ export const ScheduleRoster = (props) => {
           <td>Pos</td>
         </tr>
         <tbody>
-          {props.teams[1].roster.roster.map((team) => {
+          {preview[1].roster.roster.map((team) => {
             return (
               <tr>
                 <td>{team.jerseyNumber}</td>

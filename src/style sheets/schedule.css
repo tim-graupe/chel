@@ -1,53 +1,46 @@
-#schedule-container{
+#schedule-container {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.schedule-logos{
+.schedule-logos {
     max-width: 20%;
 }
 
-#team-stats-table{
+#team-stats-table {
     max-width: 15%;
     border: 1px solid;
 }
 
-#team-stats-table > th, td{
+#team-stats-table>th,
+td {
     border-bottom: 1px solid #ddd;
 }
 
-#preview-left-col{
-    min-width: 33%;
+.players-to-watch {
+    border-collapse: collapse;
+
 }
 
-#preview-mid-col{
-    max-width:25%;
-}
-
-.players-to-watch{
-border-collapse: collapse;
-    
-}
-
-.preview-table-stats-logos{
+.preview-table-stats-logos {
     max-height: 20%;
 }
 
-.players-to-watch-team-logos{
+.players-to-watch-team-logos {
     max-width: 20%;
 }
 
-#home-roster-table{
+#home-roster-table {
     display: none;
 }
 
-#preview-container{
+/* #preview-container{
    display: flex;
    flex-direction: row;
-}
+} */
 
-#recap-highlights{
+#recap-highlights {
     display: flex;
     flex-direction: row;
     overflow: auto;
@@ -55,21 +48,21 @@ border-collapse: collapse;
     width: 66%;
 }
 
-.highlight-div{
+.highlight-div {
     padding: 10px;
 }
 
-.pbp-pic{
+.pbp-pic {
     border-radius: 50%;
     max-height: auto;
     max-width: 20%;
 }
 
-.pbp-details{
+.pbp-details {
     display: inline-block;
 }
 
-.pbp-events{
+.pbp-events {
     list-style-type: none;
     padding: 0;
     display: block;
@@ -78,10 +71,38 @@ border-collapse: collapse;
     width: 33%
 }
 
-.pbp-event-box{
-}
-.pbp-type{
+.pbp-event-box {}
+
+.pbp-type {
     border: solid 1px;
     width: fit-content;
     text-align: center;
+}
+
+#preview-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#preview-container>section {
+    width: 100%;
+}
+
+
+#preview-left-col {
+    width: 33%;
+}
+
+#team-stats-table {
+    min-width: 50%;
+}
+
+#live-game-scoreboard{
+    max-width: 25%;
+}
+
+#recap-container{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState, useSyncExternalStore } from "react";
+import React, { Component, useContext, useEffect, useState } from "react";
 import { Boxscore } from "./boxscore";
 import "../../style sheets/schedule.css";
-import { Preview } from "./preview";
-import { GameCenter } from "./gamecenter";
-import { PlayByPlay } from "./playByPlay";
+
 import { TeamContext, PreviewContext, GameCenterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 
-export const Schedule = () => {
+export const TeamSchedule = () => {
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
   const [preview, setPreview] = useContext(PreviewContext)
   const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
@@ -61,6 +59,15 @@ export const Schedule = () => {
 
   };
 
+  const getContent = (gamePk) => {
+    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((response) => setContent({content: response}))
+      .catch((err) => console.error(err));
+  };
+
   const getTeamSchedule = (id) => {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/schedule?teamId=${id}&season=20222023`,
@@ -73,19 +80,12 @@ export const Schedule = () => {
       .catch((err) => console.error(err));
   };
 
-  const getContent = (gamePk) => {
-    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((response) => setContent({content: response}))
-      .catch((err) => console.error(err));
-  };
-
-  return (
-    <>
+  if (teamSchedule === null) {
+    return <></>;
+  } else
+    return (
       <div id="schedule-container">
-        {schedule.map((games) => {
+        {teamSchedule.map((games) => {
           return (
             <div key={games.date}>
               <h1>{games.date}</h1>
@@ -101,13 +101,12 @@ export const Schedule = () => {
                   {games.games.map((game) => {
                     return (
                       <tr key={game.gamePk}>
-                        <td>
-                          <Link
-                            to={`/schedule/${game.teams.away.team.id}`}
-                            onClick={() => {
-                              getTeamSchedule(game.teams.away.team.id);
-                            }}
-                          >
+                        <td
+                          onClick={() => {
+                            getTeamSchedule(game.teams.away.team.id);
+                          }}
+                        >
+                          <Link to={`/schedule/${game.teams.away.team.id}`}>
                             {" "}
                             {game.teams.away.team.name}
                           </Link>{" "}
@@ -137,7 +136,7 @@ export const Schedule = () => {
                           />{" "}
                         </td>
                         <td>
-                          <Link to={`/preview/${game.gamePk}`}
+                        <Link to={`/preview/${game.gamePk}`}
                             onClick={() => {
                               getPreviewStats(
                                 game.teams.away.team.id,
@@ -168,10 +167,5 @@ export const Schedule = () => {
           );
         })}
       </div>
-
-      {/* <div id="gamecenter-container">
-        <GameCenter game={game} content={content} />
-      </div> */}
-    </>
-  );
+    );
 };

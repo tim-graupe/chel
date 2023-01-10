@@ -1,20 +1,24 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import { GameCenterContext } from "../../dispatch/dispatch";
 
-export const TeamStats = (props) => {
-  const stats = props.props;
+export const TeamStats = () => {
+  const stats = useContext(GameCenterContext)
+  // return (
+  //   <p>{stats.gameCenter.gameCenter.copyright}</p>
+  // )
   const [scratches, setScratches] = useState([])
-  if (stats.game === undefined || stats.game === null || stats === undefined) {
+  if (stats.gameCenter.gameCenter === undefined || stats.gameCenter.gameCenter === null || stats === undefined) {
     return <></>;
   } else {
-    let away = Object.keys(stats.game.liveData.boxscore.teams.away.players).map(
+    let away = Object.keys(stats.gameCenter.gameCenter.liveData.boxscore.teams.away.players).map(
       (key) => (
-        Number(key), stats.game.liveData.boxscore.teams.away.players[key]
+        Number(key), stats.gameCenter.gameCenter.liveData.boxscore.teams.away.players[key]
       )
     );
 
-    let home = Object.keys(stats.game.liveData.boxscore.teams.home.players).map(
+    let home = Object.keys(stats.gameCenter.gameCenter.liveData.boxscore.teams.home.players).map(
       (key) => (
-        Number(key), stats.game.liveData.boxscore.teams.home.players[key]
+        Number(key), stats.gameCenter.gameCenter.liveData.boxscore.teams.home.players[key]
       )
     );
 
@@ -38,57 +42,57 @@ export const TeamStats = (props) => {
             <td>
               {" "}
               <img
-                src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.game.gameData.teams.away.id}.svg`}
+                src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.gameCenter.gameCenter.gameData.teams.away.id}.svg`}
                 className="schedule-logos"
                 alt="team-pic"
               />
-              {stats.game.gameData.teams.away.teamName}
+              {stats.gameCenter.gameCenter.gameData.teams.away.teamName}
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.shots
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.faceOffWinPercentage
               }{" "}
               %
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.powerPlayGoals
               }{" "}
               /{" "}
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.powerPlayOpportunities
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.pim
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.hits
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.blocked
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.away.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
                   .teamSkaterStats.giveaways
               }
             </td>
@@ -98,57 +102,57 @@ export const TeamStats = (props) => {
             <td>
               {" "}
               <img
-                src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.game.gameData.teams.home.id}.svg`}
+                src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.gameCenter.gameCenter.gameData.teams.home.id}.svg`}
                 className="schedule-logos"
                 alt="team-pic"
               />
-              {stats.game.gameData.teams.home.teamName}
+              {stats.gameCenter.gameCenter.gameData.teams.home.teamName}
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.shots
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.faceOffWinPercentage
               }{" "}
               %
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.powerPlayGoals
               }{" "}
               /{" "}
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.powerPlayOpportunities
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.pim
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.hits
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.blocked
               }
             </td>
             <td>
               {
-                stats.game.liveData.boxscore.teams.home.teamStats
+                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
                   .teamSkaterStats.giveaways
               }
             </td>
@@ -160,7 +164,7 @@ export const TeamStats = (props) => {
           id="post-game-skater-stats-away"
           className="post-game-skater-stats"
         >
-          <caption>{stats.game.gameData.teams.away.teamName}</caption>
+          <caption>{stats.gameCenter.gameCenter.gameData.teams.away.teamName}</caption>
           <thead>
             <tr>
               <th>#</th>
@@ -308,7 +312,7 @@ export const TeamStats = (props) => {
           id="post-game-skater-stats-home"
           className="post-game-skater-stats"
         >
-          <caption>{stats.game.gameData.teams.home.teamName}</caption>
+          <caption>{stats.gameCenter.gameCenter.gameData.teams.home.teamName}</caption>
           <thead>
             <tr>
               <th>#</th>
@@ -458,7 +462,7 @@ export const TeamStats = (props) => {
           <div>
             {" "}
             Referees{" "}
-            {stats.game.liveData.boxscore.officials
+            {stats.gameCenter.gameCenter.liveData.boxscore.officials
               .filter((offical) => offical.officialType === "Referee")
               .map((official) => {
                 return <p key={official.official.id}>{official.official.fullName}</p>;
@@ -467,7 +471,7 @@ export const TeamStats = (props) => {
           <div>
             {" "}
             Linesman{" "}
-            {stats.game.liveData.boxscore.officials
+            {stats.gameCenter.gameCenter.liveData.boxscore.officials
               .filter((offical) => offical.officialType === "Linesman")
               .map((official) => {
                 return <p key={official.official.id}>{official.official.fullName}</p>;
@@ -475,12 +479,12 @@ export const TeamStats = (props) => {
           </div>
           <h3>Head Coaches</h3>
           <p>
-            {stats.game.liveData.boxscore.teams.away.team.name}{" "}
-            {stats.game.liveData.boxscore.teams.away.coaches[0].person.fullName}
+            {stats.gameCenter.gameCenter.liveData.boxscore.teams.away.team.name}{" "}
+            {stats.gameCenter.gameCenter.liveData.boxscore.teams.away.coaches[0].person.fullName}
           </p>
           <p>
-            {stats.game.liveData.boxscore.teams.home.team.name}{" "}
-            {stats.game.liveData.boxscore.teams.home.coaches[0].person.fullName}
+            {stats.gameCenter.gameCenter.liveData.boxscore.teams.home.team.name}{" "}
+            {stats.gameCenter.gameCenter.liveData.boxscore.teams.home.coaches[0].person.fullName}
           </p>
         </section>
       </div>

@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "../../style sheets/standings.css";
+import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
+import { Link } from "react-router-dom";
 
-export function Division() {
+export const Division = () => {
+  const [roster, setRoster] = useContext(RosterContext);
+  const [leaders, setLeaders] = useContext(LeadersContext);
   const [standings, setStandings] = useState([]);
   useEffect(() => {
     const todaysGames = () => {
@@ -15,6 +19,29 @@ export function Division() {
     todaysGames();
   }, []);
 
+  const showRoster = (teamID) => {
+    fetch(
+      `https://statsapi.web.nhl.com/api/v1/teams/${teamID}/?expand=team.roster`,
+      {
+        mode: "cors",
+      }
+    )
+      .then((response) => response.json())
+      .then((response) => setRoster(response.teams[0].roster.roster))
+      .catch((err) => console.error(err));
+  };
+
+  
+  const showLeaders = (teamID) => {
+    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=timeOnIcePerGame&season=20222023`, {
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((response) => setLeaders(response.teamLeaders))
+      .catch((err) => console.error(err));
+  }
+
+
   return (
     <div id="table-container">
       {standings.map((standing) => {
@@ -22,7 +49,9 @@ export function Division() {
           <table key={standing.division.id}>
             <thead>
               <tr>
-                <th scope="col" id="division-row">{standing.division.name}</th>
+                <th scope="col" id="division-row">
+                  {standing.division.name}
+                </th>
                 <th scope="col">W</th>
                 <th scope="col">L</th>
                 <th scope="col">OTL</th>
@@ -37,13 +66,27 @@ export function Division() {
               return (
                 <tbody key={record.team.id}>
                   <tr>
-                    <td><img src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${record.team.id}.svg`} alt="team-logo" className="logos"/>{record.team.name}</td>
+                    <td
+                      onClick={() => {
+                        showLeaders(record.team.id);
+                        showRoster(record.team.id);
+                      }}
+                    >
+                      <Link to="/stats">
+                        <img
+                          src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${record.team.id}.svg`}
+                          alt="team-logo"
+                          className="logos"
+                        />
+                      </Link>
+                      {record.team.name}
+                    </td>
                     <td>{record.leagueRecord.wins}</td>
                     <td>{record.leagueRecord.losses}</td>
                     <td>{record.leagueRecord.ot}</td>
                     <td>{record.gamesPlayed}</td> <td>{record.points}</td>
                     <td>{record.goalsScored}</td> <td>{record.goalsAgainst}</td>
-                    <td>{record.goalsScored-record.goalsAgainst}</td>
+                    <td>{record.goalsScored - record.goalsAgainst}</td>
                   </tr>
                 </tbody>
               );

@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-export const TodaysGames = (props) => {
-  const [gamesArray, setgamesArray] = useState([]);
-
-
+export const TodaysGames = () => {
 
     // useEffect(() => {
     //     const todaysGames = () => {
@@ -19,10 +16,10 @@ export const TodaysGames = (props) => {
 
   return (
     <>
-
+    {/* {dogoco.age} */}
 
       <div id="todaysGamesFeed">
-    <h1>hi</h1>
+ 
       </div>
     </>
   );

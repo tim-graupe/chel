@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Conference } from "./conference";
 import { Division } from "./division";
 import { Wildcard } from "./wildcard";
 import { League } from "./league";
 import { StandingsNav } from "./standings_nav";
-export const Standings = () => {
+import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
+export const Standings = (props) => {
   const [table, setTable] = useState("division");
-
+  const [roster, setRoster] = useContext(RosterContext)
+  const [leaders, setLeaders] = useContext(LeadersContext)
   const onChange = (e) => {
     setTable(e);
   };
@@ -16,21 +18,22 @@ export const Standings = () => {
     return (
       <>
         <StandingsNav onChange={onChange} />
-        <Division />;
+
+        <Division />
       </>
     );
   } else if (table === "wildcard") {
     return (
       <>
         <StandingsNav onChange={onChange} />
-        <Wildcard />;
+        <Wildcard />
       </>
     );
   } else if (table === "conference") {
     return (
       <>
         <StandingsNav onChange={onChange} />
-        <Conference />;
+        <Conference />
       </>
     );
   } else {
