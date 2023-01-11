@@ -20,7 +20,7 @@ export const ScheduleRoster = () => {
 
   return (
     <>
-      <table id="home-roster-table">
+      <table id="home-roster-table" className="roster-table">
         <thead>
           <tr><th>Team Rosters</th></tr>
         </thead>
@@ -69,7 +69,7 @@ export const ScheduleRoster = () => {
         </tbody>
       </table>
 
-      <table id="away-roster-table">
+      <table id="away-roster-table" className="roster-table">
       <thead>
           <tr><th>Team Rosters</th></tr>
         </thead>

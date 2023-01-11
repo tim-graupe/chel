@@ -46,7 +46,7 @@ export const Division = () => {
     <div id="table-container">
       {standings.map((standing) => {
         return (
-          <table key={standing.division.id}>
+          <table key={standing.division.id} className="standings-table">
             <thead>
               <tr>
                 <th scope="col" id="division-row">

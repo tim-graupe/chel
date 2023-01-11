@@ -102,7 +102,7 @@ export function Wildcard(){
     <div id="table-container">
       {leaders.map((team) => {
         return (
-          <table key={team.division.id}>
+          <table key={team.division.id} className="standings-table">
             <thead>
               <tr key={team.division.id}>
               <th scope="col" id="division-row">

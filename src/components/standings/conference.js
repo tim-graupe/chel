@@ -61,7 +61,7 @@ export function Conference() {
       >
         Western
       </button>
-      <table>
+      <table className="standings-table">
         <thead>
           <tr>
             <th scope="col" id="division-row"></th>

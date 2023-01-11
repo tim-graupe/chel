@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ScheduleRoster } from "./scheduleRoster";
 import { LeadersContext, PreviewContext } from "../../dispatch/dispatch";
+import { PreviewStandings } from "./previewStandings";
 
 export const Preview = () => {
 const [preview, setPreview] = useContext(PreviewContext)
@@ -123,6 +124,7 @@ if (preview === null || preview[0] === undefined) {
               </tr>
             </tbody>
           </table>
+
         </section>
         <section className="preview-col" id="preview-mid-col">
           <table id="players-to-watch-table">

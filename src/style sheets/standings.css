@@ -43,3 +43,15 @@ tr {
     float: left;
 }
 
+@media screen and (max-width: 1000px){
+.standings-table {
+    width: auto;
+    overflow-x: scroll;
+}
+
+.standings-table > th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+}
