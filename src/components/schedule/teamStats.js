@@ -23,8 +23,8 @@ export const TeamStats = () => {
     );
 
     return (
-      <div id="team-stats-container">
-        <table>
+      <div id="gamecenter-team-stats-container">
+        <table className="post-game-skater-stats">
         <thead>
         <tr>
             <th></th>

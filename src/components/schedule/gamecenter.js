@@ -6,9 +6,9 @@ import { LiveGame } from "./liveGame";
 export const GameCenter = () => {
     return (
         <div id="game-center-container">
-            <LiveGame />
+            {/* <LiveGame /> */}
             <Recap/>
-            <TeamStats />
+            <TeamStats /> 
             <PlayByPlay /> 
         </div>
     )

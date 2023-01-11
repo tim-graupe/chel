@@ -7,7 +7,7 @@ export const TeamLeaders = () => {
         return <></>
     } else {
     return (
-        <table id="roster-table"><caption>Team Leaders</caption>
+        <table id="leaders-table"><caption>Team Leaders</caption>
         <thead><th colSpan="2">Points Leaders</th></thead>
         {leaders[0].leaders.map((player) => {
             return (

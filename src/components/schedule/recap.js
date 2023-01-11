@@ -21,7 +21,7 @@ export const Recap = () => {
                 )
             })}
 
-            <video width={media.content.content.editorial.recap.items[0].media.playbacks[2].width} height={media.content.content.editorial.recap.items[0].media.playbacks[2].height} controls>
+            <video controls id="recap-video">
                 <source src={media.content.content.editorial.recap.items[0].media.playbacks[2].url} title="recap" />
             </video>
         <p id="recap-blurb">

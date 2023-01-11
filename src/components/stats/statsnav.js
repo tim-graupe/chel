@@ -4,7 +4,7 @@ import { LeadersContext } from "../../dispatch/dispatch";
 export const StatsNav = (props) => {
 
     return (
-        <div id="container">
+        <div id="stats-nav-container">
           <div id="list-container">
             <div className="division-container">
               <h1>Metropolitan</h1>

@@ -18,7 +18,7 @@ const [roster, setRoster] = useContext(RosterContext)
           {props.team[0].splits[0].stat.ot}
         </p>
         </div>
-        <table>
+        <table id="team-stats-table">
             <caption>Summary</caption>
             <thead>
                 <tr>

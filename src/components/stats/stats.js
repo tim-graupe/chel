@@ -100,7 +100,7 @@ export const Stats = () => {
   }
 
   return (
-    <div id="main-container">
+    <div id="stats-container">
       <StatsNav
         metro={metro}
         atlantic={atlantic}
@@ -110,8 +110,9 @@ export const Stats = () => {
         showRoster = {showRoster}
         showLeaders={showLeaders}
       />
+            <div id="roster-container">
+
       <TeamStats team={team} />
-      <div id="roster-container">
       <Roster/>
       <TeamLeaders />
     </div>

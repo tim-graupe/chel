@@ -5,8 +5,8 @@ export const PlayByPlay = () => {
   const game = useContext(GameCenterContext)
   // let plays = props.props;
   const [currentPeriod, setCurrentPeriod] = useState(1)
-  if (game.gameCenter.gameCenter === null || game === undefined) {
-    return <></>;
+  if (game.gameCenter.gameCenter === undefined || game === undefined) {
+    return <></>
   } else {
     return (
       <ul className="pbp-events">

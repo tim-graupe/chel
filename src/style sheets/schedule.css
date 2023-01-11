@@ -97,40 +97,67 @@ td {
     min-width: 50%;
 }
 
-#live-game-scoreboard{
+#live-game-scoreboard {
     max-width: 25%;
 }
 
-#recap-container{
+#recap-container {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
 
-@media screen and (max-width: 1000px){
-    #schedule-container{
+@media screen and (max-width: 1000px) {
+
+    #schedule-container {
         width: 100%;
-        }
+    }
 
-        #preview-container{
-           display: contents
-        }
-  
-        #team-stats-table{
-            min-width: 100%;
-           padding: 10xp 20px; 
-           bottom:0;
-           width: 100%;
-           box-sizing: border-box;
-        }
+    #preview-container {
+        display: contents
+    }
 
-        .roster-table{
-            min-width: 100%;
-         }
+    #team-stats-table {
+        min-width: 100%;
+        padding: 10xp 20px;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
 
-#live-game-scoreboard{
-    min-width: 100%
+    .roster-table {
+        min-width: 100%;
+    }
+
+    #live-game-scoreboard {
+        min-width: 100%
+    }
+
+    #recap-container {
+        max-width: 100%;
+        width: auto;
+    }
+
+    #recap-video {
+        width: auto;
+        max-width: 100%;
+    }
+
+    #recap-highlights {
+        scrollbar-width: thick;
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    #schedule-team-stats-container {
+        min-width: 100%;
+        overflow-x: scroll;
+    }
+
+    .post-game-skater-stats{
+            overflow-x: scroll;
+           
+    }
+
+
 }
-
-    
-        }
