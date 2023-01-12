@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tim-graupe/chel/schedule/static/css/main.fee08932.css",
-    "main.js": "/tim-graupe/chel/schedule/static/js/main.168aa00a.js",
-    "static/js/787.e50e5bba.chunk.js": "/tim-graupe/chel/schedule/static/js/787.e50e5bba.chunk.js",
-    "index.html": "/tim-graupe/chel/schedule/index.html",
-    "main.fee08932.css.map": "/tim-graupe/chel/schedule/static/css/main.fee08932.css.map",
-    "main.168aa00a.js.map": "/tim-graupe/chel/schedule/static/js/main.168aa00a.js.map",
-    "787.e50e5bba.chunk.js.map": "/tim-graupe/chel/schedule/static/js/787.e50e5bba.chunk.js.map"
+    "main.css": "/static/css/main.fee08932.css",
+    "main.js": "/static/js/main.05e583dd.js",
+    "static/js/787.e50e5bba.chunk.js": "/static/js/787.e50e5bba.chunk.js",
+    "index.html": "/index.html",
+    "main.fee08932.css.map": "/static/css/main.fee08932.css.map",
+    "main.05e583dd.js.map": "/static/js/main.05e583dd.js.map",
+    "787.e50e5bba.chunk.js.map": "/static/js/787.e50e5bba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fee08932.css",
-    "static/js/main.168aa00a.js"
+    "static/js/main.05e583dd.js"
   ]
 }
