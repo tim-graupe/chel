@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/tim-graupe/chel/static/css/main.fee08932.css",
+    "main.js": "/tim-graupe/chel/static/js/main.f061cc88.js",
+    "static/js/787.e50e5bba.chunk.js": "/tim-graupe/chel/static/js/787.e50e5bba.chunk.js",
+    "index.html": "/tim-graupe/chel/index.html",
+    "main.fee08932.css.map": "/tim-graupe/chel/static/css/main.fee08932.css.map",
+    "main.f061cc88.js.map": "/tim-graupe/chel/static/js/main.f061cc88.js.map",
+    "787.e50e5bba.chunk.js.map": "/tim-graupe/chel/static/js/787.e50e5bba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fee08932.css",
+    "static/js/main.f061cc88.js"
+  ]
+}
