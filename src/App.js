@@ -1,6 +1,6 @@
 import "./style sheets/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { TodaysGames } from "./components/todaysgames";
+import { HashRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./components/home";
 import { Standings } from "./components/standings/standings";
 import { Schedule } from "./components/schedule/schedule";
 import { Stats } from "./components/stats/stats";
@@ -19,14 +19,15 @@ function App() {
   let [teamSchedule, setTeamSchedule] = useState(null)
 
   return (
-    <BrowserRouter className="App">
+    <HashRouter className="App">
+      <p>chel?</p>
       <PreviewContext.Provider value={[preview, setPreview]}>
       <RosterContext.Provider value={[roster, setRoster, leaders, setLeaders]}>
         <LeadersContext.Provider value={[leaders, setLeaders]}>
         <TeamContext.Provider value={[teamSchedule, setTeamSchedule]}>
         <GameCenterContext.Provider value={{gameCenter, setGameCenter, content, setContent}}>
         <Routes>
-            <Route path="/" element={<TodaysGames />} />
+            <Route path="/" element={<Schedule />} />
             <Route path="/standings" element={<Standings />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/stats" element={<Stats />} />
@@ -40,7 +41,7 @@ function App() {
         </LeadersContext.Provider>
       </RosterContext.Provider>
       </PreviewContext.Provider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

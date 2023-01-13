@@ -4,16 +4,21 @@ import { ScheduleRoster } from "./scheduleRoster";
 
 export const LiveGame = () => {
   const game = useContext(GameCenterContext);
-
-  return (
-    <div id="live-game-container">
-      <section id="left-live-game-col">
-        <div id="live-left-col-nav">
-          <div className="live-left-col-nav-buttons">BOX</div>
-          <div className="live-left-col-nav-buttons">TEAM STATS</div>
-          <div className="live-left-col-nav-buttons">VIDEO</div>
-        </div>
-
+  if (
+    game.gameCenter === undefined ||
+    game.gameCenter.gameCenter === undefined
+  ) {
+    return <></>;
+  } else {
+    return (
+      <div id="live-game-container">
+        <section id="left-live-game-col">
+          <div id="live-left-col-nav">
+            <div className="live-left-col-nav-buttons">BOX</div>
+            <div className="live-left-col-nav-buttons">TEAM STATS</div>
+            <div className="live-left-col-nav-buttons">VIDEO</div>
+          </div>
+          {/* 
         <table id="live-game-scoreboard">
           <thead>
             <tr>
@@ -124,8 +129,257 @@ export const LiveGame = () => {
             )
         })}
           </tbody>
-        </table>
-      </section>
-    </div>
-  );
+        </table> */}
+
+          {/* <table id="shots-on-goal-table">
+          <thead>
+            <tr><th>Period</th><th>{game.gameCenter.gameCenter.liveData.boxscore.teams.away.team.abbreviation}</th><th>{game.gameCenter.gameCenter.liveData.boxscore.teams.home.team.abbreviation}</th></tr>
+          </thead>
+          <tbody>
+          {game.gameCenter.gameCenter.liveData.linescore.periods.map((period) => {
+            return (
+              <tr key={period.num}><td>{period.num}</td><td>{period.away.shotsOnGoal}</td><td>{period.home.shotsOnGoal}</td></tr>
+            )
+          })}
+          <tr><td>Total</td><td>{game.gameCenter.gameCenter.liveData.linescore.teams.away.shotsOnGoal}</td><td>{game.gameCenter.gameCenter.liveData.linescore.teams.home.shotsOnGoal}</td></tr>
+          </tbody>
+        </table> */}
+          <table id="live-team-stats-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away.team
+                      .abbreviation
+                  }
+                </th>
+                <th>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home.team
+                      .abbreviation
+                  }
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Power Plays</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.powerPlayGoals
+                  }{" "}
+                  /{" "}
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.powerPlayOpportunities
+                  }
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.powerPlayGoals
+                  }{" "}
+                  /{" "}
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.powerPlayOpportunities
+                  }
+                </td>
+              </tr>
+              <tr>
+                <td>Power Play Goals</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.powerPlayPercentage
+                  }
+                  %
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.powerPlayPercentage
+                  }
+                  %
+                </td>
+              </tr>
+
+              <tr>
+                <td>PIM</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.pim
+                  }
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.pim
+                  }
+                </td>
+              </tr>
+
+              <tr>
+                <td>Face-Off Win %</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.faceOffWinPercentage
+                  }
+                  %
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.faceOffWinPercentage
+                  }
+                  %
+                </td>
+              </tr>
+
+              <tr>
+                <td>Blocked Shots</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.blocked
+                  }
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.blocked
+                  }
+                </td>
+              </tr>
+
+              <tr>
+                <td>Takeaways</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.takeaways
+                  }
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.takeaways
+                  }
+                </td>
+              </tr>
+
+              <tr>
+                <td>Giveaways</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.giveaways
+                  }
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.giveaways
+                  }
+                </td>
+              </tr>
+
+              <tr>
+                <td>Hits</td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.away
+                      .teamStats.teamSkaterStats.hits
+                  }
+                </td>
+                <td>
+                  {
+                    game.gameCenter.gameCenter.liveData.boxscore.teams.home
+                      .teamStats.teamSkaterStats.hits
+                  }
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table id="live-penalties-table">
+            <thead>
+              <tr>
+                <th>1st</th>
+                <th>Team</th>
+                <th>Penalty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {game.gameCenter.gameCenter.liveData.plays.allPlays
+                .filter(
+                  (play) =>
+                    play.result.event === "Penalty" && play.about.period === 1
+                )
+                .map((plays) => {
+                  return (
+                    <tr>
+                      <td>{plays.about.periodTime}</td>
+                      <td>{plays.team.triCode}</td>
+                      <td>{plays.result.description}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+            <thead>
+              <tr>
+                <th>2nd</th>
+                <th>Team</th>
+                <th>Penalty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {game.gameCenter.gameCenter.liveData.plays.allPlays
+                .filter(
+                  (play) =>
+                    play.result.event === "Penalty" && play.about.period === 2
+                )
+                .map((plays) => {
+                  return (
+                    <tr>
+                      <td>{plays.about.periodTime}</td>
+                      <td>{plays.team.triCode}</td>
+                      <td>{plays.result.description}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+            <thead>
+              <tr>
+                <th>3rd</th>
+                <th>Team</th>
+                <th>Penalty</th>
+              </tr>
+            </thead>
+            <tbody>
+              {game.gameCenter.gameCenter.liveData.plays.allPlays
+                .filter(
+                  (play) =>
+                    play.result.event === "Penalty" && play.about.period === 3
+                )
+                .map((plays) => {
+                  return (
+                    <tr>
+                      <td>{plays.about.periodTime}</td>
+                      <td>{plays.team.triCode}</td>
+                      <td>{plays.result.description}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        </section>
+      </div>
+    );
+  }
 };
