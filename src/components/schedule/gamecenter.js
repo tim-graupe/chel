@@ -6,15 +6,16 @@ import { LiveGame } from "./liveGame";
 import { LiveVideos } from "./liveVideos";
 import { GameCenterContext } from "../../dispatch/dispatch";
 import { PostGame } from "./postGame";
+import { Preview } from "./preview";
 export const GameCenter = () => {
 const game = useContext(GameCenterContext)
 
 
 if (game.gameCenter.gameCenter === undefined) {
-    return
+    return 
 }
 if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Preview") {
-    return <h1>Hi</h1>
+    return <Preview />
 } else if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Final"){ 
     return <PostGame/>
 }
