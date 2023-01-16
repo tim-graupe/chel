@@ -6,8 +6,8 @@ import { Roster } from "./roster";
 import { TeamLeaders } from "./teamLeaders";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
 export const Stats = () => {
-  const [roster, setRoster] = useContext(RosterContext)
-  const [leaders, setLeaders] = useContext(LeadersContext)
+  const [roster, setRoster] = useContext(RosterContext);
+  const [leaders, setLeaders] = useContext(LeadersContext);
   const [team, setTeam] = useState(null);
   const [metro, setMetro] = useState([]);
   const [atlantic, setAtlantic] = useState([]);
@@ -72,7 +72,6 @@ export const Stats = () => {
   }, []);
 
   const showTeamStats = (teamID) => {
-
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/stats`, {
       mode: "cors",
     })
@@ -82,40 +81,50 @@ export const Stats = () => {
   };
 
   const showRoster = (teamID) => {
-    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/?expand=team.roster`, {
-      mode: "cors",
-    })
+    fetch(
+      `https://statsapi.web.nhl.com/api/v1/teams/${teamID}/?expand=team.roster`,
+      {
+        mode: "cors",
+      }
+    )
       .then((response) => response.json())
       .then((response) => setRoster(response.teams[0].roster.roster))
       .catch((err) => console.error(err));
-  }
+  };
 
   const showLeaders = (teamID) => {
-    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=gaa&leaderCategories=timeOnIcePerGame&leaderCategories=shutouts&season=20222023`, {
-      mode: "cors",
-    })
+    fetch(
+      `https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=gaa&leaderCategories=timeOnIcePerGame&leaderCategories=shutouts&season=20222023`,
+      {
+        mode: "cors",
+      }
+    )
       .then((response) => response.json())
       .then((response) => setLeaders(response.teamLeaders))
       .catch((err) => console.error(err));
-  }
+  };
 
   return (
     <div id="stats-container">
+      
       <StatsNav
         metro={metro}
         atlantic={atlantic}
         central={central}
         pacific={pacific}
         showTeamStats={showTeamStats}
-        showRoster = {showRoster}
+        showRoster={showRoster}
         showLeaders={showLeaders}
       />
-            <div id="roster-container">
 
-      <TeamStats team={team} />
-      <Roster/>
-      <TeamLeaders />
-    </div>
+<div id="roster-main">
+<TeamStats team={team} />
+
+<div id="roster-container">
+  <Roster />
+  <TeamLeaders />
+</div>
+</div>
     </div>
   );
 };

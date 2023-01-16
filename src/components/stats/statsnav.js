@@ -7,11 +7,12 @@ export const StatsNav = (props) => {
         <div id="stats-nav-container">
           <div id="list-container">
             <div className="division-container">
-              <h1>Metropolitan</h1>
-              {props.metro.map((team) => {
+              <h1 className="division-name">Metro</h1>
+          <div className="division-teams">
+          {props.metro.map((team) => {
                 return (
-                  <div key={team.id}>
-                    <p
+                  <ul key={team.id}>
+                    <li
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id)
@@ -19,18 +20,20 @@ export const StatsNav = (props) => {
                       }}
                     >
                       {team.name}
-                    </p>
-                  </div>
+                    </li>
+                  </ul>
                 );
               })}
+          </div>
             </div>
     
             <div className="division-container">
-              <h1>Atlantic</h1>
+              <h1 className="division-name">Atlantic</h1>
+              <div className="division-teams">
               {props.atlantic.map((team) => {
                 return (
-                  <div key={team.id}>
-                    <p
+                  <ul key={team.id}>
+                    <li
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id);
@@ -38,17 +41,19 @@ export const StatsNav = (props) => {
                       }}
                     >
                       {team.name}
-                    </p>
-                  </div>
+                    </li>
+                  </ul>
                 );
               })}
+              </div>
             </div>
             <div className="division-container">
-              <h1>Central</h1>
-              {props.central.map((team) => {
+              <h1 className="division-name">Central</h1>
+<div className="division-teams">
+{props.central.map((team) => {
                 return (
-                  <div key={team.id}>
-                    <p
+                  <ul key={team.id}>
+                    <li
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id);
@@ -56,17 +61,19 @@ export const StatsNav = (props) => {
                       }}
                     >
                       {team.name}
-                    </p>
-                  </div>
+                    </li>
+                  </ul>
                 );
               })}
+</div>
             </div>
             <div className="division-container">
-              <h1>Pacific</h1>
+              <h1 className="division-name">Pacific</h1>
+              <div className="division-teams">
               {props.pacific.map((team) => {
                 return (
-                  <div key={team.id}>
-                    <p
+                  <ul key={team.id}>
+                    <li
                       onClick={() => {
                         props.showTeamStats(team.id);
                         props.showRoster(team.id);
@@ -74,10 +81,11 @@ export const StatsNav = (props) => {
                       }}
                     >
                       {team.name}
-                    </p>
-                  </div>
+                    </li>
+                  </ul>
                 );
               })}
+              </div>
             </div>
           </div>
   

@@ -2,20 +2,24 @@ import React, { useContext, useState } from "react";
 import { GameCenterContext } from "../../dispatch/dispatch";
 
 export const PlayByPlay = () => {
-  const game = useContext(GameCenterContext)
-  // let plays = props.props;
-  const [currentPeriod, setCurrentPeriod] = useState(1)
+  const game = useContext(GameCenterContext);
+  const [currentPeriod, setCurrentPeriod] = useState(1);
   if (game.gameCenter.gameCenter === undefined || game === undefined) {
-    return <></>
+    return <></>;
   } else {
     return (
       <ul className="pbp-events">
         {game.gameCenter.gameCenter.liveData.linescore.periods.map((period) => {
-            return (
-                <button key={period.num}onClick={()=> {
-                    setCurrentPeriod(period.num)
-                }}>{period.num}</button>
-            )
+          return (
+            <button
+              key={period.num}
+              onClick={() => {
+                setCurrentPeriod(period.num);
+              }}
+            >
+              {period.num}
+            </button>
+          );
         })}
         {game.gameCenter.gameCenter.liveData.plays.allPlays
           .filter(
@@ -55,7 +59,7 @@ export const PlayByPlay = () => {
             );
           })}
 
-{game.gameCenter.gameCenter.liveData.plays.allPlays
+        {game.gameCenter.gameCenter.liveData.plays.allPlays
           .filter(
             (play) =>
               play.about.period === currentPeriod &&
@@ -70,7 +74,6 @@ export const PlayByPlay = () => {
                   {play.about.periodTimeRemaining} {play.result.event}
                 </p>
                 <p>{play.result.description}</p>
-
               </li>
             );
           })}

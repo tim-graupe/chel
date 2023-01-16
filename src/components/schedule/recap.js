@@ -21,8 +21,8 @@ export const Recap = () => {
                 )
             })}
 
-            <video controls id="recap-video">
-                <source src={media.content.content.editorial.recap.items[0].media.playbacks[2].url} title="recap" />
+            <video controls id="recap-video" key={media.content.content.editorial.recap.items[0].media.playbacks[2].url} width={media.content.content.editorial.recap.items[0].media.playbacks[2].width} height={media.content.content.editorial.recap.items[0].media.playbacks[2].height} autoplay>
+                <source src={media.content.content.editorial.recap.items[0].media.playbacks[0].url} title="recap" type="video/mp4"/>
             </video>
         <p id="recap-blurb">
         {media.content.content.editorial.recap.items[0].seoDescription}
@@ -33,7 +33,7 @@ export const Recap = () => {
         {media.content.content.highlights.scoreboard.items.map((highlight) => {
             return (
                 <div className="highlight-div">
-                                        <video width={highlight.playbacks[0].width} height={highlight.playbacks[0].height} controls >
+                                        <video key = {highlight.playbacks[0].url} width={highlight.playbacks[0].width} height={highlight.playbacks[0].height} controls >
                     <source src={highlight.playbacks[0].url} title={highlight.title} />
                     </video>
                     <p>{highlight.title}</p>

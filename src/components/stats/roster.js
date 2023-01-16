@@ -1,35 +1,37 @@
 import React, { useContext, useState } from "react";
 import { PlayerProfile } from "./playerProfile";
-import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
+import { LeadersContext, PlayerContext, RosterContext } from "../../dispatch/dispatch";
+import { Link } from "react-router-dom";
 export const Roster = () => {
   const [playerID, setPlayerID] = useState(null);
-  const [playerBio, setPlayerBio] = useState(null);
   const [playerStats, setPlayerStats] = useState([]);
+  const [player, setPlayer, stats, setStats] = useContext(PlayerContext);
   const [leaders, setLeaders] = useContext(LeadersContext)
   const [roster, setRoster] = useContext(RosterContext)
-  function test(player) {
+  function getPlayer(player) {
     fetch(
-      `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear`,
+      `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear&stats=statsSingleSeason&season=20222023&stats=careerRegularSeason`,
       {
         mode: "cors",
       }
     )
       .then((response) => response.json())
       .then((response) =>
-        setPlayerStats(
+        setStats([
           response.stats[0].splits.filter(
             (league) => league.league.name === "National Hockey League"
-          )
-        )
+          ),
+        [response.stats[1].splits[0].stat],[response.stats[2].splits[0].stat]])
       )
       .then(setPlayerID(player))
+    
       .catch((err) => console.error(err));
 
     fetch(`https://statsapi.web.nhl.com/api/v1/people/${player}`, {
       mode: "cors",
     })
       .then((response) => response.json())
-      .then((response) => setPlayerBio(response.people[0]))
+      .then((response) => setPlayer(response.people[0]))
       .catch((err) => console.error(err));
 
   }
@@ -55,15 +57,21 @@ export const Roster = () => {
             .map((player) => {
               return (
                 <tr key={player.person.id}>
+                 
                   <td>
+                  <Link to={`/players/${player.person.id}`} onClick={() => {
+                    getPlayer(player.person.id)
+                  }}>
                     <img
                       src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
                       alt="profile pic"
                       className="table-pic"
                     />{" "}
                     {player.person.fullName}
+                    </Link>
                   </td>
                   <td>{player.jerseyNumber}</td>
+                 
                 </tr>
               );
             })}
@@ -88,7 +96,7 @@ export const Roster = () => {
                 <tr
                   key={player.person.id}
                   onClick={() => {
-                    test(player.person.id);
+                    getPlayer(player.person.id);
                   }}
                 >
                   <td>
@@ -120,7 +128,7 @@ export const Roster = () => {
                 <tr
                   key={player.person.id}
                   onClick={() => {
-                    test(player.person.id);
+                    getPlayer(player.person.id);
                   }}
                 >
                   <td>
@@ -152,7 +160,7 @@ export const Roster = () => {
                 <tr
                   key={player.person.id}
                   onClick={() => {
-                    test(player.person.id);
+                    getPlayer(player.person.id);
                   }}
                 >
                   <td>
@@ -168,12 +176,12 @@ export const Roster = () => {
               );
             })}
         </table>
-
+{/* 
         <PlayerProfile
           playerID={playerID}
           playerStats={playerStats}
           playerBio={playerBio}
-        />
+        /> */}
       </div>
       </div>
     );

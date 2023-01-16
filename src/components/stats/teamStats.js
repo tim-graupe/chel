@@ -10,7 +10,7 @@ const [roster, setRoster] = useContext(RosterContext)
   } else {
     return (
       <>
-        <div id="main-info">
+        <div id="team-main-info">
         <h1>{props.team[0].splits[0].team.name}</h1>
         <p>
           {props.team[0].splits[0].stat.wins}-

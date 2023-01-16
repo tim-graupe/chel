@@ -3,10 +3,8 @@ import { GameCenterContext } from "../../dispatch/dispatch";
 
 export const TeamStats = () => {
   const stats = useContext(GameCenterContext)
-  // return (
-  //   <p>{stats.gameCenter.gameCenter.copyright}</p>
-  // )
-  const [scratches, setScratches] = useState([])
+
+  
   if (stats.gameCenter.gameCenter === undefined || stats.gameCenter.gameCenter === null || stats === undefined) {
     return <></>;
   } else {
