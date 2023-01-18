@@ -1,12 +1,8 @@
 import React, { useContext } from "react";
-import { Recap } from "./recap";
-import { TeamStats } from "./postgameTeamStats";
-import { PlayByPlay } from "./playByPlay";
-import { LiveGame } from "./liveGame";
-import { LiveVideos } from "./liveVideos";
 import { GameCenterContext } from "../../dispatch/dispatch";
 import { PostGame } from "./postGame";
 import { Preview } from "./preview";
+import { LiveGame } from "./liveGame";
 export const GameCenter = () => {
 const game = useContext(GameCenterContext)
 
@@ -18,17 +14,9 @@ if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Preview") 
     return <Preview />
 } else if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Final"){ 
     return <PostGame/>
+} else if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Live") {
+    return <LiveGame />
 }
-//  else {
-//     return (
-//         <div id="gamecenter-container">
-//             <LiveVideos />
-//             <LiveGame />
-//             <Recap/> 
-//             <TeamStats /> 
-//             <PlayByPlay /> 
-//         </div>
-//     )
-// }
+
 
 }

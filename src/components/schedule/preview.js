@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import { ScheduleRoster } from "./scheduleRoster";
-import { LeadersContext, PreviewContext } from "../../dispatch/dispatch";
-import { PreviewStandings } from "./previewStandings";
+import {  PreviewContext } from "../../dispatch/dispatch";
+import {  SeasonSeries } from "./seasonSeries";
+import { PreviousGame } from "./previousGame";
 
 export const Preview = () => {
 const [preview, setPreview] = useContext(PreviewContext)
-// const [leaders, setLeaders] = useContext(LeadersContext)
 if (preview === null || preview[0] === undefined) {
   return <></>
 } else {
@@ -257,7 +257,11 @@ if (preview === null || preview[0] === undefined) {
           <ScheduleRoster />
         </section>
 
-        <section className="preview-col" id="preview-right-col"></section>
+        <section className="preview-col" id="preview-right-col">
+          <PreviousGame />
+          <SeasonSeries />
+          
+        </section>
       </div>
     );
  }

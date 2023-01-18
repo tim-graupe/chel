@@ -10,8 +10,7 @@ export const TeamSchedule = () => {
   const [preview, setPreview] = useContext(PreviewContext)
   const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
   const [schedule, setSchedule] = useState([]);
-  const [game, setGame] = useState(null);
-  const [teams, setTeams] = useState([]);
+
   const [gameSelected, setGameSelected] = useState(false);
   const current = new Date();
   const date = `${current.getFullYear()}-${

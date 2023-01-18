@@ -88,7 +88,8 @@ export const Schedule = () => {
         {schedule.map((games) => {
           return (
             <div key={games.date}>
-              <h1>{games.date}</h1>
+              
+              <h1>{new Date(`${games.date}`).toLocaleString('en-En', {month: "short", year: "2-digit", day: "numeric"})}</h1>
               <table id="schedule-day-container">
                 <thead>
                   <tr>
@@ -145,6 +146,7 @@ export const Schedule = () => {
                               );
                               setGameSelected(true);
                               setPreview(content)
+                              setGameCenter(game)
                             }}
                           >
                             Preview
