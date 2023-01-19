@@ -6,7 +6,7 @@
 }
 
 .schedule-logos {
-    max-width: 20%;
+    width: 40%;
 }
 
 #team-stats-table {
@@ -36,6 +36,28 @@ td {
     display: none;
 }
 
+#tendy-table{
+    width: 100%;
+}
+
+#tendy-left-table{
+    float: left;
+    
+}
+
+
+#tendy-right-table{
+    float: right;
+    
+}
+
+#recap-img{
+    max-width: 100%;
+}
+
+.tendy-tables > tr {
+    width: 1000px;
+}
 /* #preview-container{
    display: flex;
    flex-direction: row;
@@ -101,12 +123,6 @@ td {
 #live-game-scoreboard {
 }
 
-#recap-container {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #live-game-container{
     width: 50%;
     margin-left: auto;
@@ -121,7 +137,48 @@ td {
     padding: 10px;
 } */
 
+.link{    color: cyan;
+text-decoration: none
+;}
 
+#main-postgame-container{
+    width: 66%
+}
+
+#pg-container{
+    display:inline-flex;
+    width: 100%;
+
+}
+
+#recap-container {
+    text-align: center;
+  
+    }
+#post-game-buttons{
+    text-align: center;
+}
+
+/* CSS */
+.pg-btns {
+  align-items: center;
+  background-color: #333;
+  border-radius: 12px;
+  color: cyan;
+  cursor: pointer;
+  display: inline-flex;
+    margin: 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s,-webkit-box-shadow .2s;
+  white-space: nowrap;
+  border: 0;
+
+}
+
+.pg-btns{
+  box-shadow: cyan 0 0 0 3px, transparent 0 0 0 0;
+}
 
 @media screen and (max-width: 1000px) {
 
@@ -173,6 +230,10 @@ td {
     .post-game-skater-stats {
         overflow-x: scroll;
 
+    }
+
+    #pg-container{
+        display: block;
     }
 
 

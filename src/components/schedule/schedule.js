@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useSyncExternalStore } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Boxscore } from "./boxscore";
 import "../../style sheets/schedule.css";
 import { Preview } from "./preview";
@@ -14,7 +14,6 @@ export const Schedule = () => {
   const [schedule, setSchedule] = useState([]);
   const [game, setGame] = useState(null);
   const [teams, setTeams] = useState([]);
-  const [gameSelected, setGameSelected] = useState(false);
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
@@ -144,7 +143,6 @@ export const Schedule = () => {
                                 game.teams.away.team.id,
                                 game.teams.home.team.id
                               );
-                              setGameSelected(true);
                               setPreview(content)
                               setGameCenter(game)
                             }}
@@ -153,6 +151,10 @@ export const Schedule = () => {
                           </Link>
                           <Link to={`/gamecenter/${game.gamePk}`}
                             onClick={() => {
+                              getPreviewStats(
+                                game.teams.away.team.id,
+                                game.teams.home.team.id
+                              );
                               getGameInfo(game.gamePk);
                               getContent(game.gamePk);
                               setGameCenter(game)
@@ -170,10 +172,6 @@ export const Schedule = () => {
           );
         })}
       </div>
-
-      {/* <div id="gamecenter-container">
-        <GameCenter game={game} content={content} />
-      </div> */}
     </>
   );
 };

@@ -213,22 +213,22 @@ export const TeamStats = () => {
               })}
 
             <tr>
-              <td>#</td>
-              <td>Defenseman</td>
-              <td>G</td>
-              <td>A</td>
-              <td>P</td>
-              <td>+/=</td>
-              <td>PIM</td>
-              <td>SOG</td>
-              <td>HITS</td>
-              <td>BLKS</td>
-              <td>GVA</td>
-              <td>TKA</td>
-              <td>FO Won</td>
-              <td>TOI</td>
-              <td>PP TOI</td>
-              <td>SH TOI</td>
+              <th>#</th>
+              <th>Defenseman</th>
+              <th>G</th>
+              <th>A</th>
+              <th>P</th>
+              <th>+/=</th>
+              <th>PIM</th>
+              <th>SOG</th>
+              <th>HITS</th>
+              <th>BLKS</th>
+              <th>GVA</th>
+              <th>TKA</th>
+              <th>FO Won</th>
+              <th>TOI</th>
+              <th>PP TOI</th>
+              <th>SH TOI</th>
             </tr>
 
             {away
@@ -408,15 +408,15 @@ export const TeamStats = () => {
               })}
 
             <tr>
-              <td>#</td>
-              <td>Goalie</td>
-              <td>EV</td>
-              <td>PP</td>
-              <td>SH</td>
-              <td>SAVES - SHOTS</td>
-              <td>SV%</td>
-              <td>PIM</td>
-              <td>TOI</td>
+              <th>#</th>
+              <th>Goalie</th>
+              <th>EV</th>
+              <th>PP</th>
+              <th>SH</th>
+              <th>SAVES - SHOTS</th>
+              <th>SV%</th>
+              <th>PIM</th>
+              <th>TOI</th>
             </tr>
             {home
               .filter((player) => player.position.type === "Goalie")

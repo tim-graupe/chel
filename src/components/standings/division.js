@@ -3,20 +3,20 @@ import "../../style sheets/standings.css";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 
-export const Division = () => {
+export const Division = (props) => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
   const [standings, setStandings] = useState([]);
   useEffect(() => {
-    const todaysGames = () => {
+    const getDivision = () => {
       fetch("https://statsapi.web.nhl.com/api/v1/standings", {
         mode: "cors",
       })
         .then((response) => response.json())
-        .then((response) => setStandings(response.records))
+        .then((response) => setStandings(response.records.filter(i => i.division.nameShort === props.name)))
         .catch((err) => console.error(err));
     };
-    todaysGames();
+    getDivision();
   }, []);
 
   const showRoster = (teamID) => {

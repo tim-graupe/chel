@@ -3,30 +3,30 @@ import React, { useEffect, useState } from "react";
 import "../../style sheets/standings.css";
 import { LeadersContext } from "../../dispatch/dispatch";
 export function League() {
-  const [leaders, setLeaders] = useState(LeadersContext);
+  const [leaders, setLeaders] = useState([]);
 
   useEffect(() => {
-    getLeague();
+    const getLeague = () => {
+      fetch("https://statsapi.web.nhl.com/api/v1/standings", {
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) =>
+          setLeaders(
+            leaders
+              .concat(
+                response.records[0].teamRecords,
+                response.records[1].teamRecords,
+                response.records[2].teamRecords,
+                response.records[3].teamRecords
+              )
+              .sort((a, b) => b.points - a.points)
+          )
+        );
+    }; getLeague()
   }, []);
 
-  const getLeague = () => {
-    fetch("https://statsapi.web.nhl.com/api/v1/standings", {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((response) =>
-        setLeaders(
-          leaders
-            .concat(
-              response.records[0].teamRecords,
-              response.records[1].teamRecords,
-              response.records[2].teamRecords,
-              response.records[3].teamRecords
-            )
-            .sort((a, b) => b.points - a.points)
-        )
-      );
-  };
+
 
   return (
     <div id="table-container">

@@ -3,10 +3,11 @@ import { ScheduleRoster } from "./scheduleRoster";
 import {  PreviewContext } from "../../dispatch/dispatch";
 import {  SeasonSeries } from "./seasonSeries";
 import { PreviousGame } from "./previousGame";
-
+import { Goalies } from "./goalies";
+import { PreviewStandings } from "./previewStandings";
 export const Preview = () => {
 const [preview, setPreview] = useContext(PreviewContext)
-if (preview === null || preview[0] === undefined) {
+if (preview === null || preview[0] === undefined || preview[0].teamStats === undefined) {
   return <></>
 } else {
     return (
@@ -124,6 +125,8 @@ if (preview === null || preview[0] === undefined) {
               </tr>
             </tbody>
           </table>
+
+          <PreviewStandings />
 
         </section>
         <section className="preview-col" id="preview-mid-col">
@@ -253,8 +256,9 @@ if (preview === null || preview[0] === undefined) {
               </td>
             </tr>
           </table>
-
+          <Goalies />
           <ScheduleRoster />
+          
         </section>
 
         <section className="preview-col" id="preview-right-col">

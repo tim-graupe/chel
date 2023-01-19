@@ -4,7 +4,6 @@ import { LeadersContext, PlayerContext, RosterContext } from "../../dispatch/dis
 import { Link } from "react-router-dom";
 export const Roster = () => {
   const [playerID, setPlayerID] = useState(null);
-  const [playerStats, setPlayerStats] = useState([]);
   const [player, setPlayer, stats, setStats] = useContext(PlayerContext);
   const [leaders, setLeaders] = useContext(LeadersContext)
   const [roster, setRoster] = useContext(RosterContext)
