@@ -12,5 +12,7 @@ if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Preview") 
     return <Preview />
 } else if (game.gameCenter.gameCenter.gameData.status.abstractGameState === "Final"){ 
     return <PostGame/>
+} else {
+    return <LiveGame />
 }
 };

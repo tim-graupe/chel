@@ -9,12 +9,12 @@ export const LiveVideos = () => {
 return (
     <ul id="live-videos-containers">
                     <video controls id="highlight-video" key={highlight} autoplay>
-                <source src={highlight} title="highlight" type="video/mp4"/>
+                <source src={highlight} title="highlight" type="video/mp4" height={highlight.height} width={highlight.width}/>
             </video>
         {highlights.map((video) => {
             return (
                 <li>
-                    <video src={video.playbacks[1].url} onClick={() => {setHighlight(video.playbacks[1].url)}} />
+                    <video src={video.playbacks[1].url} onClick={() => {setHighlight(video.playbacks[3].url)}} playsInline />
                     <p>{video.title}</p>
                     
                 </li>

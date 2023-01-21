@@ -115,7 +115,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr>
+                <tr  key={player.person.id}> 
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}
@@ -159,7 +159,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr>
+                <tr key={player.person.id}>
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}
@@ -228,7 +228,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr>
+                <tr  key={player.person.id}>
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}
@@ -273,7 +273,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr>
+                <tr  key={player.person.id}>
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}

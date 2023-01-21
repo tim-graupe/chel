@@ -9,11 +9,6 @@
     width: 40%;
 }
 
-#team-stats-table {
-    max-width: 15%;
-    border: 1px solid;
-}
-
 #team-stats-table>th,
 td {
     border-bottom: 1px solid #ddd;
@@ -116,13 +111,36 @@ td {
     width: 33%;
 }
 
-#team-stats-table {
+#team-stats-table{
     min-width: 50%;
 }
 
-#live-game-scoreboard {
+#last-ten-table {
+    min-width: 100%;
+}
+.last-ten-away{
+    text-align: left;
+    margin-left: 1em;
+  
+}
+.last-ten-home{
+   text-align: right;
+   margin-right: 1em;
 }
 
+
+#last-ten-away-body{
+   
+    width: 100%;
+}
+
+#last-ten-home-body{
+    width: 100%;
+}
+
+.last-ten-logos{
+    max-width: 25%;
+}
 #live-game-container{
     width: 50%;
     margin-left: auto;
