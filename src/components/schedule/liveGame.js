@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { LiveVideos } from "./liveVideos";
 import { LiveGameStats } from "./liveGameStats";
 import { Boxscore } from "./boxscore";
+import { OnIce } from "./OnIce";
 
 export const LiveGame = () => {
   const [tab, setTab] = useState('box')
+
 
     return (
       
@@ -22,7 +24,12 @@ export const LiveGame = () => {
         <LiveVideos /> :
           null
       }
+   
          </section>
+      
+          <OnIce />
+     
+       
       </div>
     );
 

@@ -31,28 +31,29 @@ td {
     display: none;
 }
 
-#tendy-table{
+#tendy-table {
     width: 100%;
 }
 
-#tendy-left-table{
+#tendy-left-table {
     float: left;
-    
+
 }
 
 
-#tendy-right-table{
+#tendy-right-table {
     float: right;
-    
+
 }
 
-#recap-img{
+#recap-img {
     max-width: 100%;
 }
 
-.tendy-tables > tr {
+.tendy-tables>tr {
     width: 1000px;
 }
+
 /* #preview-container{
    display: flex;
    flex-direction: row;
@@ -99,7 +100,9 @@ td {
 
 #preview-container {
     display: flex;
-    justify-content: space-between;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #preview-container>section {
@@ -109,94 +112,116 @@ td {
 
 #preview-left-col {
     width: 33%;
+    max-width: fit-content;
 }
 
-#team-stats-table{
+#team-stats-table {
     min-width: 50%;
 }
 
-#last-ten-table {
+.last-ten-table {
     min-width: 100%;
 }
-.last-ten-away{
+
+.last-ten-away {
     text-align: left;
     margin-left: 1em;
-  
-}
-.last-ten-home{
-   text-align: right;
-   margin-right: 1em;
+
 }
 
-
-#last-ten-away-body{
-   
-    width: 100%;
+.last-ten-home {
+    text-align: right;
+    margin-right: 1em;
 }
 
-#last-ten-home-body{
-    width: 100%;
+#last-ten-section {
+    display: inline-flex;
+    min-width: 50%;
+    max-height: auto;
 }
 
-.last-ten-logos{
+
+
+.last-ten-logos {
     max-width: 25%;
 }
-#live-game-container{
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+
+#live-game-container {
+    width: 100%;
+    display: float;
+}
+
+#rink-container {
+    width: fit-content;
+    block-size: fit-content;
+    max-width: 50%;
+    float: right;
+}
+#live-rink{
+    max-width: 100%;
+    position: relative;
+}
+
+#home-LW{
+z-index: 1;
+position: relative;
+bottom: 350px;
+left: 440px;
+
 }
 
 
-/* #left-live-game-col {
-    position: relative;
-    left: 0px;
-    width: 300px;
-    padding: 10px;
-} */
+#left-live-game-col {
+    float: left;
+}
 
-.link{    color: cyan;
-text-decoration: none
-;}
+.link {
+    color: cyan;
+    text-decoration: none;
+}
 
-#main-postgame-container{
+#main-postgame-container {
     width: 66%
 }
 
-#pg-container{
-    display:inline-flex;
+#pg-container {
+    display: inline-flex;
     width: 100%;
 
 }
 
 #recap-container {
     text-align: center;
-  
-    }
-#post-game-buttons{
+
+}
+
+#post-game-buttons {
     text-align: center;
 }
 
 /* CSS */
 .pg-btns {
-  align-items: center;
-  background-color: #333;
-  border-radius: 12px;
-  color: cyan;
-  cursor: pointer;
-  display: inline-flex;
+    align-items: center;
+    background-color: #333;
+    border-radius: 12px;
+    color: cyan;
+    cursor: pointer;
+    display: inline-flex;
     margin: 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow .2s,-webkit-box-shadow .2s;
-  white-space: nowrap;
-  border: 0;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s, -webkit-box-shadow .2s;
+    white-space: nowrap;
+    border: 0;
 
 }
 
-.pg-btns{
-  box-shadow: cyan 0 0 0 3px, transparent 0 0 0 0;
+.pg-btns {
+    box-shadow: cyan 0 0 0 3px, transparent 0 0 0 0;
 }
+
+
+
 
 @media screen and (max-width: 1000px) {
 
@@ -250,7 +275,7 @@ text-decoration: none
 
     }
 
-    #pg-container{
+    #pg-container {
         display: block;
     }
 
