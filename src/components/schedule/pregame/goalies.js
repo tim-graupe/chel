@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { LeadersContext, PreviewContext, RosterContext, TeamContext, TwoTeamsContext } from "../../dispatch/dispatch";
+import { LeadersContext, PreviewContext } from "../../../dispatch/dispatch";
 
 
 export const Goalies = () => {
@@ -47,22 +47,22 @@ if (away === undefined) {
             <tbody className="tendy-tables" id="tendy-left-table">
                 {away.filter(player => (player.position.abbreviation === "G") && (player.stats[0] !== undefined)).map((goalie) => {
                     return (
-                        <div key={goalie.person.id}>
-                        <tr>{goalie.person.fullName}</tr>
+                        <>
+                        <tr key={goalie.person.id}>{goalie.person.fullName}</tr>
                         <tr><td>Record GAA SV% SO</td></tr>
                         <tr><td>{goalie.stats[0].stat.wins}-{goalie.stats[0].stat.losses}-{goalie.stats[0].stat.ot} {parseFloat(goalie.stats[0].stat.goalAgainstAverage.toFixed(2))} {parseFloat(goalie.stats[0].stat.savePercentage.toFixed(2))}%  {goalie.stats[0].stat.shutouts}</td></tr>
-                        </div>
+                        </>
                     )
                 })}
             </tbody>
             <tbody className="tendy-tables" id="tendy-right-table">
                 {home.filter(player => (player.position.abbreviation === "G") && (player.stats[0] !== undefined)).map((goalie) => {
                     return (
-                        <div key={goalie.person.id}>
-                        <tr>{goalie.person.fullName}</tr>
+                        <>
+                        <tr key={goalie.person.id}>{goalie.person.fullName}</tr>
                         <tr><td>Record GAA SV% SO</td></tr>
                         <tr><td>{goalie.stats[0].stat.wins}-{goalie.stats[0].stat.losses}-{goalie.stats[0].stat.ot} {parseFloat(goalie.stats[0].stat.goalAgainstAverage.toFixed(2))} {parseFloat(goalie.stats[0].stat.savePercentage.toFixed(2))}%  {goalie.stats[0].stat.shutouts}</td></tr>
-                        </div>
+                        </>
                     )
                 })}
             </tbody>

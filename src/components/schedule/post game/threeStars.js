@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GameCenterContext } from "../../dispatch/dispatch";
+import { GameCenterContext } from "../../../dispatch/dispatch";
 export const ThreeStars = () => {
   const game = useContext(GameCenterContext);
   if (game.gameCenter.gameCenter.liveData.decisions.firstStar === undefined) {

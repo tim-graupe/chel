@@ -1,114 +1,73 @@
-import React, { useEffect, useState } from "react";
-import { Boxscore } from "./boxscore";
-import '../../style sheets/schedule.css'
+import React, { useContext, useState, useEffect } from "react";
+import { LeadersContext, PreviewContext } from "../../../dispatch/dispatch";
 
-export const Schedule = () => {
-  const [schedule, setSchedule] = useState([]);
-  const [game, setGame] = useState(null);
-  const [status, setStatus] =useState(null)
-  const [content, setContent] = useState(null)
 
-  useEffect(() => {
-    const getSchedule = () => {
-      fetch(
-        "https://statsapi.web.nhl.com/api/v1/schedule?expand=schedule.broadcasts&expand=schedule.linescore",
-        {
-          mode: "cors",
-        }
-      )
-        .then((response) => response.json())
-        .then((response) => setSchedule(response))
-        .catch((err) => console.error(err));
-    };
-    getSchedule();
-  }, []);
+export const Goalies = () => {
+// const [stats, setStats] = useState([])
+const [preview, setPreview] = useContext(PreviewContext)
+const leaders = useContext(LeadersContext)
+const [away, setAway] = useState([])
+const [home, setHome] = useState([])
 
-  const getGameInfo = (gamePk) => {
-    setStatus('post')
-    fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {
-      mode: "cors",
-    })
+
+
+useEffect(() => {
+    preview[0].roster.roster.forEach((player) => {
+    fetch(
+      `https://statsapi.web.nhl.com/api/v1/people/${player.person.id}/stats?stats=statsSingleSeason&season=20222023`,
+      {
+        mode: "cors",
+      }
+    )
       .then((response) => response.json())
-      .then((response) => setGame(response))
+      .then((response) => setAway(away => [...away,{person: player.person, position: player.position, jerseyNumber: player.jerseyNumber, stats: response.stats[0].splits} ]))
       .catch((err) => console.error(err));
-  };
-
-  const getPreviewStats = (gamePk) => {
-    setStatus('pre')
-    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
-      mode: "cors",
     })
-      .then((response) => response.json())
-      .then((response) => setGame(response))
-      .catch((err) => console.error(err));
-  };
-
-  const getContent = (gamePk) => {
-    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((response) => setContent(response))
-      .catch((err) => console.error(err));
-  };
-  
-
-  return (<div id="container">
-    <div id="schedule-container">
-      {schedule.map((game) => {
-        return (
-          <ul className="schedule-cards">
-            <li>
-              <h4 className="schedule-card-status">
-                {game.status.detailedState}{" "}
-                {game.linescore.currentPeriodTimeRemaining}{" "}
-                {game.linescore.currentPeriodOrdinal}
-              </h4>
-              <p>
-                {game.teams.away.team.name} {game.teams.away.score}
-              </p>
-              <p>
-                {game.teams.home.team.name} {game.teams.home.score}
-              </p>
-              <p>{game.venue.name}</p>
-              {/* {game.broadcasts.map((broadcast) => {
-                return (
-                  <>
-                    <p>
-                      {broadcast.type.toUpperCase()}: {broadcast.name}
-                    </p>
-                  </>
-                );
-              })} */}
-              <button
-                id="box-score"
-                onClick={() => {
-                  getGameInfo(game.gamePk)
-                  getContent(game.gamePk)
-                }}
-              >
-                Box Score
-              </button>
-
-              <button
-                id="preview"
-                onClick={() => {
-                  getPreviewStats(game.gamePk)
-                  getContent(game.gamePk)
-                }}
-              >
-                Preview
-              </button>
-            </li>
-          </ul>
-        );
-      })}
-    <div id="box-scorer">
-    <Boxscore game={game} content={content} />
+    preview[1].roster.roster.forEach((player) => {
+        fetch(
+          `https://statsapi.web.nhl.com/api/v1/people/${player.person.id}/stats?stats=statsSingleSeason&season=20222023`,
+          {
+            mode: "cors",
+          }
+        )
+          .then((response) => response.json())
+          .then((response) => setHome(home => [...home,{person: player.person, position: player.position, jerseyNumber: player.jerseyNumber, stats: response.stats[0].splits} ]))
+          .catch((err) => console.error(err));
+        })
 
 
-    </div>
-    </div>
-    </div>
-  );
-};
+}, []);
+
+if (away === undefined) {
+    return <></>
+} else {
+    return (
+        <table id="tendy-table">
+            <thead><tr><th>Goaltender Comparison</th></tr></thead>
+            <tbody className="tendy-tables" id="tendy-left-table">
+                {away.filter(player => (player.position.abbreviation === "G") && (player.stats[0] !== undefined)).map((goalie) => {
+                    return (
+                        <tbody key={goalie.person.id}>
+                        <tr>{goalie.person.fullName}</tr>
+                        <tr><td>Record GAA SV% SO</td></tr>
+                        <tr><td>{goalie.stats[0].stat.wins}-{goalie.stats[0].stat.losses}-{goalie.stats[0].stat.ot} {parseFloat(goalie.stats[0].stat.goalAgainstAverage.toFixed(2))} {parseFloat(goalie.stats[0].stat.savePercentage.toFixed(2))}%  {goalie.stats[0].stat.shutouts}</td></tr>
+                        </tbody>
+                    )
+                })}
+            </tbody>
+            <tbody className="tendy-tables" id="tendy-right-table">
+                {home.filter(player => (player.position.abbreviation === "G") && (player.stats[0] !== undefined)).map((goalie) => {
+                    return (
+                        <>
+                        <tr key={goalie.person.id}>{goalie.person.fullName}</tr>
+                        <tr><td>Record GAA SV% SO</td></tr>
+                        <tr><td>{goalie.stats[0].stat.wins}-{goalie.stats[0].stat.losses}-{goalie.stats[0].stat.ot} {parseFloat(goalie.stats[0].stat.goalAgainstAverage.toFixed(2))} {parseFloat(goalie.stats[0].stat.savePercentage.toFixed(2))}%  {goalie.stats[0].stat.shutouts}</td></tr>
+                        </>
+                    )
+                })}
+            </tbody>
+            
+        </table>
+    )
+}
+}

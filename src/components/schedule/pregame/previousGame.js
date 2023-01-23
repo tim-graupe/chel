@@ -1,39 +1,32 @@
-import React, { useContext, useEffect, useState } from "react";
-import { PreviewContext } from "../../dispatch/dispatch";
+import React, {useContext, useEffect, useState} from "react";
+import { PreviewContext, GameCenterContext } from "../../../dispatch/dispatch";
 
-export const SeasonSeries = () => {
-  const [preview, setPreview] = useContext(PreviewContext);
-    // const home = game.gameCenter.gameCenter.gameData.teams.home;
-    // const away = game.gameCenter.gameCenter.gameData.teams.away;
-  const [series, setSeries] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      `https://statsapi.web.nhl.com/api/v1/schedule/?teamId=${preview[0].id},${preview[1].id}&season=20222023`,
-      {
-        mode: "cors",
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => setSeries(response.dates))
-      .catch((err) => console.error(err));
-  }, []);
 
-  if (preview === undefined) {
-    return <>no</>
-  } else {
-    return (
-      <table id="series-table">
-        <thead>
-          <tr>
-            <th colSpan="2">Season Series</th>
-          </tr>
-        </thead>
+export const PreviousGame = () => {
+    const [preview, setPreview] = useContext(PreviewContext);
+    const gameCenter = useContext(GameCenterContext)
+    const [game, setGame] = useState([])    
+    useEffect(() => {
+        fetch(
+          `https://statsapi.web.nhl.com/api/v1/schedule/?teamId=${preview[0].id},${preview[1].id}&season=20222023`,
+          {
+            mode: "cors",
+          }
+        )
+          .then((response) => response.json())
+          .then((response) => setGame(response.dates))
+          .catch((err) => console.error(err));
+      }, []);
 
-        {series
+
+      return (
+        <table id="previous-game-table">
+            <thead><tr><th>Previous Matchup</th></tr></thead>
+            {game
           .filter(
             (game) =>
-            (game.games[0].status.abstractGameState === "Final") &&
+          
               (game.games[0].teams.away.team.id === preview[0].id &&
                 game.games[0].teams.home.team.id === preview[1].id) ||
               (game.games[0].teams.away.team.id === preview[1].id &&
@@ -66,7 +59,6 @@ export const SeasonSeries = () => {
               </tbody>
             );
           })}
-      </table>
-    );
-  }
-};
+        </table>
+      )
+}

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { PreviewContext } from "../../dispatch/dispatch";
-import { Division } from "../standings/division";
-import { Conference } from "../standings/conference";
-import { League } from "../standings/league";
+import { PreviewContext } from "../../../dispatch/dispatch";
+import { Division } from "../../standings/division";
+import { Conference } from "../../standings/conference";
+import { League } from "../../standings/league";
 
 export const PreviewStandings = () => {
   const [preview, setPreview] = useContext(PreviewContext);

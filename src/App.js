@@ -6,8 +6,8 @@ import { Stats } from "./components/stats/stats";
 import { useState } from "react";
 import { RosterContext, LeadersContext, PlayerContext, TeamContext, PreviewContext, GameCenterContext } from "./dispatch/dispatch";
 import { TeamSchedule } from "./components/schedule/teamSchedule";
-import { GameCenter } from "./components/schedule/gamecenter";
-import { Preview } from "./components/schedule/preview";
+import { GameCenter } from "./components/schedule/gamecenter/gamecenter";
+import { Preview } from "./components/schedule/pregame/preview";
 import { PlayerProfile } from "./components/stats/playerProfile";
 
 function App() {

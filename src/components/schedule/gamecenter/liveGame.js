@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { LiveVideos } from "./liveVideos";
-import { LiveGameStats } from "./liveGameStats";
+import { LiveVideos } from "../live game/liveVideos";
+import { LiveGameStats } from "../live game/liveGameStats";
 import { Boxscore } from "./boxscore";
-import { OnIce } from "./OnIce";
+import { OnIce } from "../live game/OnIce";
 
 export const LiveGame = () => {
   const [tab, setTab] = useState('box')

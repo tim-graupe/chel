@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import { GameCenterContext } from "../../dispatch/dispatch";
+import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const TeamStats = () => {
   const stats = useContext(GameCenterContext)

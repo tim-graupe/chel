@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GameCenterContext } from "../../dispatch/dispatch";
+import { GameCenterContext } from "../../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 
 export const Recap = () => {

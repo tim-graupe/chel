@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { GameCenterContext } from "../../dispatch/dispatch";
-import { PostGame } from "./postGame";
-import { Preview } from "./preview";
+import { GameCenterContext } from "../../../dispatch/dispatch";
+import { PostGame } from "../post game/postGame";
+import { Preview } from "../pregame/preview";
 import { LiveGame } from "./liveGame";
 import { useParams } from "react-router-dom";
 export const GameCenter = () => {

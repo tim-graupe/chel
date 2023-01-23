@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { GameCenterContext } from "../../dispatch/dispatch";
+import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const Boxscore = () => {
   const game = useContext(GameCenterContext);

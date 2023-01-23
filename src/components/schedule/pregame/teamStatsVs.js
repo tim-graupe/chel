@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { PreviewContext } from "../../dispatch/dispatch";
+import { PreviewContext } from "../../../dispatch/dispatch";
 
 export const TeamStatsVs = () => {
 const [preview, setPreview] = useContext(PreviewContext)

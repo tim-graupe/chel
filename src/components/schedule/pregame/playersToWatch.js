@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import { PreviewContext } from "../../dispatch/dispatch";
+import { PreviewContext } from "../../../dispatch/dispatch";
 
 
 export const PlayersToWatch = () => {
@@ -31,7 +31,8 @@ export const PlayersToWatch = () => {
             </th>
           </tr>
         </thead>
-        <tr>
+<tbody>
+<tr>
           <td className="players-to-watch">
             <img
               src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${preview[0].teamLeaders[0].leaders[0].person.id}.jpg`}
@@ -134,6 +135,8 @@ export const PlayersToWatch = () => {
             {preview[1].teamLeaders[0].leaders[0].person.fullName}
           </td>
         </tr>
+
+</tbody>
       </table>
     )
 }}

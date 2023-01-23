@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { GameCenterContext } from "../../dispatch/dispatch";
+import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const LiveGameStats = () => {
     let game = useContext(GameCenterContext)

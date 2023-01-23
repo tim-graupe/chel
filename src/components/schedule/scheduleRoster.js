@@ -73,39 +73,41 @@ export const ScheduleRoster = () => {
             <th>Team Rosters</th>
           </tr>
         </thead>
-        <tr>
-          <td
-            onClick={() => {
-              setTeam("home");
-            }}
-          >
-            {preview[0].teamName}
-          </td>
-          <td
-            onClick={() => {
-              setTeam("away");
-            }}
-          >
-            {preview[1].teamName}
-          </td>
-        </tr>
-<thead>
-<tr>
-          <th>#</th>
-          <th>Forwards</th>
-          <th>Pos</th>
-          <th>GP</th>
-          <th>A</th>
-          <th>P</th>
-          <th>+/-</th>
-          <th>PIM</th>
-          <th>PPG</th>
-          <th>GWG</th>
-          <th>S</th>
-          <th>S%</th>
-          <th>FO%</th>
-        </tr>
-</thead>
+        <tbody>
+          <tr>
+            <td
+              onClick={() => {
+                setTeam("home");
+              }}
+            >
+              {preview[0].teamName}
+            </td>
+            <td
+              onClick={() => {
+                setTeam("away");
+              }}
+            >
+              {preview[1].teamName}
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Forwards</th>
+            <th>Pos</th>
+            <th>GP</th>
+            <th>A</th>
+            <th>P</th>
+            <th>+/-</th>
+            <th>PIM</th>
+            <th>PPG</th>
+            <th>GWG</th>
+            <th>S</th>
+            <th>S%</th>
+            <th>FO%</th>
+          </tr>
+        </thead>
         <tbody>
           {away
             .filter(
@@ -115,7 +117,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr  key={player.person.id}> 
+                <tr key={player.person.id}>
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}
@@ -133,23 +135,23 @@ export const ScheduleRoster = () => {
               );
             })}
         </tbody>
-<thead>
-<tr>
-          <th>#</th>
-          <th>Defense</th>
-          <th>Pos</th>
-          <th>GP</th>
-          <th>A</th>
-          <th>P</th>
-          <th>+/-</th>
-          <th>PIM</th>
-          <th>PPG</th>
-          <th>GWG</th>
-          <th>S</th>
-          <th>S%</th>
-          <th>FO%</th>
-        </tr>
-</thead>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Defense</th>
+            <th>Pos</th>
+            <th>GP</th>
+            <th>A</th>
+            <th>P</th>
+            <th>+/-</th>
+            <th>PIM</th>
+            <th>PPG</th>
+            <th>GWG</th>
+            <th>S</th>
+            <th>S%</th>
+            <th>FO%</th>
+          </tr>
+        </thead>
         <tbody>
           {away
             .filter(
@@ -185,7 +187,8 @@ export const ScheduleRoster = () => {
             <th>Team Rosters</th>
           </tr>
         </thead>
-        <tr>
+          <thead>
+          <tr>
           <td
             onClick={() => {
               setTeam("home");
@@ -201,23 +204,24 @@ export const ScheduleRoster = () => {
             {preview[1].teamName}
           </td>
         </tr>
-<thead>
-<tr>
-          <th>#</th>
-          <th>Forwards</th>
-          <th>Pos</th>
-          <th>GP</th>
-          <th>A</th>
-          <th>P</th>
-          <th>+/-</th>
-          <th>PIM</th>
-          <th>PPG</th>
-          <th>GWG</th>
-          <th>S</th>
-          <th>S%</th>
-          <th>FO%</th>
-        </tr>
-</thead>
+          </thead>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Forwards</th>
+            <th>Pos</th>
+            <th>GP</th>
+            <th>A</th>
+            <th>P</th>
+            <th>+/-</th>
+            <th>PIM</th>
+            <th>PPG</th>
+            <th>GWG</th>
+            <th>S</th>
+            <th>S%</th>
+            <th>FO%</th>
+          </tr>
+        </thead>
 
         <tbody>
           {home
@@ -228,7 +232,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr  key={player.person.id}>
+                <tr key={player.person.id}>
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}
@@ -247,23 +251,23 @@ export const ScheduleRoster = () => {
             })}
         </tbody>
 
-<thead>
-<tr>
-          <th>#</th>
-          <th>Defense</th>
-          <th>Pos</th>
-          <th>GP</th>
-          <th>A</th>
-          <th>P</th>
-          <th>+/-</th>
-          <th>PIM</th>
-          <th>PPG</th>
-          <th>GWG</th>
-          <th>S</th>
-          <th>S%</th>
-          <th>FO%</th>
-        </tr>
-</thead>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Defense</th>
+            <th>Pos</th>
+            <th>GP</th>
+            <th>A</th>
+            <th>P</th>
+            <th>+/-</th>
+            <th>PIM</th>
+            <th>PPG</th>
+            <th>GWG</th>
+            <th>S</th>
+            <th>S%</th>
+            <th>FO%</th>
+          </tr>
+        </thead>
         <tbody>
           {home
             .filter(
@@ -273,7 +277,7 @@ export const ScheduleRoster = () => {
             )
             .map((player) => {
               return (
-                <tr  key={player.person.id}>
+                <tr key={player.person.id}>
                   <td>{player.jerseyNumber}</td>{" "}
                   <td>{player.person.fullName}</td>
                   <td>{player.position.abbreviation}</td>{" "}

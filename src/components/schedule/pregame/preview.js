@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { ScheduleRoster } from "./scheduleRoster";
-import { GameCenterContext, PreviewContext } from "../../dispatch/dispatch";
+import { ScheduleRoster } from "../scheduleRoster";
+import { GameCenterContext, PreviewContext } from "../../../dispatch/dispatch";
 import { SeasonSeries } from "./seasonSeries";
 import { PreviousGame } from "./previousGame";
 import { Goalies } from "./goalies";
