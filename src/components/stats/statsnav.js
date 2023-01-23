@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { LeadersContext } from "../../dispatch/dispatch";
+import React from "react";
 
 export const StatsNav = (props) => {
 

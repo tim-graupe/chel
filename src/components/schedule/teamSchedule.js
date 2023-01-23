@@ -1,26 +1,21 @@
-import React, { Component, useContext, useEffect, useState } from "react";
-import { Boxscore } from "./boxscore";
+import React, { useContext, useEffect, useState } from "react";
 import "../../style sheets/schedule.css";
-
 import { TeamContext, PreviewContext, GameCenterContext } from "../../dispatch/dispatch";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 export const TeamSchedule = () => {
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
   const [preview, setPreview] = useContext(PreviewContext)
   const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
   const [schedule, setSchedule] = useState([]);
-  const [game, setGame] = useState(null);
-  const [teams, setTeams] = useState([]);
   const [gameSelected, setGameSelected] = useState(false);
+  // const [refreshedSchedule, setRefreshedSchedule] = useSearchParams({teamID: 1})
+  const {id} = useParams()
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
 
-  const getGoalies = (team) => {
-    team.filter((player) => player.position.abbreviation === "G");
-  };
 
   useEffect(() => {
     const getSchedule = () => {
@@ -36,6 +31,12 @@ export const TeamSchedule = () => {
     };
     getSchedule();
   }, []);
+
+  useEffect(() => {
+    if (teamSchedule === null) {
+      getTeamSchedule(id)
+    }
+  }, [])
 
   const getGameInfo = (gamePk) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {
@@ -81,7 +82,7 @@ export const TeamSchedule = () => {
   };
 
   if (teamSchedule === null) {
-    return <></>;
+    return getTeamSchedule(id)
   } else
     return (
       <div id="schedule-container">
@@ -103,7 +104,8 @@ export const TeamSchedule = () => {
                       <tr key={game.gamePk}>
                         <td
                           onClick={() => {
-                            getTeamSchedule(game.teams.away.team.id);
+
+                            getTeamSchedule(id);
                           }}
                         >
                           <Link to={`/schedule/${game.teams.away.team.id}`}>
@@ -114,7 +116,7 @@ export const TeamSchedule = () => {
                           <Link
                             to={`/schedule/${game.teams.home.team.id}`}
                             onClick={() => {
-                              getTeamSchedule(game.teams.home.team.id);
+                              getTeamSchedule(id);
                             }}
                           >
                             {" "}
@@ -136,7 +138,7 @@ export const TeamSchedule = () => {
                           />{" "}
                         </td>
                         <td>
-                        <Link to={`/preview/${game.gamePk}`}
+                        <Link to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                             onClick={() => {
                               getPreviewStats(
                                 game.teams.away.team.id,

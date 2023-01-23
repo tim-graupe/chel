@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { GameCenterContext } from "../../dispatch/dispatch";
 
 export const Boxscore = () => {
   const game = useContext(GameCenterContext);
+
+  
   return (
     <>
       <table id="live-game-scoreboard">

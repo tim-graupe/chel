@@ -55,7 +55,7 @@ export const Career = (props) => {
         <tbody>
           {player[2][0].map((season) => {
             return (
-              <tr id={player.playerID}>
+              <tr key={player.playerID}>
                 <td>{season.season.slice(0, 4)}-{season.season.slice(-4)}</td>
                 <td>{season.stat.games}</td>
                 <td>{season.stat.goals}</td>

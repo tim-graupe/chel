@@ -1,6 +1,5 @@
 import "./style sheets/App.css";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
-import { Home } from "./components/home";
 import { Standings } from "./components/standings/standings";
 import { Schedule } from "./components/schedule/schedule";
 import { Stats } from "./components/stats/stats";
@@ -37,7 +36,7 @@ function App() {
             <Route path="/stats" element={<Stats />} />
             <Route path="/schedule/:id" element={<TeamSchedule />} />
             <Route path="/gamecenter/:id" element={<GameCenter />} />
-            <Route path="/preview/:id" element={<Preview />} />
+            <Route path="/game/:id/away/:away/home/:home" element={<Preview />} />
             <Route path="/players/:id" element ={<PlayerProfile />} />
 
           </Routes>

@@ -81,6 +81,17 @@ margin-right: 0;
     width: 100%;
 }
 
+#profile-mid-div{
+    display: inline-flex;
+   
+}
+
+#mid-details{
+    flex: left;
+}
+#season-stats{
+    flex: right;
+}
 .bio-card-details {
     display: inline-block;
 }
@@ -97,6 +108,15 @@ margin-right: 0;
 .division-name{
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     margin-left: 2.5vmax;
+}
+
+#profile-mid-div{
+    display: block;
+   
+}
+
+#season-stats{
+    overflow-x: scroll;
 }
 table{
 max-width: 100%;

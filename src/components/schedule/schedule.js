@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Boxscore } from "./boxscore";
 import "../../style sheets/schedule.css";
-import { Preview } from "./preview";
-import { GameCenter } from "./gamecenter";
-import { PlayByPlay } from "./playByPlay";
 import { TeamContext, PreviewContext, GameCenterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 
@@ -12,16 +8,11 @@ export const Schedule = () => {
   const [preview, setPreview] = useContext(PreviewContext)
   const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
   const [schedule, setSchedule] = useState([]);
-  const [game, setGame] = useState(null);
-  const [teams, setTeams] = useState([]);
+
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
-
-  const getGoalies = (team) => {
-    team.filter((player) => player.position.abbreviation === "G");
-  };
 
   useEffect(() => {
     const getSchedule = () => {
@@ -47,6 +38,15 @@ export const Schedule = () => {
       .catch((err) => console.error(err));
   };
 
+  const getContent = (gamePk) => {
+    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((response) => setContent({content: response}))
+      .catch((err) => console.error(err));
+  }
+
   const getPreviewStats = (away, home) => {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/teams/?leaders&leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=gaa&leaderCategories=wins&leaderCategories=shutouts&leaderCategories=savePct&teamId=${away},${home}&expand=team.roster&expand=team.stats&expand=team.record&expand=team.schedule.next`,
@@ -69,15 +69,6 @@ export const Schedule = () => {
     )
       .then((response) => response.json())
       .then((response) => setTeamSchedule(response.dates))
-      .catch((err) => console.error(err));
-  };
-
-  const getContent = (gamePk) => {
-    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
-      mode: "cors",
-    })
-      .then((response) => response.json())
-      .then((response) => setContent({content: response}))
       .catch((err) => console.error(err));
   };
 

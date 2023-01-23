@@ -3,11 +3,41 @@ import { PlayerContext } from "../../dispatch/dispatch";
 import { PlayerStats } from "./playerSplits";
 import { Gamelog } from "./gamelogs";
 import { Career } from "./career";
+import { useParams } from "react-router-dom";
 export const PlayerProfile = () => {
-const player = useContext(PlayerContext)
+const [player, setPlayer, stats, setStats] = useContext(PlayerContext)
+const id = useParams()
+useEffect(() => {
+  function getPlayer(player) {
+    fetch(
+      `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear&stats=statsSingleSeason&season=20222023&stats=careerRegularSeason`,
+      {
+        mode: "cors",
+      }
+    )
+      .then((response) => response.json())
+      .then((response) =>
+        setStats([
+          response.stats[0].splits.filter(
+            (league) => league.league.name === "National Hockey League"
+          ),
+          [response.stats[1].splits[0].stat],
+          [response.stats[2].splits[0].stat],
+        ])
+      )
+      .catch((err) => console.error(err));
 
+    fetch(`https://statsapi.web.nhl.com/api/v1/people/${player}`, {
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((response) => setPlayer(response.people[0]))
+      .catch((err) => console.error(err));
+  }
+  getPlayer(id.id)
+}, [])
 
-  if (player === null || player === undefined | player[0].primaryPosition === undefined || player[2] === undefined) {
+  if (player === null || player === undefined | player.primaryPosition === undefined || stats === undefined) {
     return <></>
   } else {
     return (
@@ -15,34 +45,36 @@ const player = useContext(PlayerContext)
 
         <div id="profile-card">
           <img
-            src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player[0].id}.jpg`}
+            src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.id}.jpg`}
             alt="profile pic"
             id="profile-pic"
           />
           <h1>
-            {player[0].fullName} | #{player[0].primaryNumber}
+            {player.fullName} | #{player.primaryNumber}
           </h1>
           <div id="profile-card-info">
             <p className="bio-card-details">
-              {player[0].primaryPosition.abbreviation} |{" "}
-              {player[0].height} | {player[0].weight} lb | Age:{" "}
-              {player[0].currentAge}
+              {player.primaryPosition.abbreviation} |{" "}
+              {player.height} | {player.weight} lb | Age:{" "}
+              {player.currentAge}
             </p>
           </div>
-          <div id="bio-div">
-            <p className="bio-details">
-              Birthplace {player[0].birthCity},{" "}
-              {player[0].birthCountry}
+          <div id="profile-mid-div">
+              <div id="mid-details">
+              <p className="bio-details">
+              Birthplace {player.birthCity},{" "}
+              {player.birthCountry}
             </p>
-            <p className="bio-details">Born {player[0].birthDate}</p>
-
+            <p className="bio-details">Born {player.birthDate}</p>
+            <p>Shoots/Catches: {player.shootsCatches}</p>
             <a
               className="bio-details" id="news-link"
-              href={`https://www.nhl.com/devils/search#q=${player[0].fullName}&type=video`}
-            >{`Watch ${player[0].fullName} Highlights`}</a>
-          </div>
+              href={`https://www.nhl.com/devils/search#q=${player.fullName}&type=video`}
+            >{`Watch ${player.fullName} Highlights`}</a>
+              </div>
+         
           <div id="season-stats">
-            <table>
+            <table id="season-table">
               <thead>
                 <tr>
                   <th>Season</th>
@@ -63,9 +95,9 @@ const player = useContext(PlayerContext)
                 </tr>
               </thead>
               <tbody>
-              {player[2][1].map((season) => {
+              {stats[1].map((season) => {
                   return (
-                    <tr id={player.playerID}>
+                    <tr key={season.games}>
                       <td>2022 - 2023</td>
                       <td>{season.games}</td>
                       <td>{season.goals}</td>
@@ -84,9 +116,9 @@ const player = useContext(PlayerContext)
                     </tr>
                   );
                 })}                
-                {player[2][2].map((season) => {
+                {stats[2].map((season) => {
                   return (
-                    <tr id={player.playerID}>
+                    <tr key={season.games}>
                       <td>Career</td>
                       <td>{season.games}</td>
                       <td>{season.goals}</td>
@@ -104,9 +136,10 @@ const player = useContext(PlayerContext)
                       <td>{season.shotPct}</td>
                     </tr>
                   );
-                })}
+                })} 
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
