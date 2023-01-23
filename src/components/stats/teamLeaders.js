@@ -7,7 +7,6 @@ export const TeamLeaders = () => {
   const [player, setPlayer, stats, setStats] = useContext(PlayerContext);
   const [playerID, setPlayerID] = useState(null);
 
-
   function getPlayer(player) {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear&stats=statsSingleSeason&season=20222023&stats=careerRegularSeason`,
@@ -49,19 +48,19 @@ export const TeamLeaders = () => {
         {leaders[0].leaders.map((player) => {
           return (
             <tr>
-                      <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+              <Link className="link-style"
+                to={`/players/${player.person.id}`}
+                onClick={() => {
+                  getPlayer(player.person.id);
+                }}
+              >
+                <img
+                  src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                  alt="profile pic"
+                  className="table-pic"
+                />{" "}
+                {player.person.fullName}
+              </Link>
               <td>{player.value}</td>
             </tr>
           );
@@ -73,19 +72,19 @@ export const TeamLeaders = () => {
         {leaders[1].leaders.map((player) => {
           return (
             <tr>
-                      <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+              <Link className="link-style"
+                to={`/players/${player.person.id}`}
+                onClick={() => {
+                  getPlayer(player.person.id);
+                }}
+              >
+                <img
+                  src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                  alt="profile pic"
+                  className="table-pic"
+                />{" "}
+                {player.person.fullName}
+              </Link>
               <td>{player.value}</td>
             </tr>
           );
@@ -97,19 +96,19 @@ export const TeamLeaders = () => {
         {leaders[2].leaders.map((player) => {
           return (
             <tr>
-                      <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+              <Link className="link-style"
+                to={`/players/${player.person.id}`}
+                onClick={() => {
+                  getPlayer(player.person.id);
+                }}
+              >
+                <img
+                  src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                  alt="profile pic"
+                  className="table-pic"
+                />{" "}
+                {player.person.fullName}
+              </Link>
               <td>{player.value}</td>
             </tr>
           );
@@ -121,19 +120,19 @@ export const TeamLeaders = () => {
         {leaders[3].leaders.map((player) => {
           return (
             <tr>
-                      <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+              <Link className="link-style"
+                to={`/players/${player.person.id}`}
+                onClick={() => {
+                  getPlayer(player.person.id);
+                }}
+              >
+                <img
+                  src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                  alt="profile pic"
+                  className="table-pic"
+                />{" "}
+                {player.person.fullName}
+              </Link>
               <td>{player.value}</td>
             </tr>
           );

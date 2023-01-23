@@ -51,8 +51,8 @@ export const PlayerStats = (props) => {
           <tr>
             <th>Split</th>
             <th>GP</th>
-            <th> G</th> <th>A </th>
-            <th>P</th> <th>+/-</th> <th>PIM</th> <th>PPG</th> <th>SHG</th>{" "}
+            <th>G</th> <th>A</th>
+            <th>P</th> <th>+/-</th> <th>PIM</th> <th>PPG</th> <th>SHG</th>
             <th>SHP</th> <th>GWG</th> <th>OTG</th>
           </tr>
         </thead>
@@ -113,7 +113,6 @@ export const PlayerStats = (props) => {
             <td>{stats[4].splits[1].stat.gameWinningGoals}</td>
             <td>{stats[4].splits[1].stat.overTimeGoals}</td>
           </tr>
-
           {stats[2].splits.map((month) => {
             return (
               <tr key={month.month}>
@@ -155,5 +154,3 @@ export const PlayerStats = (props) => {
     );
   }
 };
-
-// GP, G, A , P =/-, PIM, PPG, SHG, SHP, GWG, OTG

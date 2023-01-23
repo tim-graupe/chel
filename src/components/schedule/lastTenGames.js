@@ -56,7 +56,7 @@ export const LastTenGames = (props) => {
   } else {
     return (
       <table className="last-ten-table">
-        
+        <caption>Last  Ten Games</caption>
         <thead>
           <tr>
             <th>

@@ -30,14 +30,14 @@ useEffect(() => {
       getGameInfo(id.id)
       getContent(id.id)
 
-}}, [id])
+}}, [])
 
 
 if (gameCenter === undefined || gameCenter.gameCenter === undefined) {
     return <></>
 }
 if (gameCenter.gameCenter.gameData.status.abstractGameState === "Preview") {
-    return <Preview />
+    return <Preview away = {gameCenter.gameCenter.gameData.teams.away.id}  home = {gameCenter.gameCenter.gameData.teams.home.id} />
 } else if (gameCenter.gameCenter.gameData.status.abstractGameState === "Final"){ 
     return <PostGame/>
 } else if (gameCenter.gameCenter.gameData.status.abstractGameState === "Live") {

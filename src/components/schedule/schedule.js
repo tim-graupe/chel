@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../../style sheets/schedule.css";
 import { TeamContext, PreviewContext, GameCenterContext } from "../../dispatch/dispatch";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const Schedule = () => {
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
   const [preview, setPreview] = useContext(PreviewContext)
   const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
   const [schedule, setSchedule] = useState([]);
-
+  const id = useParams()
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
@@ -70,6 +70,7 @@ export const Schedule = () => {
       .then((response) => response.json())
       .then((response) => setTeamSchedule(response.dates))
       .catch((err) => console.error(err));
+      
   };
 
   return (
@@ -92,21 +93,21 @@ export const Schedule = () => {
                   {games.games.map((game) => {
                     return (
                       <tr key={game.gamePk}>
-                        <td>
-                          <Link
-                            to={`/schedule/${game.teams.away.team.id}`}
-                            onClick={() => {
-                              getTeamSchedule(game.teams.away.team.id);
-                            }}
-                          >
+                        <td
+                          onClick={() => {
+                            getTeamSchedule(id);
+                          }}
+                        >
+                          <Link className="link-style" to={`/schedule/${game.teams.away.team.id}`}>
                             {" "}
                             {game.teams.away.team.name}
                           </Link>{" "}
                           @{" "}
-                          <Link
+                          <Link className="link-style"
                             to={`/schedule/${game.teams.home.team.id}`}
                             onClick={() => {
-                              getTeamSchedule(game.teams.home.team.id);
+                              getTeamSchedule(id);
+                              
                             }}
                           >
                             {" "}
@@ -128,24 +129,20 @@ export const Schedule = () => {
                           />{" "}
                         </td>
                         <td>
-                          <Link to={`/preview/${game.gamePk}`}
+                        <Link className="link-style" to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                             onClick={() => {
                               getPreviewStats(
                                 game.teams.away.team.id,
                                 game.teams.home.team.id
                               );
                               setPreview(content)
-                              setGameCenter(game)
                             }}
                           >
-                            Preview
+                            Stats {" "}
                           </Link>
-                          <Link to={`/gamecenter/${game.gamePk}`}
+                          <Link className="link-style" to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                             onClick={() => {
-                              getPreviewStats(
-                                game.teams.away.team.id,
-                                game.teams.home.team.id
-                              );
+                              console.log(game.gamePk)
                               getGameInfo(game.gamePk);
                               getContent(game.gamePk);
                               setGameCenter(game)

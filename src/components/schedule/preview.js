@@ -12,10 +12,10 @@ import { Link, useLocation, useParams } from "react-router-dom";
 
 export const Preview = () => {
   const [preview, setPreview] = useContext(PreviewContext);
-  const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
+  const { gameCenter, setGameCenter, content, setContent } =
+    useContext(GameCenterContext);
 
-  const {game, away, home} = useParams()
-
+  const { game, away, home } = useParams();
   const getPreviewStats = (away, home) => {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/teams/?leaders&leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=gaa&leaderCategories=wins&leaderCategories=shutouts&leaderCategories=savePct&teamId=${away},${home}&expand=team.roster&expand=team.stats&expand=team.record&expand=team.schedule.next`,
@@ -26,7 +26,6 @@ export const Preview = () => {
       .then((response) => response.json())
       .then((response) => setPreview(response.teams))
       .catch((err) => console.error(err));
-
   };
 
   useEffect(() => {
@@ -35,8 +34,8 @@ export const Preview = () => {
         mode: "cors",
       })
         .then((response) => response.json())
-        .then((response) => setGameCenter({gameCenter: response}))
-      
+        .then((response) => setGameCenter({ gameCenter: response }))
+
         .catch((err) => console.error(err));
     };
 
@@ -45,42 +44,31 @@ export const Preview = () => {
         mode: "cors",
       })
         .then((response) => response.json())
-        .then((response) => setContent({content: response}))
+        .then((response) => setContent({ content: response }))
         .catch((err) => console.error(err));
     };
 
-    if (gameCenter === undefined) {
 
-
-    getGameInfo(game)
-    getContent(game)
-    getPreviewStats(away, home)
-
-}
-
-}, [])
-
-  if (
-    preview === null ||
-    preview[0] === undefined ||
-    preview[0].teamStats === undefined
-    || gameCenter === undefined
-    || gameCenter == null
-  ) {
-    return <></>
+      getGameInfo(gameCenter.gameCenter.gamePk);
+      getContent(gameCenter.gameCenter.gamePk);
+      getPreviewStats(away, home);
+    
+  }, []);
+  if (preview[0] === undefined) {
+    return <></>;
   } else {
     return (
       <div id="preview-container">
         <section className="preview-col" id="preview-left-col">
           <div id="last-ten-section">
-          <LastTenGames team={preview[0]} />
-          <LastTenGames team={preview[1]} />
+            <LastTenGames team={preview[0]} />
+            <LastTenGames team={preview[1]} />
           </div>
           <TeamStatsVs />
           <PreviewStandings />
         </section>
         <section className="preview-col" id="preview-mid-col">
-         <PlayersToWatch />
+          <PlayersToWatch />
 
           <Goalies />
           <ScheduleRoster />

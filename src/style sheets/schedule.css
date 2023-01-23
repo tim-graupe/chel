@@ -5,6 +5,15 @@
     margin-right: auto;
 }
 
+.link-style{
+ text-decoration: none;
+ color: cyan;
+}
+
+.link-style:hover{
+    text-decoration: underline;
+}
+
 .schedule-logos {
     width: 40%;
 }
@@ -155,6 +164,7 @@ td {
     width: fit-content;
     block-size: fit-content;
     max-width: 50%;
+    position: absolute;
     float: right;
 }
 #live-rink{

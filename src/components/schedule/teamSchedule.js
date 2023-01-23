@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../../style sheets/schedule.css";
 import { TeamContext, PreviewContext, GameCenterContext } from "../../dispatch/dispatch";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const TeamSchedule = () => {
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
@@ -9,7 +9,6 @@ export const TeamSchedule = () => {
   const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
   const [schedule, setSchedule] = useState([]);
   const [gameSelected, setGameSelected] = useState(false);
-  // const [refreshedSchedule, setRefreshedSchedule] = useSearchParams({teamID: 1})
   const {id} = useParams()
   const current = new Date();
   const date = `${current.getFullYear()}-${
@@ -81,7 +80,7 @@ export const TeamSchedule = () => {
       .catch((err) => console.error(err));
   };
 
-  if (teamSchedule === null) {
+  if (teamSchedule === null || teamSchedule === undefined) {
     return getTeamSchedule(id)
   } else
     return (
@@ -108,12 +107,12 @@ export const TeamSchedule = () => {
                             getTeamSchedule(id);
                           }}
                         >
-                          <Link to={`/schedule/${game.teams.away.team.id}`}>
+                          <Link className="link-style" to={`/schedule/${game.teams.away.team.id}`}>
                             {" "}
                             {game.teams.away.team.name}
                           </Link>{" "}
                           @{" "}
-                          <Link
+                          <Link className="link-style"
                             to={`/schedule/${game.teams.home.team.id}`}
                             onClick={() => {
                               getTeamSchedule(id);
@@ -138,7 +137,7 @@ export const TeamSchedule = () => {
                           />{" "}
                         </td>
                         <td>
-                        <Link to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
+                        <Link className="link-style" to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                             onClick={() => {
                               getPreviewStats(
                                 game.teams.away.team.id,
@@ -148,9 +147,9 @@ export const TeamSchedule = () => {
                               setPreview(content)
                             }}
                           >
-                            Preview
+                            Stats {" "}
                           </Link>
-                          <Link to={`/gamecenter/${game.gamePk}`}
+                          <Link className="link-style" to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                             onClick={() => {
                               getGameInfo(game.gamePk);
                               getContent(game.gamePk);

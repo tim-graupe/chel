@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { PlayerProfile } from "./playerProfile";
 import { PlayerContext, RosterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 export const Roster = () => {
@@ -55,7 +54,7 @@ export const Roster = () => {
                 return (
                   <tr key={player.person.id}>
                     <td>
-                      <Link
+                      <Link className="link-style"
                         to={`/players/${player.person.id}`}
                         onClick={() => {
                           getPlayer(player.person.id);
@@ -97,19 +96,19 @@ export const Roster = () => {
                       getPlayer(player.person.id);
                     }}
                   >
-                      <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+                    <Link className="link-style"
+                      to={`/players/${player.person.id}`}
+                      onClick={() => {
+                        getPlayer(player.person.id);
+                      }}
+                    >
+                      <img
+                        src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                        alt="profile pic"
+                        className="table-pic"
+                      />{" "}
+                      {player.person.fullName}
+                    </Link>
                     <td>{player.jerseyNumber}</td>
                   </tr>
                 );
@@ -134,19 +133,19 @@ export const Roster = () => {
                       getPlayer(player.person.id);
                     }}
                   >
-                       <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+                    <Link className="link-style"
+                      to={`/players/${player.person.id}`}
+                      onClick={() => {
+                        getPlayer(player.person.id);
+                      }}
+                    >
+                      <img
+                        src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                        alt="profile pic"
+                        className="table-pic"
+                      />{" "}
+                      {player.person.fullName}
+                    </Link>
                     <td>{player.jerseyNumber}</td>
                   </tr>
                 );
@@ -171,19 +170,19 @@ export const Roster = () => {
                       getPlayer(player.person.id);
                     }}
                   >
-                      <Link
-                        to={`/players/${player.person.id}`}
-                        onClick={() => {
-                          getPlayer(player.person.id);
-                        }}
-                      >
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                          alt="profile pic"
-                          className="table-pic"
-                        />{" "}
-                        {player.person.fullName}
-                      </Link>
+                    <Link className="link-style"
+                      to={`/players/${player.person.id}`}
+                      onClick={() => {
+                        getPlayer(player.person.id);
+                      }}
+                    >
+                      <img
+                        src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                        alt="profile pic"
+                        className="table-pic"
+                      />{" "}
+                      {player.person.fullName}
+                    </Link>
                     <td>{player.jerseyNumber}</td>
                   </tr>
                 );
