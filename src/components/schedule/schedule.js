@@ -14,6 +14,8 @@ export const Schedule = () => {
     current.getMonth() + 1
   }-${current.getDate()}`;
 
+ 
+
   useEffect(() => {
     const getSchedule = () => {
       fetch(
@@ -73,9 +75,12 @@ export const Schedule = () => {
       
   };
 
+
   return (
     <>
       <div id="schedule-container">
+
+
         {schedule.map((games) => {
           return (
             <div key={games.date}>

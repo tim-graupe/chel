@@ -3,20 +3,20 @@ import "../../style sheets/standings.css";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 
-export const Division = (props) => {
+export const Division = () => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
   const [standings, setStandings] = useState([]);
   useEffect(() => {
-    const getDivision = () => {
+    const todaysGames = () => {
       fetch("https://statsapi.web.nhl.com/api/v1/standings", {
         mode: "cors",
       })
         .then((response) => response.json())
-        .then((response) => setStandings(response.records.filter(i => i.division.nameShort === props.name)))
+        .then((response) => setStandings(response.records))
         .catch((err) => console.error(err));
     };
-    getDivision();
+    todaysGames();
   }, []);
 
   const showRoster = (teamID) => {
@@ -31,16 +31,17 @@ export const Division = (props) => {
       .catch((err) => console.error(err));
   };
 
-  
   const showLeaders = (teamID) => {
-    fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=timeOnIcePerGame&season=20222023`, {
-      mode: "cors",
-    })
+    fetch(
+      `https://statsapi.web.nhl.com/api/v1/teams/${teamID}/leaders?leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=wins&leaderCategories=timeOnIcePerGame&season=20222023`,
+      {
+        mode: "cors",
+      }
+    )
       .then((response) => response.json())
       .then((response) => setLeaders(response.teamLeaders))
       .catch((err) => console.error(err));
-  }
-
+  };
 
   return (
     <div id="table-container">
@@ -96,4 +97,4 @@ export const Division = (props) => {
       })}
     </div>
   );
-}
+};

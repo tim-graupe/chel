@@ -23,6 +23,7 @@ function App() {
   return (
     <HashRouter className="App">
       <Link to={'/stats'}>Link</Link>
+      <Link to={'/standings'}>Standings</Link>
       <PreviewContext.Provider value={[preview, setPreview]}>
       <RosterContext.Provider value={[roster, setRoster, leaders, setLeaders]}>
         <LeadersContext.Provider value={[leaders, setLeaders]}>

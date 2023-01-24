@@ -5,71 +5,28 @@ import { TeamStats } from "./teamStats";
 import { Roster } from "./roster";
 import { TeamLeaders } from "./teamLeaders";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
+import { StatsLeaders } from "./statsLeaders";
 export const Stats = () => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
+  const [leagueTeams, setLeagueTeams] = useState([])
   const [team, setTeam] = useState(null);
-  const [metro, setMetro] = useState([]);
-  const [atlantic, setAtlantic] = useState([]);
-  const [central, setCentral] = useState([]);
-  const [pacific, setPacific] = useState([]);
-  useEffect(() => {
-    const getMetro = () => {
-      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
-        mode: "cors",
-      })
-        .then((response) => response.json())
-        .then((response) =>
-          setMetro(
-            response.teams.filter(
-              (team) => team.division.name === "Metropolitan"
-            )
-          )
-        )
-        .catch((err) => console.error(err));
-    };
 
-    const getAtlantic = () => {
+  useEffect(() => {
+        const getLeagueTeams = () => {
       fetch("https://statsapi.web.nhl.com/api/v1/teams", {
         mode: "cors",
       })
         .then((response) => response.json())
         .then((response) =>
-          setAtlantic(
-            response.teams.filter((team) => team.division.name === "Atlantic")
+          setLeagueTeams(
+            response.teams
           )
         )
         .catch((err) => console.error(err));
     };
-    const getCentral = () => {
-      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
-        mode: "cors",
-      })
-        .then((response) => response.json())
-        .then((response) =>
-          setCentral(
-            response.teams.filter((team) => team.division.name === "Central")
-          )
-        )
-        .catch((err) => console.error(err));
-    };
-    const getPacific = () => {
-      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
-        mode: "cors",
-      })
-        .then((response) => response.json())
-        .then((response) =>
-          setPacific(
-            response.teams.filter((team) => team.division.name === "Pacific")
-          )
-        )
-        .catch((err) => console.error(err));
-    };
-    getMetro();
-    getAtlantic();
-    getCentral();
-    getPacific();
-  }, []);
+getLeagueTeams()
+  }, [])
 
   const showTeamStats = (teamID) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/stats`, {
@@ -106,17 +63,19 @@ export const Stats = () => {
 
   return (
     <div id="stats-container">
-      
-      <StatsNav
-        metro={metro}
-        atlantic={atlantic}
-        central={central}
-        pacific={pacific}
+        <StatsLeaders />
+
+      {/* <StatsNav
+      leagueTeams={leagueTeams}
         showTeamStats={showTeamStats}
         showRoster={showRoster}
         showLeaders={showLeaders}
       />
 
+
+
+<section id="league-leaders-stats">
+</section>
 <div id="roster-main">
 <TeamStats team={team} />
 
@@ -124,7 +83,7 @@ export const Stats = () => {
   <Roster />
   <TeamLeaders />
 </div>
-</div>
+</div> */}
     </div>
   );
 };
