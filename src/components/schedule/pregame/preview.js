@@ -8,7 +8,7 @@ import { PreviewStandings } from "./previewStandings";
 import { TeamStatsVs } from "./teamStatsVs";
 import { PlayersToWatch } from "./playersToWatch";
 import { LastTenGames } from "./lastTenGames";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const Preview = () => {
   const [preview, setPreview] = useContext(PreviewContext);

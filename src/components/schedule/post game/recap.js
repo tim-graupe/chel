@@ -7,7 +7,6 @@ export const Recap = () => {
   if (
     media.content === null ||
     media.content.content.editorial.recap.items[0] === undefined ||
-    media.content.content.editorial === undefined ||
     media.content.content.editorial.recap.items[0].media.playbacks === undefined
   ) {
     return (
