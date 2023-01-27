@@ -19,6 +19,7 @@ export const Boxscore = () => {
                   .currentPeriodOrdinal
               }
             </th>
+            <th>SOG</th>
             <th>1st</th>
             <th>2nd</th>
             <th>3rd</th>
@@ -34,11 +35,13 @@ export const Boxscore = () => {
                 alt="team-pic"
               />
               {game.gameCenter.gameCenter.gameData.teams.away.teamName}
+              </td>
+              <td>
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.away
                   .teamStats.teamSkaterStats.shots
               }
-              SOG
+              
             </td>
             {game.gameCenter.gameCenter.liveData.linescore.periods.map(
               (period) => {
@@ -55,11 +58,13 @@ export const Boxscore = () => {
                 alt="team-pic"
               />
               {game.gameCenter.gameCenter.gameData.teams.home.teamName}
+              </td>
+              <td>
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.home
                   .teamStats.teamSkaterStats.shots
               }
-              SOG
+              
             </td>
             {game.gameCenter.gameCenter.liveData.linescore.periods.map(
               (period) => {

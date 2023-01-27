@@ -22,7 +22,8 @@ export const TopScoreBoard = () => {
   useEffect(() => {
     const getSchedule = () => {
       fetch(
-        `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${date}&endDate=2023-01-27&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore`,
+        `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${date}&endDate=2023-04-16&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore`,
+
         {
           mode: "cors",
         }

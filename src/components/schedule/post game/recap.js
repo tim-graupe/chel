@@ -21,7 +21,7 @@ export const Recap = () => {
                 src={item.media.image.cuts["768x432"].src}
                 alt="recap"
               />
-              <a href={`http://www.nhl.com/${item.url}`}>Read More</a>
+              <a href={`https://www.nhl.com/${item.url}`}>Read More</a>
             </div>
           );
         })}
@@ -71,8 +71,7 @@ export const Recap = () => {
       >
         <source
           src={
-            media.content.content.editorial.recap.items[0].media.playbacks[0]
-              .url
+            media.content.content.editorial.recap.items[0].media.playbacks[2].url
           }
           title="recap"
           type="video/mp4"
@@ -81,7 +80,7 @@ export const Recap = () => {
       <p id="recap-blurb">
         {media.content.content.editorial.recap.items[0].seoDescription}
         <a
-          href={`http://www.nhl.com/${media.content.content.editorial.recap.items[0].url}`}
+          href={`https://www.nhl.com/${media.content.content.editorial.recap.items[0].url}`}
         >
           Read More
         </a>
@@ -108,6 +107,7 @@ export const Recap = () => {
             </div>
           );
         })}
+        <img src={media.content.content.media.epg[2].items[0].image.cuts["320x180"].src} alt="extended highlights" width={media.content.content.media.epg[2].items[0].image.cuts["320x180"].width} height={media.content.content.media.epg[2].items[0].image.cuts["320x180"].height} />
       </div>
     </div>
   );

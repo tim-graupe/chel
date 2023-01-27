@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 export const GameCenter = () => {
     const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
     const id = useParams()
-useEffect(() => {
 
+useEffect(() => {
     const getGameInfo = (gamePk) => {
         fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {
           mode: "cors",
@@ -19,7 +19,7 @@ useEffect(() => {
       };
 
       const getContent = (gamePk) => {
-        fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
+        fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
           mode: "cors",
         })
           .then((response) => response.json())
