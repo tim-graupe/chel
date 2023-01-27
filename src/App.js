@@ -28,7 +28,7 @@ function App() {
       {/* <Link to={'/stats'}>Link</Link>
       <Link to={'/standings'}>Standings</Link> */}
 <div id="top-container">
-<TopScoreBoard />
+{/* <TopScoreBoard /> */}
     <TopNav />
 </div>
       <PreviewContext.Provider value={[preview, setPreview]}>

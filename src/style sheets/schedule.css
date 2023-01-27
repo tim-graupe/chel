@@ -362,8 +362,17 @@ left: 440px;
 
     }
 
+    #main-postgame-container{
+        width: 100%;
+    }
+
     #pg-container {
         display: block;
+        min-width: 100%;
+    }
+
+    #recap-container, #recap-highlights{
+        min-width: 100%;
     }
 
     
