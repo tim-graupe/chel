@@ -7,7 +7,7 @@ export const Home = () => {
   useEffect(() => {
     const todaysGames = () => {
       fetch( //add limit=x extension for sidebar headlines, then map/slice articles from there
-        "http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/news?limit=15",
+        "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/news?limit=15",
         {
           mode: "cors",
         }

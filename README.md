@@ -12,9 +12,8 @@ convert YYYYYY and YYYY-MM-DD dates to Month DayOfMonth
 add scratched players to gamecenter 
 
 known issues:
-alignment for roster tables
 table formatting on basically every page in mobile
 live on ice skaters
-schedule one day behind in date
+schedule date one day behind
 video not playing on mobile and crashes site
 page does not re-render on gamecenter change
