@@ -1,10 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const Boxscore = () => {
   const game = useContext(GameCenterContext);
-
-  
   return (
     <>
       <table id="live-game-scoreboard">
@@ -14,13 +12,13 @@ export const Boxscore = () => {
               {
                 game.gameCenter.gameCenter.liveData.linescore
                   .currentPeriodTimeRemaining
-              }{" "}
-              /{" "}
+              }
+              /
               {
                 game.gameCenter.gameCenter.liveData.linescore
                   .currentPeriodOrdinal
-              }{" "}
-            </th>{" "}
+              }
+            </th>
             <th>1st</th>
             <th>2nd</th>
             <th>3rd</th>
@@ -29,17 +27,17 @@ export const Boxscore = () => {
         <tbody>
           <tr>
             <td>
-              {" "}
+              
               <img
                 src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.gameCenter.gameCenter.gameData.teams.away.id}.svg`}
                 className="schedule-logos"
                 alt="team-pic"
-              />{" "}
+              />
               {game.gameCenter.gameCenter.gameData.teams.away.teamName}
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.away
                   .teamStats.teamSkaterStats.shots
-              }{" "}
+              }
               SOG
             </td>
             {game.gameCenter.gameCenter.liveData.linescore.periods.map(
@@ -50,17 +48,17 @@ export const Boxscore = () => {
           </tr>
           <tr>
             <td>
-              {" "}
+              
               <img
                 src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.gameCenter.gameCenter.gameData.teams.home.id}.svg`}
                 className="schedule-logos"
                 alt="team-pic"
-              />{" "}
+              />
               {game.gameCenter.gameCenter.gameData.teams.home.teamName}
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.home
                   .teamStats.teamSkaterStats.shots
-              }{" "}
+              }
               SOG
             </td>
             {game.gameCenter.gameCenter.liveData.linescore.periods.map(
@@ -203,8 +201,8 @@ export const Boxscore = () => {
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.away
                   .teamStats.teamSkaterStats.powerPlayGoals
-              }{" "}
-              /{" "}
+              }
+              /
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.away
                   .teamStats.teamSkaterStats.powerPlayOpportunities
@@ -214,8 +212,8 @@ export const Boxscore = () => {
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.home
                   .teamStats.teamSkaterStats.powerPlayGoals
-              }{" "}
-              /{" "}
+              }
+              /
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.home
                   .teamStats.teamSkaterStats.powerPlayOpportunities

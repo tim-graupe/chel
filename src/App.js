@@ -1,5 +1,6 @@
 import "./style sheets/App.css";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
+import {Home} from './components/home'
 import { Standings } from "./components/standings/standings";
 import { Schedule } from "./components/schedule/schedule";
 import { Stats } from "./components/stats/stats";
@@ -9,6 +10,8 @@ import { TeamSchedule } from "./components/schedule/teamSchedule";
 import { GameCenter } from "./components/schedule/gamecenter/gamecenter";
 import { Preview } from "./components/schedule/pregame/preview";
 import { PlayerProfile } from "./components/stats/playerProfile";
+import { TopScoreBoard } from "./components/topBarScoreBoard";
+import { TopNav } from "./components/topNav";
 
 function App() {
   let [roster, setRoster] = useState([]);
@@ -22,8 +25,12 @@ function App() {
 
   return (
     <HashRouter className="App">
-      <Link to={'/stats'}>Link</Link>
-      <Link to={'/standings'}>Standings</Link>
+      {/* <Link to={'/stats'}>Link</Link>
+      <Link to={'/standings'}>Standings</Link> */}
+<div id="top-container">
+<TopScoreBoard />
+    <TopNav />
+</div>
       <PreviewContext.Provider value={[preview, setPreview]}>
       <RosterContext.Provider value={[roster, setRoster, leaders, setLeaders]}>
         <LeadersContext.Provider value={[leaders, setLeaders]}>
@@ -31,7 +38,7 @@ function App() {
         <GameCenterContext.Provider value={{gameCenter, setGameCenter, content, setContent}}>
         <PlayerContext.Provider value={[player, setPlayer, stats, setStats]}>
         <Routes>
-            <Route path="/" element={<Schedule />} />
+            <Route path="/" element={<Home />} />
             <Route path="/standings" element={<Standings />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/stats" element={<Stats />} />

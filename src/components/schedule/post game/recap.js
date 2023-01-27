@@ -7,13 +7,14 @@ export const Recap = () => {
   if (
     media.content === null ||
     media.content.content.editorial.recap.items[0] === undefined ||
+    media.content.content.editorial === undefined ||
     media.content.content.editorial.recap.items[0].media.playbacks === undefined
   ) {
     return (
       <>
         {media.content.content.editorial.recap.items.map((item) => {
           return (
-            <div id="recap-container">
+            <div key={item.headline} id="recap-container">
               <h1>{item.headline}</h1>
               <p>{item.seoDescription}</p>
               <img
@@ -32,21 +33,21 @@ export const Recap = () => {
     <div id="recap-container">
       {media.content.content.editorial.recap.items.map((headline) => {
         return (
-          <>
+         <div key={headline.headline}>
             <h1>
               <strong>{headline.headline}</strong>
             </h1>
             <h2>{headline.subhead}</h2>
-            <p>
+            <div>
               {headline.contributor.contributors.map((contributor) => {
                 return (
-                  <>
+                  <p key={contributor.name}>
                     {contributor.name} / {headline.contributor.source}
-                  </>
+                  </p>
                 );
               })}
-            </p>
-          </>
+            </div>
+          </div>
         );
       })}
 
@@ -67,7 +68,6 @@ export const Recap = () => {
         
         loop
         autoPlay=""
-        muted
         playsInline
       >
         <source

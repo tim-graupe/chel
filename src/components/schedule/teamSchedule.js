@@ -98,69 +98,117 @@ export const TeamSchedule = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {games.games.map((game) => {
-                    return (
-                      <tr key={game.gamePk}>
-                        <td
-                          onClick={() => {
+                {games.games.map((game) => {
+                    if (game.status.abstractGameState === "Preview") {
+                      return (
+                        <tr key={game.gamePk}>
+                          <td>
+                            <Link
+                              className="link-style"
+                              to={`/schedule/${game.teams.away.team.id}`}
+                            >
+                              {game.teams.away.team.name}
+                            </Link>
+                            @
+                            <Link
+                              className="link-style"
+                              to={`/schedule/${game.teams.home.team.id}`}
+                              onClick={() => {
+                                getTeamSchedule(id);
+                              }}
+                            >
+                              {" "}
+                              {game.teams.home.team.name}{" "}
+                            </Link>
+                          </td>
 
-                            getTeamSchedule(id);
-                          }}
-                        >
-                          <Link className="link-style" to={`/schedule/${game.teams.away.team.id}`}>
-                            {" "}
-                            {game.teams.away.team.name}
-                          </Link>{" "}
-                          @{" "}
-                          <Link className="link-style"
-                            to={`/schedule/${game.teams.home.team.id}`}
-                            onClick={() => {
-                              getTeamSchedule(id);
-                            }}
-                          >
-                            {" "}
-                            {game.teams.home.team.name}
-                          </Link>
-                        </td>
-                        <td>
-                          {game.status.abstractGameState}{" "}
-                          <img
-                            src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
-                            className="schedule-logos"
-                            alt="team-pic"
-                          />
-                          {game.teams.away.score} {game.teams.home.score}
-                          <img
-                            src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
-                            className="schedule-logos"
-                            alt="team-pic"
-                          />{" "}
-                        </td>
-                        <td>
-                        <Link className="link-style" to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
-                            onClick={() => {
-                              getPreviewStats(
-                                game.teams.away.team.id,
-                                game.teams.home.team.id
-                              );
-                              setGameSelected(true);
-                              setPreview(content)
-                            }}
-                          >
-                            Stats {" "}
-                          </Link>
-                          <Link className="link-style" to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
-                            onClick={() => {
-                              getGameInfo(game.gamePk);
-                              getContent(game.gamePk);
-                              setGameCenter(game)
-                            }}
-                          >
-                            GameCenter
-                          </Link>
-                        </td>
-                      </tr>
-                    );
+                          <td>
+                            {game.status.abstractGameState}{" "}
+                            <img
+                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
+                              className="schedule-logos"
+                              alt="team-pic"
+                            />
+                            {game.teams.away.score} {game.teams.home.score}
+                            <img
+                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
+                              className="schedule-logos"
+                              alt="team-pic"
+                            />{" "}
+                          </td>
+
+                          <td>
+                            <Link
+                              className="link-style"
+                              to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
+                              onClick={() => {
+                                getPreviewStats(
+                                  game.teams.away.team.id,
+                                  game.teams.home.team.id
+                                );
+                                setPreview(content);
+                                setGameCenter(game);
+                              }}
+                            >
+                              Preview{" "}
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    } else {
+                      return (
+                        <tr key={game.gamePk}>
+                          <td>
+                            <Link
+                              className="link-style"
+                              to={`/schedule/${game.teams.away.team.id}`}
+                            >
+                              {game.teams.away.team.name}
+                            </Link>
+                            @
+                            <Link
+                              className="link-style"
+                              to={`/schedule/${game.teams.home.team.id}`}
+                              onClick={() => {
+                                getTeamSchedule(id);
+                              }}
+                            >
+                              {" "}
+                              {game.teams.home.team.name}{" "}
+                            </Link>
+                          </td>
+
+                          <td>
+                            {game.status.abstractGameState}{" "}
+                            <img
+                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
+                              className="schedule-logos"
+                              alt="team-pic"
+                            />
+                            {game.teams.away.score} {game.teams.home.score}
+                            <img
+                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
+                              className="schedule-logos"
+                              alt="team-pic"
+                            />{" "}
+                          </td>
+
+                          <td>
+                            <Link
+                              className="link-style"
+                              to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
+                              onClick={() => {
+                                getGameInfo(game.gamePk);
+                                getContent(game.gamePk);
+                                setGameCenter(game);
+                              }}
+                            >
+                              GameCenter{" "}
+                            </Link>
+                          </td>
+                        </tr>
+                      );
+                    }
                   })}
                 </tbody>
               </table>

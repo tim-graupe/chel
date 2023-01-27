@@ -63,9 +63,9 @@ getLeagueTeams()
 
   return (
     <div id="stats-container">
-        <StatsLeaders />
+        {/* <StatsLeaders /> */}
 
-      {/* <StatsNav
+      <StatsNav
       leagueTeams={leagueTeams}
         showTeamStats={showTeamStats}
         showRoster={showRoster}
@@ -83,7 +83,7 @@ getLeagueTeams()
   <Roster />
   <TeamLeaders />
 </div>
-</div> */}
+</div>
     </div>
   );
 };
