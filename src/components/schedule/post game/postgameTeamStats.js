@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const TeamStats = () => {

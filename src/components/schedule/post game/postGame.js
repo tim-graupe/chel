@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Recap } from "./recap";
 import { TeamStats } from "./postgameTeamStats";
 import { PlayByPlay } from "../playByPlay";
-import { GameCenterContext } from "../../../dispatch/dispatch";
 import { Boxscore } from "../gamecenter/boxscore";
 import { ThreeStars } from "./threeStars";
 export const PostGame = () => {

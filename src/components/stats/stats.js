@@ -5,10 +5,12 @@ import { TeamStats } from "./teamStats";
 import { Roster } from "./roster";
 import { TeamLeaders } from "./teamLeaders";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
-import { StatsLeaders } from "./statsLeaders";
+import { Leaders } from "./leaders/leadersHome";
 export const Stats = () => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
+  const [skaters, setSkaters] = useState('points');
+  const [goalies, setGoalies] = useState('gaa')
   const [leagueTeams, setLeagueTeams] = useState([])
   const [team, setTeam] = useState(null);
 
@@ -63,7 +65,42 @@ getLeagueTeams()
 
   return (
     <div id="stats-container">
-        {/* <StatsLeaders /> */}
+        <div id="skaters-leader-container">
+        <div className="leader-buttons">
+          <button onClick={() => {
+            setSkaters('points')
+          }}>Points</button>
+
+          <button onClick={() => {
+            setSkaters("goals")
+          }}>Goals</button>
+
+          <button onClick={() => {
+            setSkaters('assists')
+          }}>Assists</button>
+
+        </div>
+        <Leaders stat={skaters} />
+
+        <div className="leader-buttons">
+          <button onClick={() => {
+            setGoalies('gaa')
+          }}>GAA</button>
+
+          <button onClick={() => {
+            setGoalies("savePct")
+          }}>SV%</button>
+
+          <button onClick={() => {
+            setGoalies('shutouts')
+          }}>Shutouts</button>
+
+        </div>
+        <Leaders stat={goalies} />
+
+        </div>
+        
+
 
       <StatsNav
       leagueTeams={leagueTeams}

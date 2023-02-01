@@ -1,7 +1,8 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
+
 #schedule-container,
 #gamecenter-container {
     width: 50%;
@@ -9,22 +10,24 @@
     margin-right: auto;
 }
 
-#top-container{
+#top-container {
     /* position: fixed; */
 }
-#top-nav-container{
+
+#top-nav-container {
     overflow: auto;
     white-space: nowrap;
     background-color: #333;
     padding-bottom: 10px;
 }
 
-#top-nav{
+#top-nav {
     background-color: #333;
     overflow: auto;
     white-space: nowrap;
 }
-.nav-links{
+
+.nav-links {
     text-decoration: none;
     color: cyan;
     text-align: center;
@@ -33,30 +36,30 @@
 }
 
 
-.top-nav-individual-gamebox{
+.top-nav-individual-gamebox {
     display: inline-block;
 }
 
-.top-nav-logos{
+.top-nav-logos {
     max-width: 10%;
 }
 
-#container{
+#container {
     background-color: rebeccapurple;
 }
 
 
 
-.link-style{
- text-decoration: none;
- color: cyan;
+.link-style {
+    text-decoration: none;
+    color: cyan;
 }
 
-.link-style:hover{
+.link-style:hover {
     text-decoration: underline;
 }
 
-#news-container{
+#news-container {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -74,21 +77,18 @@
     box-shadow: 0 0 25px rgb(73, 253, 247);
     border-color: rgb(73, 253, 247);
 }
-.homepage-links-cards > *{
+
+.homepage-links-cards>* {
     text-decoration: none;
     color: cyan;
-    transition: 0.3s;   
-    
+    transition: 0.3s;
+
 }
 
-.home-article-images{
-object-fit: cover;
-width: 100%;
-max-height: 100%;    
-}
-
-#rinkdiv{
-    background-image: url("../images/rink.png");
+.home-article-images {
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
 }
 
 .schedule-logos {
@@ -118,7 +118,9 @@ td {
 }
 
 #tendy-table {
-    width: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #tendy-left-table {
@@ -150,11 +152,17 @@ td {
     flex-direction: row;
     overflow: auto;
     white-space: nowrap;
-    width: 66%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .highlight-div {
     padding: 10px;
+}
+
+.video-thumbnail{
+    padding-left: 10px;
 }
 
 .pbp-pic {
@@ -163,30 +171,51 @@ td {
     max-width: 20%;
 }
 
+.rink-pic{
+    max-width: 50%;
+    height: auto;
+    float: right;
+    width:50%;
+}
+
+#hit-marker{
+    float: right;
+}
 .pbp-details {
     display: inline-block;
+    width: 50%;
 }
 
 .pbp-events {
     list-style-type: none;
-    padding: 0;
     display: block;
     margin-right: auto;
     margin-left: auto;
-    width: 33%
+    width: 80%;
+
 }
 
-.pbp-event-box {}
 
 .pbp-type {
     border: solid 1px;
-    width: fit-content;
+    /* width: fit-content; */
     text-align: center;
+    padding: 1%;
+}
+
+
+
+.pbp-event-box {
+    display: inline-flex;
+}
+
+
+.pbp-event-box-no-players {
+    background-color: #090a09
 }
 
 #preview-container {
     display: flex;
-    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -237,25 +266,6 @@ td {
     display: float;
 }
 
-#rink-container {
-    width: fit-content;
-    block-size: fit-content;
-    max-width: 50%;
-    position: absolute;
-    float: right;
-}
-#live-rink{
-    max-width: 100%;
-    position: relative;
-}
-
-#home-LW{
-z-index: 1;
-position: relative;
-bottom: 350px;
-left: 440px;
-
-}
 
 
 #left-live-game-col {
@@ -342,14 +352,18 @@ left: 440px;
     }
 
     #recap-video {
-        width: auto;
-        max-width: 100%;
+        width: 100%;
     }
 
     #recap-highlights {
         scrollbar-width: thick;
         border: 1px solid aqua;
         width: 100%;
+
+    }
+
+    #highlight-video{
+        max-width: 100%;
     }
 
     #schedule-team-stats-container {
@@ -362,7 +376,7 @@ left: 440px;
 
     }
 
-    #main-postgame-container{
+    #main-postgame-container {
         width: 100%;
     }
 
@@ -371,21 +385,22 @@ left: 440px;
         min-width: 100%;
     }
 
-    #recap-container, #recap-highlights{
+    #recap-container,
+    #recap-highlights {
         min-width: 100%;
     }
 
-    
-#news-container{
-    width: 100%;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-}
 
-.homepage-links-cards {
-    min-width: 100%;
-}
+    #news-container {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .homepage-links-cards {
+        min-width: 100%;
+    }
 
 
 

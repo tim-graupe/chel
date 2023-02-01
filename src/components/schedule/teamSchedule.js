@@ -1,20 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../../style sheets/schedule.css";
-import { TeamContext, PreviewContext, GameCenterContext } from "../../dispatch/dispatch";
+import {
+  TeamContext,
+  PreviewContext,
+  GameCenterContext,
+} from "../../dispatch/dispatch";
 import { Link, useParams } from "react-router-dom";
 
 export const TeamSchedule = () => {
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
-  const [preview, setPreview] = useContext(PreviewContext)
-  const {gameCenter, setGameCenter, content, setContent} = useContext(GameCenterContext)
+  const [preview, setPreview] = useContext(PreviewContext);
+  const { gameCenter, setGameCenter, content, setContent } =
+    useContext(GameCenterContext);
   const [schedule, setSchedule] = useState([]);
   const [gameSelected, setGameSelected] = useState(false);
-  const {id} = useParams()
+  const { id } = useParams();
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
-
 
   useEffect(() => {
     const getSchedule = () => {
@@ -33,16 +37,16 @@ export const TeamSchedule = () => {
 
   useEffect(() => {
     if (teamSchedule === null) {
-      getTeamSchedule(id)
+      getTeamSchedule(id);
     }
-  }, [])
+  }, []);
 
   const getGameInfo = (gamePk) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {
       mode: "cors",
     })
       .then((response) => response.json())
-      .then((response) => setGameCenter({gameCenter: response}))
+      .then((response) => setGameCenter({ gameCenter: response }))
       .catch((err) => console.error(err));
   };
 
@@ -56,15 +60,14 @@ export const TeamSchedule = () => {
       .then((response) => response.json())
       .then((response) => setPreview(response.teams))
       .catch((err) => console.error(err));
-
   };
 
   const getContent = (gamePk) => {
-    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
+    fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
       mode: "cors",
     })
       .then((response) => response.json())
-      .then((response) => setContent({content: response}))
+      .then((response) => setContent({ content: response }))
       .catch((err) => console.error(err));
   };
 
@@ -81,7 +84,7 @@ export const TeamSchedule = () => {
   };
 
   if (teamSchedule === null || teamSchedule === undefined) {
-    return getTeamSchedule(id)
+    return getTeamSchedule(id);
   } else
     return (
       <div id="schedule-container">
@@ -98,7 +101,7 @@ export const TeamSchedule = () => {
                   </tr>
                 </thead>
                 <tbody>
-                {games.games.map((game) => {
+                  {games.games.map((game) => {
                     if (game.status.abstractGameState === "Preview") {
                       return (
                         <tr key={game.gamePk}>
@@ -146,7 +149,6 @@ export const TeamSchedule = () => {
                                   game.teams.away.team.id,
                                   game.teams.home.team.id
                                 );
-                                setPreview(content);
                                 setGameCenter(game);
                               }}
                             >

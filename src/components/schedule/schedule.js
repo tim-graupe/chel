@@ -44,7 +44,7 @@ export const Schedule = () => {
   };
 
   const getContent = (gamePk) => {
-    fetch(`http://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
+    fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/content`, {
       mode: "cors",
     })
       .then((response) => response.json())
@@ -148,7 +148,7 @@ export const Schedule = () => {
                                   game.teams.away.team.id,
                                   game.teams.home.team.id
                                 );
-                                setPreview(content);
+                                
                                 setGameCenter(game);
                               }}
                             >
@@ -208,7 +208,7 @@ export const Schedule = () => {
                                   game.teams.away.team.id,
                                   game.teams.home.team.id
                                 );
-                                setPreview(content);
+                                
                                 setGameCenter(game);
                               }}
                             >

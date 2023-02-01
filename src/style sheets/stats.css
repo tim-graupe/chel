@@ -101,7 +101,8 @@ margin-right: 0;
 @media screen and (max-width: 1000px){
 
 #stats-container{
-    width: auto;
+    width: 100%;
+    text-align: center;
 }
 #roster-container{
     display: flex;

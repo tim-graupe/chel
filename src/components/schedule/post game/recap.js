@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
 import { GameCenterContext } from "../../../dispatch/dispatch";
+import { useState } from "react";
 
 export const Recap = () => {
   const media = useContext(GameCenterContext);
+  const highlights = media.content.content.highlights.scoreboard.items;
+  const [highlight, setHighlight] = useState(
+    media.content.content.editorial.recap.items[0].media.playbacks[2].url
+  );
+  if (media.content === null) {
+    return <></>;
+  }
   if (
-    media.content === null ||
     media.content.content.editorial.recap.items[0] === undefined ||
     media.content.content.editorial === undefined ||
     media.content.content.editorial.recap.items[0].media.playbacks === undefined
@@ -32,7 +39,7 @@ export const Recap = () => {
     <div id="recap-container">
       {media.content.content.editorial.recap.items.map((headline) => {
         return (
-         <div key={headline.headline}>
+          <div key={headline.headline}>
             <h1>
               <strong>{headline.headline}</strong>
             </h1>
@@ -50,31 +57,15 @@ export const Recap = () => {
         );
       })}
 
-      <video
-        controls
-        id="recap-video"
-        key={
-          media.content.content.editorial.recap.items[0].media.playbacks[2].url
-        }
-        width={
-          media.content.content.editorial.recap.items[0].media.playbacks[2]
-            .width
-        }
-        height={
-          media.content.content.editorial.recap.items[0].media.playbacks[2]
-            .height
-        }
-        
-        loop
-        autoPlay=""
-        playsInline
-      >
+
+      {/* thumbnail for video below poster={media.content.content.editorial.recap.items[0].media.image.cuts["320x180"].src} */}
+      <video controls id="highlight-video" key={highlight} >
         <source
-          src={
-            media.content.content.editorial.recap.items[0].media.playbacks[2].url
-          }
-          title="recap"
+          src={highlight}
+          title="highlight"
           type="video/mp4"
+          height={highlight.height}
+          width={highlight.width}
         />
       </video>
       <p id="recap-blurb">
@@ -87,27 +78,46 @@ export const Recap = () => {
       </p>
 
       <div id="recap-highlights">
-        {media.content.content.highlights.scoreboard.items.map((highlight) => {
+        {highlights.map((video) => {
           return (
-            <div className="highlight-div" key={highlight.id}>
+            <li key={video.title}>
               <video
-                key={highlight.playbacks[0].url}
-                width={highlight.playbacks[0].width}
-                height={highlight.playbacks[0].height}
-                controls
+                className="video-thumbnail"
+                src={video.playbacks[0].url}
+                onClick={() => {
+                  setHighlight(video.playbacks[3].url);
+                }}
                 playsInline
-              >
-                <source
-                  src={highlight.playbacks[0].url}
-                  title={highlight.title}
-                />
-              </video>
-              <p>{highlight.title}</p>
-              <p>{highlight.duration}</p>
-            </div>
+              />
+              <p>{video.title}</p>
+              <p>{video.duration}</p>
+            </li>
           );
         })}
-        <img src={media.content.content.media.epg[2].items[0].image.cuts["320x180"].src} alt="extended highlights" width={media.content.content.media.epg[2].items[0].image.cuts["320x180"].width} height={media.content.content.media.epg[2].items[0].image.cuts["320x180"].height} />
+<div>
+<img
+          src={
+            media.content.content.media.epg[2].items[0].image.cuts["320x180"]
+              .src
+          }
+          alt="extended highlights"
+          width={
+            media.content.content.media.epg[2].items[0].image.cuts["320x180"]
+              .width
+          }
+          height={
+            media.content.content.media.epg[2].items[0].image.cuts["320x180"]
+              .height
+          }
+          onClick={() => {
+            setHighlight(
+              media.content.content.media.epg[2].items[0].playbacks[3].url
+            );
+          }}
+        />
+        <p>{media.content.content.media.epg[2].items[0].blurb}</p>
+        <p>{media.content.content.media.epg[2].items[0].duration}</p>
+</div>
       </div>
     </div>
   );

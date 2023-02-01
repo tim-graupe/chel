@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
 import { GameCenterContext } from "../../dispatch/dispatch";
+import rink from "../../images/rink.png";
+import { Rink } from "./playMap";
+
 
 export const PlayByPlay = () => {
   const game = useContext(GameCenterContext);
@@ -10,6 +13,18 @@ export const PlayByPlay = () => {
     return (
       <ul className="pbp-events">
         {game.gameCenter.gameCenter.liveData.linescore.periods.map((period) => {
+          if (period.num === 4) {
+            return (
+              <button
+                key={period.num}
+                onClick={() => {
+                  setCurrentPeriod(period.num);
+                }}
+              >
+                Overtime
+              </button>
+            );
+          }
           return (
             <button
               key={period.num}
@@ -22,60 +37,44 @@ export const PlayByPlay = () => {
           );
         })}
         {game.gameCenter.gameCenter.liveData.plays.allPlays
-          .filter(
-            (play) =>
-              play.about.period === currentPeriod &&
-              play.result.event !== "Stoppage" &&
-              play.result.event !== "Period End" &&
-              play.result.event !== "Official Challenge" &&
-              play.result.event !== "Game Scheduled" &&
-              play.result.event !== "Period Ready" &&
-              play.result.event !== "Period Start" &&
-              play.result.event !== "Period Official" &&
-              play.result.event !== "Game Official" &&
-              play.result.event !== "Game End"
-          )
+          .filter((play) => play.result.event !== "Period Ready")
           //Shot, Blocked Shot, Hit,  Faceoff, Missed Shot, Goal, Takeaway, Giveaway, Penalty
           .map((play) => {
-            return (
-              <li key={play.about.eventIdx} className="pbp-event-box">
-                <p className="pbp-type">
-                  {play.about.periodTimeRemaining} {play.result.event}
-                </p>
-                <p>{play.result.description}</p>
-                {play.players.map((player) => {
-                  return (
-                    <div className="pbp-details" key={player.id}>
-                      <img
-                        src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.player.id}.jpg`}
-                        alt="profile pic"
-                        className="pbp-pic"
-                      />{" "}
-                      <p>{player.player.fullName}</p>
-                    </div>
-                  );
-                })}
-              </li>
-            );
-          })}
-
-        {game.gameCenter.gameCenter.liveData.plays.allPlays
-          .filter(
-            (play) =>
-              play.about.period === currentPeriod &&
-              play.result.event === "Period End" &&
-              play.result.event === "Game Official" &&
-              play.result.event === "Game End"
-          )
-          .map((play) => {
-            return (
-              <li key={play.about.eventIdx} className="pbp-event-box">
-                <p className="pbp-type">
-                  {play.about.periodTimeRemaining} {play.result.event}
-                </p>
-                <p>{play.result.description}</p>
-              </li>
-            );
+            if (play.players !== undefined) {
+              return (
+                <li key={play.about.eventIdx} className="pbp-event-box">
+                  <p className="pbp-type">
+                    {play.about.periodTimeRemaining} {play.result.event}
+                  </p>
+                  <p>{play.result.description}</p>
+                  {play.players.map((player) => {
+                    return (
+                      <div className="pbp-details" key={player.id}>
+                        <img
+                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.player.id}.jpg`}
+                          alt="profile pic"
+                          className="pbp-pic"
+                        />{" "}
+                        <p>{player.player.fullName}</p>
+                    
+                      </div>
+                    );
+                  })}
+                      
+                </li>
+              );
+            } else {
+              return (
+                <li
+                  key={play.about.eventIdx}
+                  className="pbp-event-box-no-players"
+                >
+                  <p className="pbp-type">
+                    {play.about.periodTimeRemaining} {play.result.event}
+                  </p>
+                </li>
+              );
+            }
           })}
       </ul>
     );
