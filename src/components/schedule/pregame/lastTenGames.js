@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { PreviewContext } from "../../../dispatch/dispatch";
 
 export const LastTenGames = (props) => {
-
-  let [preview, setPreview] = useContext(PreviewContext)
   let [team, setTeamResults] = useState([]);
   let [teamTen, setTeamTen] = useState([]);
 
@@ -46,7 +44,7 @@ export const LastTenGames = (props) => {
 
     awayLastTen();
     getLastTen();
-  }, []);
+  }, [props.team]);
 ;
 
   
