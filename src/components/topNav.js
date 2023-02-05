@@ -8,6 +8,10 @@ export const TopNav = () => {
         Home{" "}
       </NavLink>
 
+      <NavLink className="nav-links" to="/scores">
+        Scores
+      </NavLink>
+
       <NavLink className="nav-links" to="/schedule">
         Schedule
       </NavLink>

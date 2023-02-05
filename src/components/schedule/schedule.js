@@ -17,7 +17,7 @@ export const Schedule = () => {
   const current = new Date();
 
   const date = `${current.getFullYear()}-${current.getMonth() + 1}-${
-    current.getDate() + 1
+    current.getDate()
   }`;
 
   useEffect(() => {
