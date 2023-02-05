@@ -8,8 +8,7 @@ add rink image for on ice players
 filter team specific news, next/previous game (with gamecenter?) and stats for team home page
 
 low:
-convert YYYYYY and YYYY-MM-DD dates to Month DayOfMonth
 add scratched players to gamecenter 
 
 known issues:
-schedule date one day behind
+css formatting

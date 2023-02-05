@@ -12,6 +12,7 @@ import { Preview } from "./components/schedule/pregame/preview";
 import { PlayerProfile } from "./components/stats/playerProfile";
 import { TopScoreBoard } from "./components/topBarScoreBoard";
 import { TopNav } from "./components/topNav";
+import { Roster } from "./components/stats/roster";
 
 function App() {
   let [roster, setRoster] = useState([]);
@@ -42,7 +43,8 @@ function App() {
             <Route path="/standings" element={<Standings />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/stats" element={<Stats />} />
-            <Route path="/schedule/:id" element={<TeamSchedule />} />
+            <Route path="/schedule/:id" element={<TeamSchedule />}/>
+            <Route path="/team/:id" element={ <Roster />} />
             <Route path="/game/:id/away/:away/home/:home" element={<GameCenter />} />
             <Route path="/game/:id/away/:away/home/:home" element={<Preview />} />
             <Route path="/players/:id" element ={<PlayerProfile />} />

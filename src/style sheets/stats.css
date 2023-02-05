@@ -85,7 +85,6 @@ margin-right: 0;
 
 #profile-mid-div{
     display: inline-flex;
-   
 }
 
 #mid-details{
@@ -96,6 +95,10 @@ margin-right: 0;
 }
 .bio-card-details {
     display: inline-block;
+}
+
+#skaters-leader-container{
+    display: inline-flex;
 }
 
 @media screen and (max-width: 1000px){

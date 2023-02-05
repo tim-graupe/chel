@@ -5,25 +5,28 @@ import {
   PreviewContext,
   GameCenterContext,
 } from "../../dispatch/dispatch";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 export const TeamSchedule = () => {
+  const location = useLocation()
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
   const [preview, setPreview] = useContext(PreviewContext);
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
   const [schedule, setSchedule] = useState([]);
-  const [gameSelected, setGameSelected] = useState(false);
   const { id } = useParams();
+  const [team, setTeam] = useState(id)
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
 
+  // useEffect()
+
   useEffect(() => {
     const getSchedule = () => {
       fetch(
-        `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${date}&endDate=2023-04-16`,
+        `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${date}&endDate=2023-04-16&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore`,
         {
           mode: "cors",
         }
@@ -33,13 +36,14 @@ export const TeamSchedule = () => {
         .catch((err) => console.error(err));
     };
     getSchedule();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
-    if (teamSchedule === null) {
+    
+    if (teamSchedule === null || id !== team) {
       getTeamSchedule(id);
     }
-  }, []);
+  }, [id]);
 
   const getGameInfo = (gamePk) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {
@@ -91,7 +95,14 @@ export const TeamSchedule = () => {
         {teamSchedule.map((games) => {
           return (
             <div key={games.date}>
-              <h1>{games.date}</h1>
+              <h1>
+                {new Date(`${games.date}`).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  month: "short",
+                  year: "2-digit",
+                  day: "numeric",
+                })}
+              </h1>
               <table id="schedule-day-container">
                 <thead>
                   <tr>
@@ -107,6 +118,10 @@ export const TeamSchedule = () => {
                         <tr key={game.gamePk}>
                           <td>
                             <Link
+                              onClick={() => {
+                                getTeamSchedule(id);
+                                setTeam(game.teams.away.team.id)
+                              }}
                               className="link-style"
                               to={`/schedule/${game.teams.away.team.id}`}
                             >
@@ -126,7 +141,6 @@ export const TeamSchedule = () => {
                           </td>
 
                           <td>
-                            {game.status.abstractGameState}{" "}
                             <img
                               src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
                               className="schedule-logos"
@@ -145,6 +159,7 @@ export const TeamSchedule = () => {
                               className="link-style"
                               to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                               onClick={() => {
+                                
                                 getPreviewStats(
                                   game.teams.away.team.id,
                                   game.teams.home.team.id
@@ -165,8 +180,9 @@ export const TeamSchedule = () => {
                               className="link-style"
                               to={`/schedule/${game.teams.away.team.id}`}
                             >
-                              {game.teams.away.team.name}
-                            </Link>
+                              {game.teams.away.team.name}{" "}
+                              {game.teams.away.score}
+                            </Link>{" "}
                             @
                             <Link
                               className="link-style"
@@ -177,23 +193,10 @@ export const TeamSchedule = () => {
                             >
                               {" "}
                               {game.teams.home.team.name}{" "}
+                              {game.teams.home.score}
                             </Link>
                           </td>
-
-                          <td>
-                            {game.status.abstractGameState}{" "}
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />
-                            {game.teams.away.score} {game.teams.home.score}
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />{" "}
-                          </td>
+                          <td>{game.status.abstractGameState}</td>
 
                           <td>
                             <Link

@@ -10,6 +10,7 @@ export const Stats = () => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
   const [skaters, setSkaters] = useState('points');
+  const [deuce, setDeuce] = useState([])
   const [goalies, setGoalies] = useState('gaa')
   const [leagueTeams, setLeagueTeams] = useState([])
   const [team, setTeam] = useState(null);
@@ -29,6 +30,8 @@ export const Stats = () => {
     };
 getLeagueTeams()
   }, [])
+
+
 
   const showTeamStats = (teamID) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/stats`, {
@@ -65,7 +68,7 @@ getLeagueTeams()
 
   return (
     <div id="stats-container">
-        <div id="skaters-leader-container">
+        {/* <div id="skaters-leader-container">
         <div className="leader-buttons">
           <button onClick={() => {
             setSkaters('points')
@@ -77,12 +80,12 @@ getLeagueTeams()
 
           <button onClick={() => {
             setSkaters('assists')
-          }}>Assists</button>
+          }}>Assists</button> */}
+        {/* <Leaders stat={skaters} /> */}
 
-        </div>
-        <Leaders stat={skaters} />
+        {/* </div> */}
 
-        <div className="leader-buttons">
+        {/* <div className="leader-buttons">
           <button onClick={() => {
             setGoalies('gaa')
           }}>GAA</button>
@@ -93,12 +96,11 @@ getLeagueTeams()
 
           <button onClick={() => {
             setGoalies('shutouts')
-          }}>Shutouts</button>
-
+          }}>Shutouts</button> */}
+          {/* <Leaders stat={goalies} /> */}
+{/* 
         </div>
-        <Leaders stat={goalies} />
-
-        </div>
+        </div> */}
         
 
 

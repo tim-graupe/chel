@@ -3,22 +3,21 @@ import { PreviewContext, GameCenterContext } from "../../../dispatch/dispatch";
 
 
 
-export const PreviousGame = () => {
+export const PreviousGame = (props) => {
     const [preview, setPreview] = useContext(PreviewContext);
-    const gameCenter = useContext(GameCenterContext)
     const [game, setGame] = useState([])    
     useEffect(() => {
         fetch(
-          `https://statsapi.web.nhl.com/api/v1/schedule/?teamId=${preview[0].id},${preview[1].id}&season=20222023`,
+          `https://statsapi.web.nhl.com/api/v1/schedule/?teamId=${props.away},${props.home}&season=20222023`,
           {
             mode: "cors",
           }
         )
           .then((response) => response.json())
-          .then((response) => setGame(response.dates))
+          .then((response) => setGame(response.dates.filter(game => (game.games[0].status.abstractGameState === "Final") && (game.games.filter(game => game.teams.away.team.id === props.away && game.teams.home.team.id === props.home)))))
           .catch((err) => console.error(err));
       }, []);
-
+      // game.games[0].status.abstractGameState === "Final"
 
       return (
         <table id="previous-game-table">
@@ -27,10 +26,10 @@ export const PreviousGame = () => {
           .filter(
             (game) =>
           
-              (game.games[0].teams.away.team.id === preview[0].id &&
-                game.games[0].teams.home.team.id === preview[1].id) ||
-              (game.games[0].teams.away.team.id === preview[1].id &&
-                game.games[0].teams.home.team.id === preview[0].id)
+              (game.games[0].teams.away.team.id === props.away &&
+                game.games[0].teams.home.team.id === props.home) ||
+              (game.games[0].teams.away.team.id === props.home &&
+                game.games[0].teams.home.team.id === props.away)
           )
           .map((game) => {
             return (

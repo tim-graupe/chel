@@ -5,7 +5,7 @@ export const StatsNav = (props) => {
     <div id="stats-nav-container">
       <div id="list-container">
         <div className="division-container">
-          <h1 className="division-name">Stats</h1>
+          <h1>Team Stats</h1>
           <div className="division-teams">
             <select>
             <option value="" disabled defaultValue hidden>Teams</option>

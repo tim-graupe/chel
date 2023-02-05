@@ -15,9 +15,10 @@ export const Schedule = () => {
   const [schedule, setSchedule] = useState([]);
   const id = useParams();
   const current = new Date();
-  const date = `${current.getFullYear()}-${
-    current.getMonth() + 1
-  }-${current.getDate()}`;
+
+  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${
+    current.getDate() + 1
+  }`;
 
   useEffect(() => {
     const getSchedule = () => {
@@ -83,7 +84,8 @@ export const Schedule = () => {
           return (
             <div key={games.date}>
               <h1>
-                {new Date(`${games.date}`).toLocaleString("en-En", {
+                {new Date(`${games.date}`).toLocaleString("en-US", {
+                  timeZone: "UTC",
                   month: "short",
                   year: "2-digit",
                   day: "numeric",
@@ -93,13 +95,17 @@ export const Schedule = () => {
                 <thead>
                   <tr>
                     <th>Matchup</th>
-                    <th>Live Score</th>
+                    <th>Time</th>
                     <th>Game Info</th>
                   </tr>
                 </thead>
                 <tbody>
                   {games.games.map((game) => {
-                    if (game.status.abstractGameState === "Preview" && game.tickets !== undefined) {
+                    const time = new Date(game.gameDate);
+                    if (
+                      game.status.abstractGameState === "Preview" &&
+                      game.tickets !== undefined
+                    ) {
                       return (
                         <tr key={game.gamePk}>
                           <td>
@@ -108,9 +114,8 @@ export const Schedule = () => {
                               to={`/schedule/${game.teams.away.team.id}`}
                             >
                               {game.teams.away.team.name}
-                            </Link>
-                            {" "}
-                             @
+                            </Link>{" "}
+                            @
                             <Link
                               className="link-style"
                               to={`/schedule/${game.teams.home.team.id}`}
@@ -123,21 +128,11 @@ export const Schedule = () => {
                             </Link>
                           </td>
 
-                          <td>
-                            {/* {game.status.abstractGameState}{" "} */}
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />
-                            {game.teams.away.score} 
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />{" "}
-                            {game.teams.home.score}
-                          </td>
+                          <td>{`${time.getHours()}:${
+                            time.getMinutes() < 2
+                              ? "00"
+                              : "" + time.getMinutes()
+                          }`}</td>
 
                           <td>
                             <Link
@@ -148,18 +143,28 @@ export const Schedule = () => {
                                   game.teams.away.team.id,
                                   game.teams.home.team.id
                                 );
-                                
+
                                 setGameCenter(game);
                               }}
                             >
                               Preview{" "}
                             </Link>
                           </td>
-             
-                          <td><a className="link-style" href={game.tickets[0].ticketLink}>Tickets</a></td>
+
+                          <td>
+                            <a
+                              className="link-style"
+                              href={game.tickets[0].ticketLink}
+                            >
+                              Tickets
+                            </a>
+                          </td>
                         </tr>
                       );
-                    } else                     if (game.status.abstractGameState === "Preview" && game.tickets === undefined) {
+                    } else if (
+                      game.status.abstractGameState === "Preview" &&
+                      game.tickets === undefined
+                    ) {
                       return (
                         <tr key={game.gamePk}>
                           <td>
@@ -168,9 +173,8 @@ export const Schedule = () => {
                               to={`/schedule/${game.teams.away.team.id}`}
                             >
                               {game.teams.away.team.name}
-                            </Link>
-                            {" "}
-                             @
+                            </Link>{" "}
+                            @
                             <Link
                               className="link-style"
                               to={`/schedule/${game.teams.home.team.id}`}
@@ -183,22 +187,11 @@ export const Schedule = () => {
                             </Link>
                           </td>
 
-                          <td>
-                            {/* {game.status.abstractGameState}{" "} */}
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />
-                            {game.teams.away.score} 
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />{" "}
-                            {game.teams.home.score}
-                          </td>
-
+                          <td>{`${time.getHours()}:${
+                            time.getMinutes() < 2
+                              ? "00"
+                              : "" + time.getMinutes()
+                          }`}</td>
                           <td>
                             <Link
                               className="link-style"
@@ -208,14 +201,13 @@ export const Schedule = () => {
                                   game.teams.away.team.id,
                                   game.teams.home.team.id
                                 );
-                                
+
                                 setGameCenter(game);
                               }}
                             >
                               Preview{" "}
                             </Link>
                           </td>
-             
                         </tr>
                       );
                     } else {
@@ -267,12 +259,13 @@ export const Schedule = () => {
                               }}
                             >
                               GameCenter
-                            </Link>
-                            {" "}
+                            </Link>{" "}
                             {game.broadcasts.map((broadcast) => {
-                                return (
-                                  <div key={broadcast.type}>{broadcast.type}: {broadcast.name}</div>
-                                )
+                              return (
+                                <div key={broadcast.type}>
+                                  {broadcast.type}: {broadcast.name}
+                                </div>
+                              );
                             })}
                           </td>
                         </tr>

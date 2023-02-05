@@ -6,30 +6,30 @@ export const Leaders = (props) => {
   const [all, setAll] = useState([])
   const [season, setSeason] = useState("20222023");
 
-  useEffect(() => {
-    const getLeaders = () => {
-      fetch(
-        `https://statsapi.web.nhl.com/api/v1/stats/leaders?leaderCategories=${props.stat}&season=${season}&limit=10`,
-        {
-          mode: "cors",
-        }
-      )
-        .then((response) => response.json())
-        .then((response) =>
-          setLeaders({
-            current: response.leagueLeaders[0].leaders[0],
-            list: response.leagueLeaders[0].leaders
-          })
-        )
-        .catch((err) => console.error(err));
+  // useEffect(() => {
+  //   const getLeaders = () => {
+  //     fetch(
+  //       `https://statsapi.web.nhl.com/api/v1/stats/leaders?leaderCategories=${props.stat}&season=${season}&limit=10`,
+  //       {
+  //         mode: "cors",
+  //       }
+  //     )
+  //       .then((response) => response.json())
+  //       .then((response) =>
+  //         setLeaders({
+  //           current: response.leagueLeaders[0].leaders[0],
+  //           list: response.leagueLeaders[0].leaders
+  //         })
+  //       )
+  //       .catch((err) => console.error(err));
 
       
 
-    };
+  //   };
 
 
-    getLeaders();
-  }, [props.stat]);
+  //   getLeaders();
+  // }, []);
 
 
 
