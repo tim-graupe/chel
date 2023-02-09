@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   TeamContext,
   PreviewContext,
   GameCenterContext,
 } from "../../dispatch/dispatch";
+import { FinalScores } from "./FinalScores";
 
 export const DaysScores = (props) => {
-  const id = useParams();
+  const { id } = useParams();
+  const [date, setDate] = useState(id);
   const [preview, setPreview] = useContext(PreviewContext);
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
@@ -28,11 +30,11 @@ export const DaysScores = (props) => {
     return <h1>No games scheduled for this day.</h1>;
   }
   return (
-    <div>
+    <div key={props.today}>
       <h4>
         {" "}
         {new Date(`${props.today}`).toLocaleString("en-US", {
-          timeZone: "UTC",
+          timeZone: "EST",
           month: "short",
           day: "numeric",
           weekday: "long",
@@ -42,10 +44,11 @@ export const DaysScores = (props) => {
       {props.scores[0].games.map((game) => {
         if (
           game.status.abstractGameState === "Preview" &&
-          game.tickets !== undefined
+          game.tickets !== undefined &&
+          game.broadcasts !== undefined
         ) {
           return (
-            <div className="scores-boxes" key={game.gamepk}>
+            <div className="scores-boxes" key={game.gamePk}>
               <div className="scores-boxes-teams">
                 <div className="scores-boxes-teams-away">
                   {game.teams.away.team.name}
@@ -64,12 +67,10 @@ export const DaysScores = (props) => {
                   {game.teams.home.leagueRecord.ot}
                 </div>
 
-            <div className="broadcast-details">
-                {game.broadcasts.map((broadcast) => {
-                    return (
-                        <p key={broadcast.id}>{broadcast.name}</p>
-                    )
-                })}
+                <div className="broadcast-details">
+                  {game.broadcasts.map((broadcast) => {
+                    return <p key={broadcast.id}>{broadcast.name}</p>;
+                  })}
                 </div>
               </div>
               <div className="scores-boxes-content">
@@ -94,9 +95,12 @@ export const DaysScores = (props) => {
               </div>
             </div>
           );
-        } else if (game.tickets === undefined) {
+        } else if (
+          game.tickets === undefined ||
+          game.broadcasts === undefined
+        ) {
           return (
-            <div key={game.gamepk}>
+            <div key={game.gamePk} className="scores-boxes">
               <div className="scores-boxes-teams">
                 <div className="scores-boxes-teams-away">
                   {game.teams.away.team.name}
@@ -127,6 +131,16 @@ export const DaysScores = (props) => {
                   Preview{" "}
                 </Link>
               </div>
+            </div>
+          );
+        }
+      })}
+
+      {props.scores[0].games.map((game) => {
+        if (game.status.abstractGameState === "Final") {
+          return (
+            <div key={game.gamePk}>
+              <FinalScores game={game} />
             </div>
           );
         }

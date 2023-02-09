@@ -6,6 +6,7 @@ import { Career } from "./career";
 import { useParams } from "react-router-dom";
 export const PlayerProfile = () => {
 const [player, setPlayer, stats, setStats] = useContext(PlayerContext)
+const [tab, setTab] = useState("stats")
 const id = useParams()
 useEffect(() => {
   function getPlayer(player) {
@@ -77,7 +78,7 @@ useEffect(() => {
             <table id="season-table">
               <thead>
                 <tr>
-                  <th>Season</th>
+                  <th className="sticky-col first-col">Season</th>
                   <th>Games</th>
                   <th>Goals</th>
                   <th>Assists</th>
@@ -98,7 +99,7 @@ useEffect(() => {
               {stats[1].map((season) => {
                   return (
                     <tr key={season.games}>
-                      <td>2022 - 2023</td>
+                      <td className="sticky-col first-col">2022 - 2023</td>
                       <td>{season.games}</td>
                       <td>{season.goals}</td>
                       <td>{season.assists}</td>
@@ -119,7 +120,7 @@ useEffect(() => {
                 {stats[2].map((season) => {
                   return (
                     <tr key={season.games}>
-                      <td>Career</td>
+                      <td className="sticky-col first-col">Career</td>
                       <td>{season.games}</td>
                       <td>{season.goals}</td>
                       <td>{season.assists}</td>
@@ -144,9 +145,25 @@ useEffect(() => {
         </div>
 
                 <section id="player-stats">
-                 <PlayerStats/> 
-                 <Gamelog /> 
-                 <Career /> 
+                <button onClick={() => {
+                  setTab('stats')
+                }}>Stats</button>
+                <button onClick={() => {
+                  setTab('game-log')
+                }}>Gamelog</button>
+                <button onClick={() => {
+                  setTab('career')
+                }}>Career</button>
+                
+                <section id="player-stats-container">
+                {tab === 'stats' ? <PlayerStats/> : 
+        tab === 'game-log' ?
+        <Gamelog/> :
+        tab === 'career' ?
+        <Career /> :
+          null
+      }
+                </section>
                 </section>
       </div>
     );

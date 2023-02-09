@@ -1,33 +1,49 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { ScoresDateNav } from "./scoresDateNav";
-import { DaysScores } from "./scoresOfTheDay";
+import { DaysScores } from "./DaysScores";
 import "../../style sheets/scores.css";
 import { useParams } from "react-router-dom";
 
 export const Scores = () => {
-  const id = useParams()
-  const currentDay = new Date()
-  const [schedule, setSchedule] = useState([])
+  const urlDate = useParams();
+  const currentDay = new Date();
+  const [schedule, setSchedule] = useState([]);
   const [today, setToday] = useState(currentDay);
   const [yesterday, setYesterday] = useState(
     new Date(today.getTime() - 86400000)
   );
-  const [tomorrow, setTomorrrow] = useState(new Date(today.getTime() + 86400000));
+  const [tomorrow, setTomorrrow] = useState(
+    new Date(today.getTime() + 86400000)
+  );
 
-  const handleClick = () => {
-    console.log(id)
+  const handlePreviousDay = () => {
+    setYesterday(new Date(today.getTime() - 172800000));
+    setToday(new Date(today.getTime() - 86400000));
+    setTomorrrow(new Date(today.getTime()));
+  };
+
+  const handleNextDay = () => {
     setYesterday(new Date(today.getTime()));
     setToday(new Date(today.getTime() + 86400000));
     setTomorrrow(new Date(today.getTime() + 172800000));
+    console.log(new Date(urlDate))
+
   };
+
+  useEffect(() => {
+  if (urlDate.id !== undefined) {
+    console.log(new Date(today.getTime()));
+
+  }
+  }, [])
 
   useEffect(() => {
     const getSchedule = () => {
       fetch(
-        `https://statsapi.web.nhl.com/api/v1/schedule?date=${today.getFullYear()}-${today.getMonth() + 1}-${
-            today.getDate()
-          }&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore&expand=schedule.venue`,
+        `https://statsapi.web.nhl.com/api/v1/schedule?date=${today.getFullYear()}-${
+          today.getMonth() + 1
+        }-${today.getDate()}&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore&expand=schedule.venue`,
         {
           mode: "cors",
         }
@@ -36,18 +52,35 @@ export const Scores = () => {
         .then((response) => setSchedule(response.dates))
         .catch((err) => console.error(err));
     };
+
+    const getURLschedule = () => {
+      fetch(
+        `https://statsapi.web.nhl.com/api/v1/schedule?date=${urlDate.id}&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore&expand=schedule.venue`,
+        {
+          mode: "cors",
+        }
+      )
+        .then((response) => response.json())
+        .then((response) => setSchedule(response.dates))
+        .catch((err) => console.error(err));
+    }
+   if (urlDate.id === undefined) {
     getSchedule();
-  }, [today]);
+   } else {
+    getURLschedule()
+   }
+  }, [urlDate.id]);
   return (
     <div>
-    <ScoresDateNav
-      today={today}
-      yesterday={yesterday}
-      tomorrow={tomorrow}
-      handleClick={handleClick}
-    />
+      <ScoresDateNav
+        today={today}
+        yesterday={yesterday}
+        tomorrow={tomorrow}
+        handlePreviousDay={handlePreviousDay}
+        handleNextDay={handleNextDay}
+      />
 
-    <DaysScores scores={schedule} today={today}/>
+      <DaysScores scores={schedule} today={today} />
     </div>
   );
 };

@@ -16,18 +16,18 @@ export const PlayerStats = (props) => {
   ];
   let months = [
     "Month",
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEPT",
-    "OCT",
-    "NOV",
-    "DEC",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   useEffect(() => {
@@ -46,10 +46,10 @@ export const PlayerStats = (props) => {
     return <></>;
   } else {
     return (
-      <table>
+      <table className="player-table">
         <thead>
-          <tr>
-            <th>Split</th>
+          <tr  className="stat-row">
+            <th className="sticky-col first-col">Split</th>
             <th>GP</th>
             <th>G</th> <th>A</th>
             <th>P</th> <th>+/-</th> <th>PIM</th> <th>PPG</th> <th>SHG</th>
@@ -58,7 +58,7 @@ export const PlayerStats = (props) => {
         </thead>
         <tbody>
           <tr>
-            <td>Home</td>
+            <td className="sticky-col first-col">Home</td>
             <td>{stats[3].splits[0].stat.games}</td>
             <td>{stats[3].splits[0].stat.goals}</td>
             <td>{stats[3].splits[0].stat.assists}</td>
@@ -72,7 +72,7 @@ export const PlayerStats = (props) => {
             <td>{stats[3].splits[0].stat.overTimeGoals}</td>
           </tr>
           <tr>
-            <td>Away</td>
+            <td className="sticky-col first-col">Away</td>
             <td>{stats[3].splits[0].stat.games}</td>
             <td>{stats[3].splits[1].stat.goals}</td>
             <td>{stats[3].splits[1].stat.assists}</td>
@@ -86,7 +86,7 @@ export const PlayerStats = (props) => {
             <td>{stats[3].splits[1].stat.overTimeGoals}</td>
           </tr>
           <tr>
-            <td>Wins</td>
+            <td className="sticky-col first-col">Wins</td>
             <td>{stats[4].splits[0].stat.games}</td>
             <td>{stats[4].splits[0].stat.goals}</td>
             <td>{stats[4].splits[0].stat.assists}</td>
@@ -100,7 +100,7 @@ export const PlayerStats = (props) => {
             <td>{stats[4].splits[0].stat.overTimeGoals}</td>
           </tr>
           <tr>
-            <td>Losses</td>
+            <td className="sticky-col first-col">Losses</td>
             <td>{stats[4].splits[1].stat.games}</td>
             <td>{stats[4].splits[1].stat.goals}</td>
             <td>{stats[4].splits[1].stat.assists}</td>
@@ -116,7 +116,7 @@ export const PlayerStats = (props) => {
           {stats[2].splits.map((month) => {
             return (
               <tr key={month.month}>
-                <td>{months[`${month.month}`]}</td>
+                <td className="sticky-col first-col">{months[`${month.month}`]}</td>
                 <td>{month.stat.games}</td>
                 <td>{month.stat.goals}</td>
                 <td>{month.stat.assists}</td>
@@ -134,7 +134,7 @@ export const PlayerStats = (props) => {
           {stats[1].splits.map((day) => {
             return (
               <tr key={day.dayOfWeek}>
-                <td>{week[`${day.dayOfWeek}`]}</td>
+                <td className="sticky-col first-col">{week[`${day.dayOfWeek}`]}</td>
                 <td>{day.stat.games}</td>
                 <td>{day.stat.goals}</td>
                 <td>{day.stat.assists}</td>

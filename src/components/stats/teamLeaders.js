@@ -48,6 +48,7 @@ export const TeamLeaders = () => {
         {leaders[0].leaders.map((player) => {
           return (
             <tr>
+              <td>
               <Link className="link-style"
                 to={`/players/${player.person.id}`}
                 onClick={() => {
@@ -61,6 +62,7 @@ export const TeamLeaders = () => {
                 />{" "}
                 {player.person.fullName}
               </Link>
+              </td>
               <td>{player.value}</td>
             </tr>
           );
@@ -72,7 +74,8 @@ export const TeamLeaders = () => {
         {leaders[1].leaders.map((player) => {
           return (
             <tr>
-              <Link className="link-style"
+             <td>
+             <Link className="link-style"
                 to={`/players/${player.person.id}`}
                 onClick={() => {
                   getPlayer(player.person.id);
@@ -85,6 +88,7 @@ export const TeamLeaders = () => {
                 />{" "}
                 {player.person.fullName}
               </Link>
+             </td>
               <td>{player.value}</td>
             </tr>
           );
@@ -96,7 +100,8 @@ export const TeamLeaders = () => {
         {leaders[2].leaders.map((player) => {
           return (
             <tr>
-              <Link className="link-style"
+                <td>
+                <Link className="link-style"
                 to={`/players/${player.person.id}`}
                 onClick={() => {
                   getPlayer(player.person.id);
@@ -109,6 +114,7 @@ export const TeamLeaders = () => {
                 />{" "}
                 {player.person.fullName}
               </Link>
+                </td>
               <td>{player.value}</td>
             </tr>
           );
@@ -120,7 +126,8 @@ export const TeamLeaders = () => {
         {leaders[3].leaders.map((player) => {
           return (
             <tr>
-              <Link className="link-style"
+                <td>
+                <Link className="link-style"
                 to={`/players/${player.person.id}`}
                 onClick={() => {
                   getPlayer(player.person.id);
@@ -133,6 +140,7 @@ export const TeamLeaders = () => {
                 />{" "}
                 {player.person.fullName}
               </Link>
+                </td>
               <td>{player.value}</td>
             </tr>
           );

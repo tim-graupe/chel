@@ -8,21 +8,18 @@ import {
 import { Link, useParams, useLocation } from "react-router-dom";
 
 export const TeamSchedule = () => {
-  const location = useLocation()
+  const location = useLocation();
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
   const [preview, setPreview] = useContext(PreviewContext);
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
   const [schedule, setSchedule] = useState([]);
   const { id } = useParams();
-  const [team, setTeam] = useState(id)
+  const [team, setTeam] = useState(id);
   const current = new Date();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
-
-  // useEffect()
-
   useEffect(() => {
     const getSchedule = () => {
       fetch(
@@ -39,7 +36,6 @@ export const TeamSchedule = () => {
   }, [id]);
 
   useEffect(() => {
-    
     if (teamSchedule === null || id !== team) {
       getTeamSchedule(id);
     }
@@ -120,7 +116,7 @@ export const TeamSchedule = () => {
                             <Link
                               onClick={() => {
                                 getTeamSchedule(id);
-                                setTeam(game.teams.away.team.id)
+                                setTeam(game.teams.away.team.id);
                               }}
                               className="link-style"
                               to={`/schedule/${game.teams.away.team.id}`}
@@ -159,7 +155,6 @@ export const TeamSchedule = () => {
                               className="link-style"
                               to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
                               onClick={() => {
-                                
                                 getPreviewStats(
                                   game.teams.away.team.id,
                                   game.teams.home.team.id

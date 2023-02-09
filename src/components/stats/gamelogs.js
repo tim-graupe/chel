@@ -45,32 +45,32 @@ export const Gamelog = (props) => {
     return <></>;
   } else {
     return (
-      <table>
+      <table className="player-table">
         <caption>Game Log</caption>
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Opponent</th>
-            <th>G</th>
-            <th>A</th>
-            <th>P</th>
-            <th>+/-</th>
-            <th>PIM</th>
-            <th>PPG</th>
-            <th>SHG</th>
-            <th>SHP</th>
-            <th>GWG</th>
-            <th>OTG</th>
-            <th>S</th>
-            <th>TOI</th>
-            <th>Shifts</th>
+            <th className="sticky-col first-col">Date</th>
+            <th className="stat-row">Opponent</th>
+            <th className="stat-row">G</th>
+            <th className="stat-row">A</th>
+            <th className="stat-row">P</th>
+            <th className="stat-row">+/-</th>
+            <th className="stat-row">PIM</th>
+            <th className="stat-row">PPG</th>
+            <th className="stat-row">SHG</th>
+            <th className="stat-row">SHP</th>
+            <th className="stat-row">GWG</th>
+            <th className="stat-row">OTG</th>
+            <th className="stat-row">S</th>
+            <th className="stat-row">TOI</th>
+            <th className="stat-row">Shifts</th>
           </tr>
         </thead>
         <tbody>
           {stats.map((game) => {
             return (
               <tr key={game.date}>
-                <td>
+                <td className="sticky-col first-col">
                   {new Date(`${game.date}`).toLocaleString("en-En", {
                     month: "short",
                     day: "numeric",

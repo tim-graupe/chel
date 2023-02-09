@@ -16,3 +16,30 @@
     margin-left: auto; 
 margin-right: 0;
 }
+
+#days-nav{
+    display: inline-flex;
+    padding: 10px;
+    border-bottom: 1px solid transparent;
+}
+.day-btn{
+    padding: 10px;
+    margin: 10px;
+    display: block;
+}
+.day-btn:hover{
+    text-decoration: underline 1px;
+    display: inline-block;
+
+}
+#current-day{
+    text-decoration: underline 1px;
+}
+
+@media screen and (max-width: 1000px){
+.scores-boxes{
+    width: 100%;
+    max-width: 100%;
+}
+    
+    }

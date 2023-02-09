@@ -5,33 +5,71 @@ import { TeamStats } from "./teamStats";
 import { Roster } from "./roster";
 import { TeamLeaders } from "./teamLeaders";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
-import { Leaders } from "./leaders/leadersHome";
 export const Stats = () => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
-  const [skaters, setSkaters] = useState('points');
-  const [deuce, setDeuce] = useState([])
-  const [goalies, setGoalies] = useState('gaa')
-  const [leagueTeams, setLeagueTeams] = useState([])
   const [team, setTeam] = useState(null);
-
+  const [metro, setMetro] = useState([]);
+  const [atlantic, setAtlantic] = useState([]);
+  const [central, setCentral] = useState([]);
+  const [pacific, setPacific] = useState([]);
   useEffect(() => {
-        const getLeagueTeams = () => {
+    const getMetro = () => {
       fetch("https://statsapi.web.nhl.com/api/v1/teams", {
         mode: "cors",
       })
         .then((response) => response.json())
         .then((response) =>
-          setLeagueTeams(
-            response.teams
+          setMetro(
+            response.teams.filter(
+              (team) => team.division.name === "Metropolitan"
+            )
           )
         )
         .catch((err) => console.error(err));
     };
-getLeagueTeams()
-  }, [])
 
-
+    const getAtlantic = () => {
+      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) =>
+          setAtlantic(
+            response.teams.filter((team) => team.division.name === "Atlantic")
+          )
+        )
+        .catch((err) => console.error(err));
+    };
+    const getCentral = () => {
+      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) =>
+          setCentral(
+            response.teams.filter((team) => team.division.name === "Central")
+          )
+        )
+        .catch((err) => console.error(err));
+    };
+    const getPacific = () => {
+      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) =>
+          setPacific(
+            response.teams.filter((team) => team.division.name === "Pacific")
+          )
+        )
+        .catch((err) => console.error(err));
+    };
+    getMetro();
+    getAtlantic();
+    getCentral();
+    getPacific();
+  }, []);
 
   const showTeamStats = (teamID) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/teams/${teamID}/stats`, {
@@ -68,53 +106,17 @@ getLeagueTeams()
 
   return (
     <div id="stats-container">
-        {/* <div id="skaters-leader-container">
-        <div className="leader-buttons">
-          <button onClick={() => {
-            setSkaters('points')
-          }}>Points</button>
-
-          <button onClick={() => {
-            setSkaters("goals")
-          }}>Goals</button>
-
-          <button onClick={() => {
-            setSkaters('assists')
-          }}>Assists</button> */}
-        {/* <Leaders stat={skaters} /> */}
-
-        {/* </div> */}
-
-        {/* <div className="leader-buttons">
-          <button onClick={() => {
-            setGoalies('gaa')
-          }}>GAA</button>
-
-          <button onClick={() => {
-            setGoalies("savePct")
-          }}>SV%</button>
-
-          <button onClick={() => {
-            setGoalies('shutouts')
-          }}>Shutouts</button> */}
-          {/* <Leaders stat={goalies} /> */}
-{/* 
-        </div>
-        </div> */}
-        
-
-
+      
       <StatsNav
-      leagueTeams={leagueTeams}
+        metro={metro}
+        atlantic={atlantic}
+        central={central}
+        pacific={pacific}
         showTeamStats={showTeamStats}
         showRoster={showRoster}
         showLeaders={showLeaders}
       />
 
-
-
-<section id="league-leaders-stats">
-</section>
 <div id="roster-main">
 <TeamStats team={team} />
 

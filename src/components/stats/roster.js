@@ -54,7 +54,8 @@ export const Roster = () => {
                 return (
                   <tr key={player.person.id}>
                     <td>
-                      <Link className="link-style"
+                      <Link
+                        className="link-style"
                         to={`/players/${player.person.id}`}
                         onClick={() => {
                           getPlayer(player.person.id);
@@ -96,19 +97,22 @@ export const Roster = () => {
                       getPlayer(player.person.id);
                     }}
                   >
-                    <Link className="link-style"
-                      to={`/players/${player.person.id}`}
-                      onClick={() => {
-                        getPlayer(player.person.id);
-                      }}
-                    >
-                      <img
-                        src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                        alt="profile pic"
-                        className="table-pic"
-                      />{" "}
-                      {player.person.fullName}
-                    </Link>
+                    <td>
+                      <Link
+                        className="link-style"
+                        to={`/players/${player.person.id}`}
+                        onClick={() => {
+                          getPlayer(player.person.id);
+                        }}
+                      >
+                        <img
+                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                          alt="profile pic"
+                          className="table-pic"
+                        />{" "}
+                        {player.person.fullName}
+                      </Link>
+                    </td>
                     <td>{player.jerseyNumber}</td>
                   </tr>
                 );
@@ -133,19 +137,23 @@ export const Roster = () => {
                       getPlayer(player.person.id);
                     }}
                   >
-                    <Link className="link-style"
-                      to={`/players/${player.person.id}`}
-                      onClick={() => {
-                        getPlayer(player.person.id);
-                      }}
-                    >
-                      <img
-                        src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
-                        alt="profile pic"
-                        className="table-pic"
-                      />{" "}
-                      {player.person.fullName}
-                    </Link>
+                    <td>
+                      {" "}
+                      <Link
+                        className="link-style"
+                        to={`/players/${player.person.id}`}
+                        onClick={() => {
+                          getPlayer(player.person.id);
+                        }}
+                      >
+                        <img
+                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.person.id}.jpg`}
+                          alt="profile pic"
+                          className="table-pic"
+                        />{" "}
+                        {player.person.fullName}
+                      </Link>
+                    </td>
                     <td>{player.jerseyNumber}</td>
                   </tr>
                 );
@@ -170,7 +178,9 @@ export const Roster = () => {
                       getPlayer(player.person.id);
                     }}
                   >
-                    <Link className="link-style"
+                      <td>
+                      <Link
+                      className="link-style"
                       to={`/players/${player.person.id}`}
                       onClick={() => {
                         getPlayer(player.person.id);
@@ -183,6 +193,7 @@ export const Roster = () => {
                       />{" "}
                       {player.person.fullName}
                     </Link>
+                      </td>
                     <td>{player.jerseyNumber}</td>
                   </tr>
                 );

@@ -28,19 +28,19 @@ li {
     width: 25%;
 }
 
-.division-container:hover > .division-teams{
+.division-container:hover > .division-list{
     display: block;
 
 }
 
 
 
-/* .division-teams{
+.division-list{
     display: none;
 background-color: #333;
     border: 1px solid #333;
 
-} */
+}
 
 #roster-main{
     padding-top: 10%;
@@ -101,6 +101,10 @@ margin-right: 0;
     display: inline-flex;
 }
 
+.player-table{
+    width: 100%;
+}
+
 @media screen and (max-width: 1000px){
 
 #stats-container{
@@ -109,7 +113,8 @@ margin-right: 0;
 }
 #roster-container{
     display: flex;
-    flex-direction: column
+    flex-direction: column;
+  
 }
 .division-name{
     font-size: clamp(1rem, 2.5vw, 1.5rem);
@@ -124,9 +129,40 @@ margin-right: 0;
 #season-stats{
     overflow-x: scroll;
 }
-table{
-max-width: 100%;
-overflow-x: scroll;
-}
+
+
+
+
+  #player-stats-container{
+    overflow-y: scroll;
+    overflow-x: scroll;
+    max-height: 50vh;
+  }
+
+  
+
+  .sticky-col {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: #333;
+    z-index: 2;
+  }
+  
+  .first-col {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    left: 0px;
+  }
+
+  .stat-row{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    z-index: 1;
+
+  }
+  
 
 }

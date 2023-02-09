@@ -30,10 +30,10 @@ export const Career = (props) => {
   ];
 
   return (
-    <table>
+    <table className="player-table">
       <thead>
         <tr>
-          <th>Season</th>
+          <th className="sticky-col first-col">Season</th>
           <th>Games</th>
           <th>Goals</th>
           <th>Assists</th>
@@ -54,7 +54,7 @@ export const Career = (props) => {
         {player[2][0].map((season) => {
           return (
             <tr key={season.season}>
-              <td>
+              <td className="sticky-col first-col">
                 {season.season.slice(0, 4)}-{season.season.slice(-4)}
               </td>
               <td>{season.stat.games}</td>
