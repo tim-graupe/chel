@@ -1,168 +1,179 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const TeamStats = () => {
-  const stats = useContext(GameCenterContext)
+  const stats = useContext(GameCenterContext);
 
-  
-  if (stats.gameCenter.gameCenter === undefined || stats.gameCenter.gameCenter === null || stats === undefined) {
+  if (
+    stats.gameCenter.gameCenter === undefined ||
+    stats.gameCenter.gameCenter === null ||
+    stats === undefined
+  ) {
     return <></>;
   } else {
-    let away = Object.keys(stats.gameCenter.gameCenter.liveData.boxscore.teams.away.players).map(
+    let away = Object.keys(
+      stats.gameCenter.gameCenter.liveData.boxscore.teams.away.players
+    ).map(
       (key) => (
-        Number(key), stats.gameCenter.gameCenter.liveData.boxscore.teams.away.players[key]
+        Number(key),
+        stats.gameCenter.gameCenter.liveData.boxscore.teams.away.players[key]
       )
     );
 
-    let home = Object.keys(stats.gameCenter.gameCenter.liveData.boxscore.teams.home.players).map(
+    let home = Object.keys(
+      stats.gameCenter.gameCenter.liveData.boxscore.teams.home.players
+    ).map(
       (key) => (
-        Number(key), stats.gameCenter.gameCenter.liveData.boxscore.teams.home.players[key]
+        Number(key),
+        stats.gameCenter.gameCenter.liveData.boxscore.teams.home.players[key]
       )
     );
 
     return (
       <div id="gamecenter-team-stats-container">
         <table className="post-game-skater-stats">
-        <thead>
-        <tr>
-            <th></th>
-            <th>SOG</th>
-            <th>FO%</th>
-            <th>PP</th>
-            <th>PIM</th>
-            <th>HITS</th>
-            <th>BLKS</th>
-            <th>GVA</th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-              {" "}
-              <img
-                src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.gameCenter.gameCenter.gameData.teams.away.id}.svg`}
-                className="schedule-logos"
-                alt="team-pic"
-              />
-              {stats.gameCenter.gameCenter.gameData.teams.away.teamName}
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.shots
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.faceOffWinPercentage
-              }{" "}
-              %
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.powerPlayGoals
-              }{" "}
-              /{" "}
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.powerPlayOpportunities
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.pim
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.hits
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.blocked
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.away.teamStats
-                  .teamSkaterStats.giveaways
-              }
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th></th>
+              <th>SOG</th>
+              <th>FO%</th>
+              <th>PP</th>
+              <th>PIM</th>
+              <th>HITS</th>
+              <th>BLKS</th>
+              <th>GVA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                {" "}
+                <img
+                  src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.gameCenter.gameCenter.gameData.teams.away.id}.svg`}
+                  className="schedule-logos"
+                  alt="team-pic"
+                />
+                {stats.gameCenter.gameCenter.gameData.teams.away.teamName}
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.shots
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.faceOffWinPercentage
+                }{" "}
+                %
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.powerPlayGoals
+                }{" "}
+                /{" "}
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.powerPlayOpportunities
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.pim
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.hits
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.blocked
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                    .teamStats.teamSkaterStats.giveaways
+                }
+              </td>
+            </tr>
 
-          <tr>
-            <td>
-              {" "}
-              <img
-                src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.gameCenter.gameCenter.gameData.teams.home.id}.svg`}
-                className="schedule-logos"
-                alt="team-pic"
-              />
-              {stats.gameCenter.gameCenter.gameData.teams.home.teamName}
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.shots
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.faceOffWinPercentage
-              }{" "}
-              %
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.powerPlayGoals
-              }{" "}
-              /{" "}
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.powerPlayOpportunities
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.pim
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.hits
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.blocked
-              }
-            </td>
-            <td>
-              {
-                stats.gameCenter.gameCenter.liveData.boxscore.teams.home.teamStats
-                  .teamSkaterStats.giveaways
-              }
-            </td>
-          </tr>
-        </tbody>
+            <tr>
+              <td>
+                {" "}
+                <img
+                  src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${stats.gameCenter.gameCenter.gameData.teams.home.id}.svg`}
+                  className="schedule-logos"
+                  alt="team-pic"
+                />
+                {stats.gameCenter.gameCenter.gameData.teams.home.teamName}
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.shots
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.faceOffWinPercentage
+                }{" "}
+                %
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.powerPlayGoals
+                }{" "}
+                /{" "}
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.powerPlayOpportunities
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.pim
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.hits
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.blocked
+                }
+              </td>
+              <td>
+                {
+                  stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                    .teamStats.teamSkaterStats.giveaways
+                }
+              </td>
+            </tr>
+          </tbody>
         </table>
 
         <table
           id="post-game-skater-stats-away"
           className="post-game-skater-stats"
         >
-          <caption>{stats.gameCenter.gameCenter.gameData.teams.away.teamName}</caption>
+          <caption>
+            {stats.gameCenter.gameCenter.gameData.teams.away.teamName}
+          </caption>
           <thead>
             <tr>
               <th>#</th>
@@ -310,7 +321,9 @@ export const TeamStats = () => {
           id="post-game-skater-stats-home"
           className="post-game-skater-stats"
         >
-          <caption>{stats.gameCenter.gameCenter.gameData.teams.home.teamName}</caption>
+          <caption>
+            {stats.gameCenter.gameCenter.gameData.teams.home.teamName}
+          </caption>
           <thead>
             <tr>
               <th>#</th>
@@ -461,28 +474,38 @@ export const TeamStats = () => {
             {" "}
             Referees{" "}
             {stats.gameCenter.gameCenter.liveData.boxscore.officials
-              .filter((offical) => offical.officialType === "Referee")
+              .filter((official) => official.officialType === "Referee")
               .map((official) => {
-                return <p key={official.official.id}>{official.official.fullName}</p>;
+                return (
+                  <p key={official.official.id}>{official.official.fullName}</p>
+                );
               })}
           </div>
           <div>
             {" "}
             Linesman{" "}
             {stats.gameCenter.gameCenter.liveData.boxscore.officials
-              .filter((offical) => offical.officialType === "Linesman")
+              .filter((official) => official.officialType === "Linesman")
               .map((official) => {
-                return <p key={official.official.id}>{official.official.fullName}</p>;
+                return (
+                  <p key={official.official.id}>{official.official.fullName}</p>
+                );
               })}
           </div>
           <h3>Head Coaches</h3>
           <p>
             {stats.gameCenter.gameCenter.liveData.boxscore.teams.away.team.name}{" "}
-            {stats.gameCenter.gameCenter.liveData.boxscore.teams.away.coaches[0].person.fullName}
+            {
+              stats.gameCenter.gameCenter.liveData.boxscore.teams.away
+                .coaches[0].person.fullName
+            }
           </p>
           <p>
             {stats.gameCenter.gameCenter.liveData.boxscore.teams.home.team.name}{" "}
-            {stats.gameCenter.gameCenter.liveData.boxscore.teams.home.coaches[0].person.fullName}
+            {
+              stats.gameCenter.gameCenter.liveData.boxscore.teams.home
+                .coaches[0].person.fullName
+            }
           </p>
         </section>
       </div>

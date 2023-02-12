@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { GameCenterContext } from "../../dispatch/dispatch";
-import rink from "../../images/rink.png";
-import { Rink } from "./playMap";
 import { Canvas } from "./live game/canvas";
 
 export const PlayByPlay = () => {
   const game = useContext(GameCenterContext);
   const [currentPeriod, setCurrentPeriod] = useState(1);
+
+
+
   if (game.gameCenter.gameCenter === undefined || game === undefined) {
     return <></>;
   } else {
@@ -70,7 +71,7 @@ export const PlayByPlay = () => {
                   </section>
                   <div id="pbp-rink">
                     {" "}
-                    <Canvas props={[play.coordinates.x, play.coordinates.y]} />
+                    <Canvas props={[play.coordinates.x,   parseInt(`${play.coordinates.y - play.coordinates.y - play.coordinates.y}`)]} />
                   </div>
                 </li>
               );

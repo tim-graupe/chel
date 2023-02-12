@@ -242,7 +242,7 @@ padding-right: 15px;
 
 #live-game-container {
     width: 100%;
-    display: float;
+    display: inline-flex;
 }
 
 
@@ -250,6 +250,13 @@ padding-right: 15px;
 #left-live-game-col {
     float: left;
 }
+
+#pbp-live-col{
+    float: right;
+    max-width: 75%;
+    width: 75%;
+}
+
 
 .link {
     color: cyan;

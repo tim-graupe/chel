@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { LiveVideos } from "../live game/liveVideos";
 import { LiveGameStats } from "../live game/liveGameStats";
 import { Boxscore } from "./boxscore";
-import { OnIce } from "../live game/OnIce";
+
+import { PlayByPlay } from "../playByPlay";
 
 export const LiveGame = () => {
   const [tab, setTab] = useState('box')
+
 
 
     return (
@@ -24,10 +26,9 @@ export const LiveGame = () => {
         <LiveVideos /> :
           null
       }
-   
          </section>
-      
-          <OnIce />
+         <section id="pbp-live-col"> <PlayByPlay /></section>
+   
      
        
       </div>
