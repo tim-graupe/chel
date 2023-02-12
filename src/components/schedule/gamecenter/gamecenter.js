@@ -4,6 +4,7 @@ import { PostGame } from "../post game/postGame";
 import { Preview } from "../pregame/preview";
 import { LiveGame } from "./liveGame";
 import { useParams } from "react-router-dom";
+import { PlayMap } from "../live game/playMap";
 export const GameCenter = () => {
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);

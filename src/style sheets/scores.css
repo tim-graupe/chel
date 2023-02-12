@@ -12,11 +12,18 @@
     width: 50%;
 }
 
-.scores-boxes-content, .broadcast-details{
+.scores-boxes-content{
     margin-left: auto; 
 margin-right: 0;
 }
 
+.scores-boxes-teams-home, .scores-boxes-teams-away, .scores-boxes{
+    display: flex;
+    justify-content: space-between;
+}
+.broadcast-details{
+    justify-content: center;
+}
 #days-nav{
     display: inline-flex;
     padding: 10px;

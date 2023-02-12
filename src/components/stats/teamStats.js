@@ -26,7 +26,8 @@ const [roster, setRoster] = useContext(RosterContext)
                 </tr>
             </thead>
             <tbody>
-             <td>{props.team[1].splits[0].stat.faceOffWinPercentage} - {props.team[0].splits[0].stat.faceOffWinPercentage}%</td>
+              <tr>
+              <td>{props.team[1].splits[0].stat.faceOffWinPercentage} - {props.team[0].splits[0].stat.faceOffWinPercentage}%</td>
              <td>{props.team[1].splits[0].stat.faceOffsLost} - {props.team[0].splits[0].stat.faceOffsLost}</td> 
              <td>{props.team[1].splits[0].stat.faceOffsTaken} - {props.team[0].splits[0].stat.faceOffsTaken}</td> 
              <td>{props.team[1].splits[0].stat.faceOffsWon} - {props.team[0].splits[0].stat.faceOffsWon}</td> 
@@ -40,6 +41,7 @@ const [roster, setRoster] = useContext(RosterContext)
              <td>{props.team[1].splits[0].stat.shootingPctRank} - {props.team[0].splits[0].stat.shootingPctg}%</td>
              <td>{props.team[1].splits[0].stat.shotsAllowed} - {Math.round(props.team[0].splits[0].stat.shotsAllowed * 10) / 10}%</td>
              <td>{props.team[1].splits[0].stat.shotsPerGame} - {Math.round(props.team[0].splits[0].stat.shotsPerGame * 10) / 10}%</td>
+              </tr>
 
             </tbody>
         </table>

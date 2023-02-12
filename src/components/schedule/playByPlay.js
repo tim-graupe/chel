@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { GameCenterContext } from "../../dispatch/dispatch";
 import rink from "../../images/rink.png";
 import { Rink } from "./playMap";
-
+import { Canvas } from "./live game/canvas";
 
 export const PlayByPlay = () => {
   const game = useContext(GameCenterContext);
@@ -37,7 +37,11 @@ export const PlayByPlay = () => {
           );
         })}
         {game.gameCenter.gameCenter.liveData.plays.allPlays
-          .filter((play) => play.result.event !== "Period Ready")
+          .filter(
+            (play) =>
+              play.result.event !== "Period Ready" &&
+              play.about.period === currentPeriod
+          )
           //Shot, Blocked Shot, Hit,  Faceoff, Missed Shot, Goal, Takeaway, Giveaway, Penalty
           .map((play) => {
             if (play.players !== undefined) {
@@ -46,21 +50,28 @@ export const PlayByPlay = () => {
                   <p className="pbp-type">
                     {play.about.periodTimeRemaining} {play.result.event}
                   </p>
-                  <p>{play.result.description}</p>
-                  {play.players.map((player) => {
-                    return (
-                      <div className="pbp-details" key={player.id}>
-                        <img
-                          src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.player.id}.jpg`}
-                          alt="profile pic"
-                          className="pbp-pic"
-                        />{" "}
-                        <p>{player.player.fullName}</p>
-                    
-                      </div>
-                    );
-                  })}
-                      
+                  <section id="pbp-event-and-players">
+                    <p className="pbp-description" id="box">
+                      {play.result.description}
+                    </p>
+
+                    {play.players.map((player) => {
+                      return (
+                        <div className="pbp-details" key={player.id}>
+                          <img
+                            src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${player.player.id}.jpg`}
+                            alt="profile pic"
+                            className="pbp-pic"
+                          />{" "}
+                          <p>{player.player.fullName}</p>
+                        </div>
+                      );
+                    })}
+                  </section>
+                  <div id="pbp-rink">
+                    {" "}
+                    <Canvas props={[play.coordinates.x, play.coordinates.y]} />
+                  </div>
                 </li>
               );
             } else {

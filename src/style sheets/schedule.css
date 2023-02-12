@@ -162,45 +162,30 @@ td {
 .pbp-pic {
     border-radius: 50%;
     max-height: auto;
-    max-width: 20%;
-}
-
-.rink-pic{
-    max-width: 50%;
-    height: auto;
-    float: right;
-    width:50%;
-}
-
-#hit-marker{
-    float: right;
-}
-.pbp-details {
-    display: inline-block;
-    width: 50%;
-}
-
-.pbp-events {
-    list-style-type: none;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    width: 80%;
-
+    max-width: 10%;
 }
 
 
-.pbp-type {
-    border: solid 1px;
-    /* width: fit-content; */
-    text-align: center;
-    padding: 1%;
+#pbp-event-and-players{
+    padding-left: 25px;
 }
 
+.pbp-details{
+    display: inline-flex;
+  justify-content: space-evenly;
+}
+
+#pbp-rink{
+    margin-left: auto; 
+margin-right: 0;
+padding-right: 15px;
+}
 
 
 .pbp-event-box {
+    padding-top: 10px;
     display: inline-flex;
+    width: 100%;
 }
 
 
@@ -394,6 +379,13 @@ td {
 
     .homepage-links-cards {
         min-width: 100%;
+    }
+    .pbp-event-box{
+        display: block;
+    }
+
+    #pbp-event-and-players{
+        display: inline-block;
     }
 
 

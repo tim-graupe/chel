@@ -119,9 +119,6 @@ export const Schedule = () => {
                             <Link
                               className="link-style"
                               to={`/schedule/${game.teams.home.team.id}`}
-                              onClick={() => {
-                                getTeamSchedule(id);
-                              }}
                             >
                               {" "}
                               {game.teams.home.team.name}{" "}
@@ -163,7 +160,7 @@ export const Schedule = () => {
                       );
                     } else if (
                       game.status.abstractGameState === "Preview" &&
-                      game.tickets === undefined
+                      game.broadcasts === undefined
                     ) {
                       return (
                         <tr key={game.gamePk}>
@@ -260,13 +257,13 @@ export const Schedule = () => {
                             >
                               GameCenter
                             </Link>{" "}
-                            {game.broadcasts.map((broadcast) => {
+                            {/* {game.broadcasts.map((broadcast) => {
                               return (
                                 <div key={broadcast.type}>
                                   {broadcast.type}: {broadcast.name}
                                 </div>
                               );
-                            })}
+                            })} */}
                           </td>
                         </tr>
                       );

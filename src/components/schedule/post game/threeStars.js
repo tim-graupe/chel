@@ -3,7 +3,7 @@ import { GameCenterContext } from "../../../dispatch/dispatch";
 export const ThreeStars = () => {
   const game = useContext(GameCenterContext);
   if (game.gameCenter.gameCenter.liveData.decisions.firstStar === undefined) {
-    return <></>
+    return <></>;
   }
   return (
     <table id="stars-of-the-game">
@@ -22,7 +22,7 @@ export const ThreeStars = () => {
           </td>
         </tr>
         <tr>
-          <td>           
+          <td>
             <img
               src={`http://nhl.bamcontent.com/images/headshots/current/168x168/${game.gameCenter.gameCenter.liveData.decisions.secondStar.id}.jpg`}
               alt="profile pic"

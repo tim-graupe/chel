@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 export const Scores = () => {
   const urlDate = useParams();
-  const currentDay = new Date();
+  const [currentDay, setCurrentDay] = useState(new Date());
   const [schedule, setSchedule] = useState([]);
   const [today, setToday] = useState(currentDay);
   const [yesterday, setYesterday] = useState(
@@ -27,16 +27,10 @@ export const Scores = () => {
     setYesterday(new Date(today.getTime()));
     setToday(new Date(today.getTime() + 86400000));
     setTomorrrow(new Date(today.getTime() + 172800000));
-    console.log(new Date(urlDate))
+
 
   };
 
-  useEffect(() => {
-  if (urlDate.id !== undefined) {
-    console.log(new Date(today.getTime()));
-
-  }
-  }, [])
 
   useEffect(() => {
     const getSchedule = () => {
@@ -53,23 +47,10 @@ export const Scores = () => {
         .catch((err) => console.error(err));
     };
 
-    const getURLschedule = () => {
-      fetch(
-        `https://statsapi.web.nhl.com/api/v1/schedule?date=${urlDate.id}&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore&expand=schedule.venue`,
-        {
-          mode: "cors",
-        }
-      )
-        .then((response) => response.json())
-        .then((response) => setSchedule(response.dates))
-        .catch((err) => console.error(err));
-    }
-   if (urlDate.id === undefined) {
     getSchedule();
-   } else {
-    getURLschedule()
-   }
-  }, [urlDate.id]);
+
+   
+  }, [today]);
   return (
     <div>
       <ScoresDateNav

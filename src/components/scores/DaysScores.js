@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   TeamContext,
@@ -6,6 +6,7 @@ import {
   GameCenterContext,
 } from "../../dispatch/dispatch";
 import { FinalScores } from "./FinalScores";
+import { InProgressScore } from "./InProgress";
 
 export const DaysScores = (props) => {
   const { id } = useParams();
@@ -13,6 +14,8 @@ export const DaysScores = (props) => {
   const [preview, setPreview] = useContext(PreviewContext);
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
+
+
 
   const getPreviewStats = (away, home) => {
     fetch(
@@ -29,16 +32,23 @@ export const DaysScores = (props) => {
   if (props.scores.length < 1) {
     return <h1>No games scheduled for this day.</h1>;
   }
+
+  
   return (
     <div key={props.today}>
       <h4>
-        {" "}
         {new Date(`${props.today}`).toLocaleString("en-US", {
           timeZone: "EST",
           month: "short",
           day: "numeric",
           weekday: "long",
         })}
+        {/* {new Date(`${props.today}`).toLocaleString("en-US", {
+          timeZone: "EST",
+          month: "short",
+          day: "numeric",
+          weekday: "long",
+        })} */}
       </h4>
 
       {props.scores[0].games.map((game) => {
@@ -67,12 +77,13 @@ export const DaysScores = (props) => {
                   {game.teams.home.leagueRecord.ot}
                 </div>
 
-                <div className="broadcast-details">
+
+              </div>
+              <div className="broadcast-details">
                   {game.broadcasts.map((broadcast) => {
                     return <p key={broadcast.id}>{broadcast.name}</p>;
                   })}
                 </div>
-              </div>
               <div className="scores-boxes-content">
                 <Link
                   className="link-style"
@@ -143,7 +154,15 @@ export const DaysScores = (props) => {
               <FinalScores game={game} />
             </div>
           );
-        }
+        } else if
+          (game.status.abstractGameState === "Live") {
+            return (
+              <div key={game.gamePk}>
+                  <InProgressScore game={game} />
+                </div>
+            )
+          }
+        
       })}
     </div>
   );

@@ -9,6 +9,7 @@ export const ScoresDateNav = (props) => {
     props.tomorrow.getMonth() + 1
   }-${props.tomorrow.getDate()}`;
 
+
   return (
     <div id="days-nav">
       <Link to={`../scores/${previousDay}`} className="link-style">

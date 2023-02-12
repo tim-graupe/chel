@@ -109,13 +109,29 @@ margin-right: 0;
 
 #stats-container{
     width: 100%;
-    text-align: center;
+}
+
+#roster-main{
+    width: 100%;
+    max-width: 100%;
+    overflow-x: scroll;
 }
 #roster-container{
     display: flex;
     flex-direction: column;
   
 }
+
+#team-main-info{
+    max-width: 100%;
+}
+
+
+#team-stats-table{
+    overflow-x: scroll;
+    max-width: 100%;
+}
+
 .division-name{
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     margin-left: 2.5vmax;

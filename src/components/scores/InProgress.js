@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { GameCenterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
-
-export const FinalScores = (props) => {
+export const InProgressScore = (props) => {
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
 
@@ -28,27 +27,38 @@ export const FinalScores = (props) => {
     <div className="scores-boxes" key={props.game.gamepk}>
       <div className="scores-boxes-teams">
         <div className="scores-boxes-teams-away">
-          {props.game.teams.away.team.name}
+          <div>
+            <h2>
+              {" "}
+
+              {props.game.teams.away.team.name}
+            </h2>
+            <h4>
+              {props.game.linescore.periods
+                .map((period) => period.away.shotsOnGoal)
+                .reduce((prev, next) => prev + next)}{" "}
+              SOG
+            </h4>
+          </div>
+          <h1>{props.game.teams.away.score}</h1>{" "}
         </div>
-        <div>
-          {props.game.teams.away.leagueRecord.wins} -{" "}
-          {props.game.teams.away.leagueRecord.losses} -{" "}
-          {props.game.teams.away.leagueRecord.ot}
-        </div>
+        <div></div>
         <div className="scores-boxes-teams-home">
-          {props.game.teams.home.team.name}
+          <div>
+            <h2>{props.game.teams.home.team.name}</h2>
+            <h4>
+              {props.game.linescore.periods
+                .map((period) => period.home.shotsOnGoal)
+                .reduce((prev, next) => prev + next)}{" "}
+              SOG
+            </h4>
+          </div>
+          <h1>{props.game.teams.home.score}</h1>
         </div>
-        <div>
-          {props.game.teams.home.leagueRecord.wins} -{" "}
-          {props.game.teams.home.leagueRecord.losses} -{" "}
-          {props.game.teams.home.leagueRecord.ot}
-        </div>
-{/* 
-        <div className="broadcast-details">
-          {props.game.broadcasts.map((broadcast) => {
-            return <p key={broadcast.id}>{broadcast.name}</p>;
-          })}
-        </div> */}
+      </div>
+      <div className="scores-boxes-period">
+        <p>{props.game.linescore.currentPeriodOrdinal}</p>
+        <p>{props.game.linescore.currentPeriodTimeRemaining}</p>
       </div>
       <div className="scores-boxes-content">
         <Link
