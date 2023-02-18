@@ -45,7 +45,7 @@ export const Division = () => {
 
   return (
     <div id="table-container">
-      {standings.map((standing) => {
+      {standings.slice(3, 4).map((standing) => {
         return (
           <table key={standing.division.id} className="standings-table">
             <thead>

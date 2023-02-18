@@ -26,29 +26,26 @@ export const FinalScores = (props) => {
 
   return (
     <div className="scores-boxes" key={props.game.gamepk}>
-      <div className="scores-boxes-teams">
-        <div className="scores-boxes-teams-away">
-          {props.game.teams.away.team.name}
-        </div>
-        <div>
-          {props.game.teams.away.leagueRecord.wins} -{" "}
-          {props.game.teams.away.leagueRecord.losses} -{" "}
-          {props.game.teams.away.leagueRecord.ot}
-        </div>
-        <div className="scores-boxes-teams-home">
-          {props.game.teams.home.team.name}
-        </div>
-        <div>
-          {props.game.teams.home.leagueRecord.wins} -{" "}
-          {props.game.teams.home.leagueRecord.losses} -{" "}
-          {props.game.teams.home.leagueRecord.ot}
-        </div>
-{/* 
-        <div className="broadcast-details">
-          {props.game.broadcasts.map((broadcast) => {
-            return <p key={broadcast.id}>{broadcast.name}</p>;
-          })}
-        </div> */}
+              <div className="scores-boxes-teams">
+                <div className="scores-boxes-teams-away">
+                <div>  <h2>{props.game.teams.away.team.name}</h2>
+                  {props.game.teams.away.leagueRecord.wins} -{" "}
+                  {props.game.teams.away.leagueRecord.losses} -{" "}
+                  {props.game.teams.away.leagueRecord.ot}
+                  </div>
+                  <h1>{props.game.teams.away.score}</h1>
+                </div>
+                <div className="scores-boxes-teams-home">
+                 <div> <h2>{props.game.teams.home.team.name}</h2>
+                  {props.game.teams.home.leagueRecord.wins} -{" "}
+                  {props.game.teams.home.leagueRecord.losses} -{" "}
+                  {props.game.teams.home.leagueRecord.ot}
+                  </div>
+                  <h1>{props.game.teams.home.score}</h1>
+                </div>
+              </div>
+      <div className="scores-boxes-period">
+        <h3>{props.game.linescore.currentPeriodTimeRemaining}</h3>
       </div>
       <div className="scores-boxes-content">
         <Link

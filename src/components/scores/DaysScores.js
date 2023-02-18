@@ -15,8 +15,6 @@ export const DaysScores = (props) => {
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
 
-
-
   const getPreviewStats = (away, home) => {
     fetch(
       `https://statsapi.web.nhl.com/api/v1/teams/?leaders&leaderCategories=points&leaderCategories=goals&leaderCategories=assists&leaderCategories=plusMinus&leaderCategories=gaa&leaderCategories=wins&leaderCategories=shutouts&leaderCategories=savePct&teamId=${away},${home}&expand=team.roster&expand=team.stats&expand=team.record&expand=team.schedule.next`,
@@ -33,7 +31,6 @@ export const DaysScores = (props) => {
     return <h1>No games scheduled for this day.</h1>;
   }
 
-  
   return (
     <div key={props.today}>
       <h4>
@@ -60,30 +57,28 @@ export const DaysScores = (props) => {
           return (
             <div className="scores-boxes" key={game.gamePk}>
               <div className="scores-boxes-teams">
-                <div className="scores-boxes-teams-away">
+                <h2 className="scores-boxes-teams-away">
                   {game.teams.away.team.name}
-                </div>
+                </h2>
                 <div>
                   {game.teams.away.leagueRecord.wins} -{" "}
                   {game.teams.away.leagueRecord.losses} -{" "}
                   {game.teams.away.leagueRecord.ot}
                 </div>
-                <div className="scores-boxes-teams-home">
+                <h2 className="scores-boxes-teams-home">
                   {game.teams.home.team.name}
-                </div>
+                </h2>
                 <div>
                   {game.teams.home.leagueRecord.wins} -{" "}
                   {game.teams.home.leagueRecord.losses} -{" "}
                   {game.teams.home.leagueRecord.ot}
                 </div>
-
-
               </div>
               <div className="broadcast-details">
-                  {game.broadcasts.map((broadcast) => {
-                    return <p key={broadcast.id}>{broadcast.name}</p>;
-                  })}
-                </div>
+                {game.broadcasts.map((broadcast) => {
+                  return <p key={broadcast.id}>{broadcast.name}</p>;
+                })}
+              </div>
               <div className="scores-boxes-content">
                 <Link
                   className="link-style"
@@ -107,23 +102,29 @@ export const DaysScores = (props) => {
             </div>
           );
         } else if (
-          game.tickets === undefined ||
-          game.broadcasts === undefined
+          (game.tickets === undefined || game.broadcasts === undefined) &&
+          game.status.abstractGameState !== "Final"
         ) {
           return (
             <div key={game.gamePk} className="scores-boxes">
               <div className="scores-boxes-teams">
                 <div className="scores-boxes-teams-away">
-                  {game.teams.away.team.name}
-                  {game.teams.away.leagueRecord.wins} -{" "}
-                  {game.teams.away.leagueRecord.losses} -{" "}
-                  {game.teams.away.leagueRecord.ot}
+                  <div>
+                    {" "}
+                    <h2>{game.teams.away.team.name}</h2>
+                    {game.teams.away.leagueRecord.wins} -{" "}
+                    {game.teams.away.leagueRecord.losses} -{" "}
+                    {game.teams.away.leagueRecord.ot}
+                  </div>
                 </div>
                 <div className="scores-boxes-teams-home">
-                  {game.teams.home.team.name}
-                  {game.teams.home.leagueRecord.wins} -{" "}
-                  {game.teams.home.leagueRecord.losses} -{" "}
-                  {game.teams.home.leagueRecord.ot}
+                  <div>
+                    {" "}
+                    <h2>{game.teams.home.team.name}</h2>
+                    {game.teams.home.leagueRecord.wins} -{" "}
+                    {game.teams.home.leagueRecord.losses} -{" "}
+                    {game.teams.home.leagueRecord.ot}
+                  </div>
                 </div>
               </div>
               <div id="scores-boxes-content">
@@ -154,15 +155,13 @@ export const DaysScores = (props) => {
               <FinalScores game={game} />
             </div>
           );
-        } else if
-          (game.status.abstractGameState === "Live") {
-            return (
-              <div key={game.gamePk}>
-                  <InProgressScore game={game} />
-                </div>
-            )
-          }
-        
+        } else if (game.status.abstractGameState === "Live") {
+          return (
+            <div key={game.gamePk}>
+              <InProgressScore game={game} />
+            </div>
+          );
+        }
       })}
     </div>
   );

@@ -28,17 +28,13 @@ export const InProgressScore = (props) => {
       <div className="scores-boxes-teams">
         <div className="scores-boxes-teams-away">
           <div>
-            <h2>
-              {" "}
-
-              {props.game.teams.away.team.name}
-            </h2>
-            <h4>
+            <h2> {props.game.teams.away.team.name}</h2>
+            <p>
               {props.game.linescore.periods
                 .map((period) => period.away.shotsOnGoal)
                 .reduce((prev, next) => prev + next)}{" "}
               SOG
-            </h4>
+            </p>
           </div>
           <h1>{props.game.teams.away.score}</h1>{" "}
         </div>
@@ -46,12 +42,12 @@ export const InProgressScore = (props) => {
         <div className="scores-boxes-teams-home">
           <div>
             <h2>{props.game.teams.home.team.name}</h2>
-            <h4>
+            <p>
               {props.game.linescore.periods
                 .map((period) => period.home.shotsOnGoal)
                 .reduce((prev, next) => prev + next)}{" "}
               SOG
-            </h4>
+            </p>
           </div>
           <h1>{props.game.teams.home.score}</h1>
         </div>

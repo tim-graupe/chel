@@ -39,7 +39,7 @@ export const TeamSchedule = () => {
     if (teamSchedule === null || id !== team) {
       getTeamSchedule(id);
     }
-  }, [id]);
+  }, [id])
 
   const getGameInfo = (gamePk) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {

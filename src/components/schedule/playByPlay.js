@@ -42,7 +42,7 @@ export const PlayByPlay = () => {
             (play) =>
               play.result.event !== "Period Ready" &&
               play.about.period === currentPeriod
-          )
+          ).reverse()
           //Shot, Blocked Shot, Hit,  Faceoff, Missed Shot, Goal, Takeaway, Giveaway, Penalty
           .map((play) => {
             if (play.players !== undefined) {
@@ -71,7 +71,7 @@ export const PlayByPlay = () => {
                   </section>
                   <div id="pbp-rink">
                     {" "}
-                    <Canvas props={[play.coordinates.x,   parseInt(`${play.coordinates.y - play.coordinates.y - play.coordinates.y}`)]} />
+                    <Canvas props={[play.coordinates.x,  play.coordinates.y]} />
                   </div>
                 </li>
               );

@@ -9,9 +9,11 @@ import { TeamStatsVs } from "./teamStatsVs";
 import { PlayersToWatch } from "./playersToWatch";
 import { LastTenGames } from "./lastTenGames";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { useState } from "react";
 
 export const Preview = () => {
   const [preview, setPreview] = useContext(PreviewContext);
+  const [teams, setTeams] = useState([])
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
 
@@ -24,7 +26,7 @@ export const Preview = () => {
       }
     )
       .then((response) => response.json())
-      .then((response) => setPreview(response.teams))
+      .then((response) => setTeams(response.teams))
       .catch((err) => console.error(err));
   };
 
@@ -70,10 +72,9 @@ export const Preview = () => {
         <section className="preview-col" id="preview-mid-col">
           <PlayersToWatch />
 
-          <Goalies team={preview[0]}/>
-          <Goalies team={preview[1]}/>
+          <Goalies teams={teams} />
 
-          <ScheduleRoster />
+          <ScheduleRoster teams={teams} />
         </section>
 
         <section className="preview-col" id="preview-right-col">
