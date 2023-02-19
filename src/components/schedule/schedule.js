@@ -89,13 +89,14 @@ export const Schedule = () => {
                   month: "short",
                   year: "2-digit",
                   day: "numeric",
+
                 })}
               </h1>
               <table id="schedule-day-container">
                 <thead>
                   <tr>
                     <th>Matchup</th>
-                    <th>Time</th>
+                    <th>Time / Result</th>
                     <th>Game Info</th>
                   </tr>
                 </thead>
@@ -129,6 +130,7 @@ export const Schedule = () => {
                             time.getMinutes() < 2
                               ? "00"
                               : "" + time.getMinutes()
+                              
                           }`}</td>
 
                           <td>
@@ -207,7 +209,7 @@ export const Schedule = () => {
                           </td>
                         </tr>
                       );
-                    } else {
+                    } else if (game.status.abstractGameState === "Live") {
                       return (
                         <tr key={game.gamePk}>
                           <td>
@@ -230,7 +232,7 @@ export const Schedule = () => {
                             </Link>
                           </td>
 
-                          <td>
+                          <td id="score-box">
                             {/* {game.status.abstractGameState}{" "} */}
                             <img
                               src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}

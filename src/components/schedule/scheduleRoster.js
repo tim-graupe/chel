@@ -233,6 +233,51 @@ export const ScheduleRoster = (props) => {
                 );
               })}
           </tbody>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Goalies</th>
+              <th>Pos</th>
+              <th>GP</th>
+              <th>W</th>
+              <th>L</th>
+              <th>OT</th>
+              <th>GA</th>
+              <th>SA</th>
+              <th>SV%</th>
+              <th>GAA</th>
+              <th>SO</th>
+              <th>MIN</th>
+            </tr>
+          </thead>
+          <tbody>
+            {away.filter((player) => player.position.type === "Goalie" && player.stats[0] !== undefined).map((player) => {
+                return (
+                  <tr key={player.person.id}>
+                    <td>{player.jerseyNumber}</td>
+                    <Link
+                      className="link-style"
+                      to={`/players/${player.person.id}`}
+                      onClick={() => {
+                        getPlayer(player.person.id);
+                      }}
+                    >
+                      <td>{player.person.fullName}</td>
+                      <td>{player.position.abbreviation}</td>{" "}
+                      <td>{player.stats[0].stat.wins}</td>
+                      <td>{player.stats[0].stat.losses}</td>
+                      <td>{player.stats[0].stat.ot}</td>
+                      <td>{player.stats[0].stat.goalsAgainst}</td>
+                      <td>{player.stats[0].stat.shotsAgainst}</td>
+                      <td>{player.stats[0].stat.savePercentage.toFixed(3)}</td>
+                      <td>{Math.round(player.stats[0].stat.goalAgainstAverage  * 100) / 100}</td>
+                      <td>{player.stats[0].stat.shutouts}</td>
+                      <td>{player.stats[0].stat.timeOnIce}</td>
+                    </Link>
+                  </tr>
+                )
+            })}
+          </tbody>
         </table>
 
         <table id="away-roster-table" className="roster-table">
@@ -364,6 +409,51 @@ export const ScheduleRoster = (props) => {
                   </tr>
                 );
               })}
+          </tbody>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Goalies</th>
+              <th>Pos</th>
+              <th>GP</th>
+              <th>W</th>
+              <th>L</th>
+              <th>OT</th>
+              <th>GA</th>
+              <th>SA</th>
+              <th>SV%</th>
+              <th>GAA</th>
+              <th>SO</th>
+              <th>MIN</th>
+            </tr>
+          </thead>
+          <tbody>
+            {home.filter((player) => player.position.type === "Goalie" && player.stats[0] !== undefined).map((player) => {
+                return (
+                  <tr key={player.person.id}>
+                    <td>{player.jerseyNumber}</td>
+                    <Link
+                      className="link-style"
+                      to={`/players/${player.person.id}`}
+                      onClick={() => {
+                        getPlayer(player.person.id);
+                      }}
+                    >
+                      <td>{player.person.fullName}</td>
+                      <td>{player.position.abbreviation}</td>{" "}
+                      <td>{player.stats[0].stat.wins}</td>
+                      <td>{player.stats[0].stat.losses}</td>
+                      <td>{player.stats[0].stat.ot}</td>
+                      <td>{player.stats[0].stat.goalsAgainst}</td>
+                      <td>{player.stats[0].stat.shotsAgainst}</td>
+                      <td>{player.stats[0].stat.savePercentage.toFixed(3)}</td>
+                      <td>{Math.round(player.stats[0].stat.goalAgainstAverage  * 100) / 100}</td>
+                      <td>{player.stats[0].stat.shutouts}</td>
+                      <td>{player.stats[0].stat.timeOnIce}</td>
+                    </Link>
+                  </tr>
+                )
+            })}
           </tbody>
         </table>
       </>
