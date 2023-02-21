@@ -4,6 +4,7 @@ import { PlayerStats } from "./playerSplits";
 import { Gamelog } from "./gamelogs";
 import { Career } from "./career";
 import { useParams } from "react-router-dom";
+import { GoalieMainStats } from "./goalieMainStats";
 export const PlayerProfile = () => {
 const [player, setPlayer, stats, setStats] = useContext(PlayerContext)
 const [tab, setTab] = useState("stats")
@@ -40,7 +41,7 @@ useEffect(() => {
 
   if (player === null || player === undefined | player.primaryPosition === undefined || stats === undefined) {
     return <></>
-  } else {
+  } else if (player.primaryPosition.name !== "Goalie") {
     return (
       <div id="container">
 
@@ -67,7 +68,7 @@ useEffect(() => {
               {player.birthCountry}
             </p>
             <p className="bio-details">Born {player.birthDate}</p>
-            <p>Shoots/Catches: {player.shootsCatches}</p>
+            <p>Shoots: {player.shootsCatches}</p>
             <a
               className="bio-details" id="news-link"
               href={`https://www.nhl.com/devils/search#q=${player.fullName}&type=video`}
@@ -167,5 +168,7 @@ useEffect(() => {
                 </section>
       </div>
     );
+  } else {
+    return <GoalieMainStats player={player} />
   }
 };

@@ -78,8 +78,8 @@ export const Preview = () => {
         </section>
 
         <section className="preview-col" id="preview-right-col">
-          <PreviousGame home={preview[0].id} away={preview[1].id} />
-          <SeasonSeries home={preview[0].id} away={preview[1].id} />
+          <PreviousGame teams={teams} />
+          <SeasonSeries teams={teams} />
         </section>
       </div>
     );

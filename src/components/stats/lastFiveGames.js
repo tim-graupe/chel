@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PlayerContext } from "../../dispatch/dispatch";
 
-export const Gamelog = (props) => {
+export const LastFive = (props) => {
   let player = useContext(PlayerContext);
   let [stats, setStats] = useState([]);
   let week = [
@@ -45,31 +45,31 @@ export const Gamelog = (props) => {
     return <></>;
   } else {
     return (
-      <table className="player-table">
-        <caption>Game Log</caption>
+      <table className="last-five">
+        <caption>Last 5 Games</caption>
         <thead>
           <tr>
-            <th className="sticky-col first-col">Date</th>
-            <th className="stat-row">Opponent</th>
+            <th>Date</th>
+            <th>Opponent</th>
 
-            <th className="stat-row">GS</th>
-            <th className="stat-row">W</th>
-            <th className="stat-row">L</th>
-            <th className="stat-row">OT</th>
-            <th className="stat-row">SA</th>
-            <th className="stat-row">GA</th>
+            <th>GS</th>
+            <th>W</th>
+            <th>L</th>
+            <th>OT</th>
+            <th>SA</th>
+            <th>GA</th>
 
-            <th className="stat-row">SV%</th>
-            <th className="stat-row">SO</th>
-            <th className="stat-row">MIN</th>
+            <th>SV%</th>
+            <th>SO</th>
+            <th>MIN</th>
           </tr>
         </thead>
         <tbody>
-          {stats.map((game) => {
+          {stats.slice(0, 5).map((game) => {
             if (game.isWin === true) {
               return (
                 <tr key={game.date}>
-                  <td className="sticky-col first-col">
+                  <td>
                     {new Date(`${game.date}`).toLocaleString("en-En", {
                       month: "short",
                       day: "numeric",
@@ -92,7 +92,7 @@ export const Gamelog = (props) => {
             } else if (game.isWin === false && game.isOT === false) {
               return (
                 <tr key={game.date}>
-                  <td className="sticky-col first-col">
+                  <td>
                     {new Date(`${game.date}`).toLocaleString("en-En", {
                       month: "short",
                       day: "numeric",
@@ -114,7 +114,7 @@ export const Gamelog = (props) => {
             } else if (game.isWin === false && game.isOT === true) {
               return (
                 <tr key={game.date}>
-                  <td className="sticky-col first-col">
+                  <td>
                     {new Date(`${game.date}`).toLocaleString("en-En", {
                       month: "short",
                       day: "numeric",

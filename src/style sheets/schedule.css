@@ -86,7 +86,7 @@
 }
 
 .schedule-logos {
-   width: 25%;
+    width: 25%;
 }
 
 
@@ -134,9 +134,9 @@ td {
     max-width: 100%;
 }
 
-.tendy-tables>tr {
+/* .tendy-tables>tr {
     width: 1000px;
-}
+} */
 
 /* #preview-container{
    display: flex;
@@ -157,7 +157,7 @@ td {
     padding: 10px;
 }
 
-.video-thumbnail{
+.video-thumbnail {
     padding-left: 10px;
 }
 
@@ -168,19 +168,19 @@ td {
 }
 
 
-#pbp-event-and-players{
+#pbp-event-and-players {
     padding-left: 25px;
 }
 
-.pbp-details{
+.pbp-details {
     display: inline-flex;
-  justify-content: space-evenly;
+    justify-content: space-evenly;
 }
 
-#pbp-rink{
-    margin-left: auto; 
-margin-right: 0;
-padding-right: 15px;
+#pbp-rink {
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 15px;
 }
 
 
@@ -253,7 +253,7 @@ padding-right: 15px;
     float: left;
 }
 
-#pbp-live-col{
+#pbp-live-col {
     float: right;
     max-width: 75%;
     width: 75%;
@@ -327,8 +327,13 @@ padding-right: 15px;
     }
 
     .roster-table {
-        min-width: 100%;
+        overflow-x: scroll;
     }
+
+    /* th,
+    td {
+        min-width: 200px;
+    } */
 
     #live-game-scoreboard {
         min-width: 100%
@@ -350,7 +355,7 @@ padding-right: 15px;
 
     }
 
-    #highlight-video{
+    #highlight-video {
         max-width: 100%;
     }
 
@@ -389,11 +394,12 @@ padding-right: 15px;
     .homepage-links-cards {
         min-width: 100%;
     }
-    .pbp-event-box{
+
+    .pbp-event-box {
         display: block;
     }
 
-    #pbp-event-and-players{
+    #pbp-event-and-players {
         display: inline-block;
     }
 

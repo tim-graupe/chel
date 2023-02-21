@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { PreviewContext, PlayerContext } from "../../dispatch/dispatch";
-import { useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const ScheduleRoster = (props) => {
   const [team, setTeam] = useState("home");
@@ -10,8 +9,6 @@ export const ScheduleRoster = (props) => {
   const [away, setAway] = useState([]);
   const [home, setHome] = useState([]);
   const [playerID, setPlayerID] = useState(null);
-
-  const id = useParams();
 
   useEffect(() => {
     if (props.teams[0] === undefined) {
@@ -251,7 +248,13 @@ export const ScheduleRoster = (props) => {
             </tr>
           </thead>
           <tbody>
-            {away.filter((player) => player.position.type === "Goalie" && player.stats[0] !== undefined).map((player) => {
+            {away
+              .filter(
+                (player) =>
+                  player.position.type === "Goalie" &&
+                  player.stats[0] !== undefined
+              )
+              .map((player) => {
                 return (
                   <tr key={player.person.id}>
                     <td>{player.jerseyNumber}</td>
@@ -261,22 +264,30 @@ export const ScheduleRoster = (props) => {
                       onClick={() => {
                         getPlayer(player.person.id);
                       }}
+                 
+                      
                     >
-                      <td>{player.person.fullName}</td>
+                           {player.person.fullName}
+                         </Link>
                       <td>{player.position.abbreviation}</td>{" "}
+                      <td>{player.stats[0].stat.games}</td>
                       <td>{player.stats[0].stat.wins}</td>
                       <td>{player.stats[0].stat.losses}</td>
                       <td>{player.stats[0].stat.ot}</td>
                       <td>{player.stats[0].stat.goalsAgainst}</td>
                       <td>{player.stats[0].stat.shotsAgainst}</td>
                       <td>{player.stats[0].stat.savePercentage.toFixed(3)}</td>
-                      <td>{Math.round(player.stats[0].stat.goalAgainstAverage  * 100) / 100}</td>
+                      <td>
+                        {Math.round(
+                          player.stats[0].stat.goalAgainstAverage * 100
+                        ) / 100}
+                      </td>
                       <td>{player.stats[0].stat.shutouts}</td>
                       <td>{player.stats[0].stat.timeOnIce}</td>
-                    </Link>
+                 
                   </tr>
-                )
-            })}
+                );
+              })}
           </tbody>
         </table>
 
@@ -428,32 +439,44 @@ export const ScheduleRoster = (props) => {
             </tr>
           </thead>
           <tbody>
-            {home.filter((player) => player.position.type === "Goalie" && player.stats[0] !== undefined).map((player) => {
+            {home
+              .filter(
+                (player) =>
+                  player.position.type === "Goalie" &&
+                  player.stats[0] !== undefined
+              )
+              .map((player) => {
                 return (
                   <tr key={player.person.id}>
                     <td>{player.jerseyNumber}</td>
-                    <Link
-                      className="link-style"
-                      to={`/players/${player.person.id}`}
-                      onClick={() => {
-                        getPlayer(player.person.id);
-                      }}
-                    >
-                      <td>{player.person.fullName}</td>
-                      <td>{player.position.abbreviation}</td>{" "}
-                      <td>{player.stats[0].stat.wins}</td>
-                      <td>{player.stats[0].stat.losses}</td>
-                      <td>{player.stats[0].stat.ot}</td>
-                      <td>{player.stats[0].stat.goalsAgainst}</td>
-                      <td>{player.stats[0].stat.shotsAgainst}</td>
-                      <td>{player.stats[0].stat.savePercentage.toFixed(3)}</td>
-                      <td>{Math.round(player.stats[0].stat.goalAgainstAverage  * 100) / 100}</td>
-                      <td>{player.stats[0].stat.shutouts}</td>
-                      <td>{player.stats[0].stat.timeOnIce}</td>
-                    </Link>
+                    <td>
+                      <Link
+                        className="link-style"
+                        to={`/players/${player.person.id}`}
+                        onClick={() => {
+                          getPlayer(player.person.id);
+                        }}
+                      >
+                        {player.person.fullName}
+                      </Link>
+                    </td>
+                    <td>{player.position.abbreviation}</td>{" "}
+                    <td>{player.stats[0].stat.wins}</td>
+                    <td>{player.stats[0].stat.losses}</td>
+                    <td>{player.stats[0].stat.ot}</td>
+                    <td>{player.stats[0].stat.goalsAgainst}</td>
+                    <td>{player.stats[0].stat.shotsAgainst}</td>
+                    <td>{player.stats[0].stat.savePercentage.toFixed(3)}</td>
+                    <td>
+                      {Math.round(
+                        player.stats[0].stat.goalAgainstAverage * 100
+                      ) / 100}
+                    </td>
+                    <td>{player.stats[0].stat.shutouts}</td>
+                    <td>{player.stats[0].stat.timeOnIce}</td>
                   </tr>
-                )
-            })}
+                );
+              })}
           </tbody>
         </table>
       </>
