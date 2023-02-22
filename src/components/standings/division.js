@@ -3,7 +3,7 @@ import "../../style sheets/standings.css";
 import { LeadersContext, RosterContext } from "../../dispatch/dispatch";
 import { Link } from "react-router-dom";
 
-export const Division = () => {
+export const Division = (props) => {
   const [roster, setRoster] = useContext(RosterContext);
   const [leaders, setLeaders] = useContext(LeadersContext);
   const [standings, setStandings] = useState([]);
@@ -43,9 +43,10 @@ export const Division = () => {
       .catch((err) => console.error(err));
   };
 
+if (props.name !== "") {
   return (
     <div id="table-container">
-      {standings.slice(3, 4).map((standing) => {
+      {standings.filter(conf => conf.division.nameShort === props.name).map((standing) => {
         return (
           <table key={standing.division.id} className="standings-table">
             <thead>
@@ -97,4 +98,60 @@ export const Division = () => {
       })}
     </div>
   );
+} else {
+  return (
+    <div id="table-container">
+      {standings.map((standing) => {
+        return (
+          <table key={standing.division.id} className="standings-table">
+            <thead>
+              <tr>
+                <th scope="col" id="division-row">
+                  {standing.division.name}
+                </th>
+                <th scope="col">W</th>
+                <th scope="col">L</th>
+                <th scope="col">OTL</th>
+                <th scope="col">GP</th>
+                <th scope="col">P</th>
+                <th scope="col">G</th>
+                <th scope="col">GA</th>
+                <th scozpe="col">Diff</th>
+              </tr>
+            </thead>
+            {standing.teamRecords.map((record) => {
+              return (
+                <tbody key={record.team.id}>
+                  <tr>
+                    <td
+                      onClick={() => {
+                        showLeaders(record.team.id);
+                        showRoster(record.team.id);
+                      }}
+                    >
+                      <Link to="/stats">
+                        <img
+                          src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${record.team.id}.svg`}
+                          alt="team-logo"
+                          className="logos"
+                        />
+                      </Link>
+                      {record.team.name}
+                    </td>
+                    <td>{record.leagueRecord.wins}</td>
+                    <td>{record.leagueRecord.losses}</td>
+                    <td>{record.leagueRecord.ot}</td>
+                    <td>{record.gamesPlayed}</td> <td>{record.points}</td>
+                    <td>{record.goalsScored}</td> <td>{record.goalsAgainst}</td>
+                    <td>{record.goalsScored - record.goalsAgainst}</td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        );
+      })}
+    </div>
+  );
+}
 };

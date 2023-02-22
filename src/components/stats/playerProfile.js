@@ -5,14 +5,16 @@ import { Gamelog } from "./gamelogs";
 import { Career } from "./career";
 import { useParams } from "react-router-dom";
 import { GoalieMainStats } from "./goalieMainStats";
+import { LastFive } from "./lastFiveGames";
 export const PlayerProfile = () => {
 const [player, setPlayer, stats, setStats] = useContext(PlayerContext)
 const [tab, setTab] = useState("stats")
+const [year, setYear] = useState(20222023)
 const id = useParams()
 useEffect(() => {
   function getPlayer(player) {
     fetch(
-      `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear&stats=statsSingleSeason&season=20222023&stats=careerRegularSeason`,
+      `https://statsapi.web.nhl.com/api/v1/people/${player}/stats?stats=yearByYear&stats=statsSingleSeason&season=${year}&stats=careerRegularSeason`,
       {
         mode: "cors",
       }
@@ -37,7 +39,7 @@ useEffect(() => {
       .catch((err) => console.error(err));
   }
   getPlayer(id.id)
-}, [])
+}, [year])
 
   if (player === null || player === undefined | player.primaryPosition === undefined || stats === undefined) {
     return <></>
@@ -143,7 +145,9 @@ useEffect(() => {
             </table>
             </div>
           </div>
+          <LastFive />
         </div>
+        
 
                 <section id="player-stats">
                 <button onClick={() => {

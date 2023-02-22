@@ -16,9 +16,9 @@ export const Schedule = () => {
   const id = useParams();
   const current = new Date();
 
-  const date = `${current.getFullYear()}-${current.getMonth() + 1}-${
-    current.getDate()
-  }`;
+  const date = `${current.getFullYear()}-${
+    current.getMonth() + 1
+  }-${current.getDate()}`;
 
   useEffect(() => {
     const getSchedule = () => {
@@ -89,7 +89,6 @@ export const Schedule = () => {
                   month: "short",
                   year: "2-digit",
                   day: "numeric",
-
                 })}
               </h1>
               <table id="schedule-day-container">
@@ -130,7 +129,6 @@ export const Schedule = () => {
                             time.getMinutes() < 2
                               ? "00"
                               : "" + time.getMinutes()
-                              
                           }`}</td>
 
                           <td>

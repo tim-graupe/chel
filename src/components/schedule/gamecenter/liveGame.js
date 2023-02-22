@@ -4,6 +4,7 @@ import { LiveGameStats } from "../live game/liveGameStats";
 import { Boxscore } from "./boxscore";
 
 import { PlayByPlay } from "../playByPlay";
+import { OnIce } from "../live game/OnIce";
 
 export const LiveGame = () => {
   const [tab, setTab] = useState('box')
@@ -27,7 +28,9 @@ export const LiveGame = () => {
           null
       }
          </section>
-         <section id="pbp-live-col"> <PlayByPlay /></section>
+         <section id="pbp-live-col">
+          <OnIce />
+           <PlayByPlay /></section>
    
      
        

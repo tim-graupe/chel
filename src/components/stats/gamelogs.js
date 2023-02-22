@@ -43,7 +43,7 @@ export const Gamelog = (props) => {
   }, []);
   if (stats === undefined) {
     return <></>;
-  } else {
+  } else if (props.props === "goalie") {
     return (
       <table className="player-table">
         <caption>Game Log</caption>
@@ -70,9 +70,10 @@ export const Gamelog = (props) => {
               return (
                 <tr key={game.date}>
                   <td className="sticky-col first-col">
-                    {new Date(`${game.date}`).toLocaleString("en-En", {
-                      month: "short",
-                      day: "numeric",
+                    {new Date(`${game.date}`).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  month: "short",
+                  day: "numeric",
                     })}
                   </td>
                   <td>{game.opponent.name}</td>
@@ -93,9 +94,11 @@ export const Gamelog = (props) => {
               return (
                 <tr key={game.date}>
                   <td className="sticky-col first-col">
-                    {new Date(`${game.date}`).toLocaleString("en-En", {
-                      month: "short",
-                      day: "numeric",
+                    {new Date(`${game.date}`).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  month: "short",
+                  year: "2-digit",
+                  day: "numeric",
                     })}
                   </td>
                   <td>{game.opponent.name}</td>
@@ -115,9 +118,10 @@ export const Gamelog = (props) => {
               return (
                 <tr key={game.date}>
                   <td className="sticky-col first-col">
-                    {new Date(`${game.date}`).toLocaleString("en-En", {
-                      month: "short",
-                      day: "numeric",
+                    {new Date(`${game.date}`).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  month: "short",
+                  day: "numeric",
                     })}
                   </td>
                   <td>{game.opponent.name}</td>
@@ -134,6 +138,60 @@ export const Gamelog = (props) => {
                 </tr>
               );
             }
+          })}
+        </tbody>
+      </table>
+    );
+  } else {
+    return (
+      <table className="player-table">
+        <caption>Game Log</caption>
+        <thead>
+          <tr>
+            <th className="sticky-col first-col">Date</th>
+            <th className="stat-row">Opponent</th>
+            <th className="stat-row">G</th>
+            <th className="stat-row">A</th>
+            <th className="stat-row">P</th>
+            <th className="stat-row">+/-</th>
+            <th className="stat-row">PIM</th>
+            <th className="stat-row">PPG</th>
+            <th className="stat-row">SHG</th>
+            <th className="stat-row">SHP</th>
+            <th className="stat-row">GWG</th>
+            <th className="stat-row">OTG</th>
+            <th className="stat-row">S</th>
+            <th className="stat-row">TOI</th>
+            <th className="stat-row">Shifts</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stats.map((game) => {
+            return (
+              <tr key={game.date}>
+                <td className="sticky-col first-col">
+                  {new Date(`${game.date}`).toLocaleString("en-US", {
+                  timeZone: "UTC",
+                  month: "short",
+                  day: "numeric",
+                  })}
+                </td>
+                <td>{game.opponent.name}</td>
+                <td>{game.stat.goals}</td>
+                <td>{game.stat.assists}</td>
+                <td>{game.stat.points}</td>
+                <td>{game.stat.plusMinus}</td>
+                <td>{game.stat.pim}</td>
+                <td>{game.stat.powerPlayGoals}</td>
+                <td>{game.stat.shortHandedGoals}</td>
+                <td>{game.stat.shortHandedPoints}</td>
+                <td>{game.stat.gameWinningGoals}</td>
+                <td>{game.stat.overTimeGoals}</td>
+                <td>{game.stat.shots}</td>
+                <td>{game.stat.timeOnIce}</td>
+                <td>{game.stat.shifts}</td>
+              </tr>
+            );
           })}
         </tbody>
       </table>

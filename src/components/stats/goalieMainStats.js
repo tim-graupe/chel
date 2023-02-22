@@ -34,7 +34,7 @@ export const GoalieMainStats = () => {
             <p className="bio-details">Born {player.birthDate}</p>
             <p>Catches: {player.shootsCatches}</p>
             <a
-            //   className="bio-details"
+              //   className="bio-details"
               className="link-style"
               id="news-link"
               href={`https://www.nhl.com/devils/search#q=${player.fullName}&type=video`}
@@ -134,7 +134,7 @@ export const GoalieMainStats = () => {
           {tab === "stats" ? (
             <PlayerStats props={"goalie"} />
           ) : tab === "game-log" ? (
-            <Gamelog props={"goalie"}/>
+            <Gamelog props={"goalie"} />
           ) : tab === "career" ? (
             <Career props={"goalie"} />
           ) : null}

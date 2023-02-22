@@ -19,7 +19,7 @@ export const Standings = (props) => {
       <>
         <StandingsNav onChange={onChange} />
 
-        <Division />
+        <Division name=""/>
       </>
     );
   } else if (table === "wildcard") {

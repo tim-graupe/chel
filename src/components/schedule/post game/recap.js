@@ -1,15 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { GameCenterContext } from "../../../dispatch/dispatch";
 
 export const Recap = () => {
   const media = useContext(GameCenterContext);
+  const [auto, setAuto] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
+  // const [highlights, setHighlights] = useState([])
+  const [recapVid, setRecapVid] = useState([]);
 
-
-  if (media.content === null) {
-    return <></>
-  }
-  if (
+  useEffect(() => {
+    setIsLoading(false)
+    setRecapVid(media.content.content.editorial.recap.items[0].media.playbacks[2].url)
     
+  }, [isLoading]);
+
+  if (
     media.content.content.editorial.recap.items[0] === undefined ||
     media.content.content.editorial === undefined ||
     media.content.content.editorial.recap.items[0].media.playbacks === undefined
@@ -57,30 +62,21 @@ export const Recap = () => {
 
         <video
           controls
-          id="recap-video"
-          key={
-            media.content.content.editorial.recap.items[0].media.playbacks[1]
-              .url
+          id="highlight-video"
+          key={recapVid}
+          autoPlay={auto}
+          poster={
+            media.content.content.editorial.recap.items[0].media.image.cuts[
+              "320x180"
+            ].src
           }
-          width={
-            media.content.content.editorial.recap.items[0].media.playbacks[1]
-              .width
-          }
-          height={
-            media.content.content.editorial.recap.items[0].media.playbacks[1]
-              .height
-          }
-          loop
-          autoPlay=""
-          playsInline
         >
           <source
-            src={
-              media.content.content.editorial.recap.items[0].media.playbacks[2]
-                .url
-            }
-            title="recap"
+            src={recapVid}
+            title="highlight"
             type="video/mp4"
+            height={recapVid.height}
+            width={recapVid.width}
           />
         </video>
         <p id="recap-blurb">
@@ -96,13 +92,24 @@ export const Recap = () => {
           {media.content.content.highlights.scoreboard.items.map(
             (highlight) => {
               return (
-                <div className="highlight-div" key={highlight.id}>
+                <div
+                  className="highlight-div"
+                  key={highlight.id}
+                  onClick={() => {
+                    setAuto(highlight.playbacks[0].url);
+                  }}
+                >
                   <video
+                    poster={highlight.image.cuts["1024x576"].src}
                     key={highlight.playbacks[0].url}
                     width={highlight.playbacks[0].width}
                     height={highlight.playbacks[0].height}
-                    controls
-                    playsInline
+                    onClick={() => {
+                      setRecapVid(highlight.playbacks[2].url);
+                      setAuto(true);
+                    }}
+                    // controls
+                    // playsInline
                   >
                     <source
                       src={highlight.playbacks[2].url}
