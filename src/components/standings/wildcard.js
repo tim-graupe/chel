@@ -139,7 +139,7 @@ export function Wildcard(){
         );
       })}
 
-      <table>
+      <table className="standings-table">
         <thead>
           <tr>
           <th scope="col" id="division-row">
@@ -173,7 +173,7 @@ export function Wildcard(){
         })}
       </table>
 
-      <table>
+      <table className="standings-table">
         <thead>
         <tr>
         <th scope="col" id="division-row">

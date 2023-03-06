@@ -30,7 +30,7 @@ export function League() {
 
   return (
     <div id="table-container">
-      <table>
+      <table className="standings-table">
         <thead>
           <tr>
             <th scope="col" id="division-row"></th>

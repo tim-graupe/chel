@@ -117,15 +117,17 @@ export const OnIce = (props) => {
   };
 
   return (
-    <canvas
-      ref={drawCanvas}
-      style={{
-        backgroundImage: `url(${rink})`,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-      }}
-    />
+
+    <h1>Live is tracker, work in progress</h1>
+    // <canvas
+    //   ref={drawCanvas}
+    //   style={{
+    //     backgroundImage: `url(${rink})`,
+    //     backgroundPosition: "center",
+    //     backgroundRepeat: "no-repeat",
+    //     backgroundSize: "cover",
+    //   }}
+    // />
   );
   //   Object.values(game.gameCenter.gameCenter.liveData.boxscore.teams.away.players)
   //     .filter((player) =>

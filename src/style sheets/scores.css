@@ -1,9 +1,14 @@
+/* #score-container{
+    margin: auto;
+    width: 100%;
+
+} */
+
 .scores-boxes{
-    border: 1px solid cyan;
-    display: flex;
-    flex-direction: row;
-    max-width: 33%;
-    margin-bottom: 10px;
+    margin: auto;
+    width: 80%;
+    border: 3px solid;
+    padding: 10px;
 }
 
 .scores-boxes-teams{
@@ -45,7 +50,7 @@ margin-right: 0;
 
 @media screen and (max-width: 1000px){
 .scores-boxes{
-    width: 100%;
+   
     max-width: 100%;
 }
     

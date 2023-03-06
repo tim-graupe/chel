@@ -52,7 +52,8 @@ export const Scores = () => {
    
   }, [today]);
   return (
-    <div>
+    <div id="score-container">
+      <h1>Scores</h1>
       <ScoresDateNav
         today={today}
         yesterday={yesterday}
