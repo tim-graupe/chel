@@ -14,9 +14,9 @@ export const Recap = () => {
 
   const initializeVideo = () => {
     if (!autoPlay) {
-    setRecapVideo(
-      media.content.content.editorial.recap.items[0].media.playbacks[2].url
-    );
+      setRecapVideo(
+        media.content.content.editorial.recap.items[0].media.playbacks[2].url
+      );
     }
   };
 
@@ -72,9 +72,7 @@ export const Recap = () => {
         <video
           controls
           id="recap-video"
-          key={
-           recapVideo
-          }
+          key={recapVideo}
           width={
             media.content.content.editorial.recap.items[0].media.playbacks[1]
               .width
@@ -110,12 +108,13 @@ export const Recap = () => {
                 <div className="highlight-div" key={highlight.id}>
                   <video
                     key={highlight.playbacks[0].url}
+                    poster={highlight.image.cuts['768x432'].src}
                     width={highlight.playbacks[0].width}
                     height={highlight.playbacks[0].height}
-                    onClick={(() => {
-                      setAutoPlay(true)
-                      setRecapVideo(highlight.playbacks[2].url)
-                    })}
+                    onClick={() => {
+                      setAutoPlay(true);
+                      setRecapVideo(highlight.playbacks[2].url);
+                    }}
                     // controls
                     // playsInline
                   >

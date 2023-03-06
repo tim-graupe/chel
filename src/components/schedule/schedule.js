@@ -5,7 +5,7 @@ import {
   PreviewContext,
   GameCenterContext,
 } from "../../dispatch/dispatch";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 export const Schedule = () => {
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
@@ -13,12 +13,24 @@ export const Schedule = () => {
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
   const [schedule, setSchedule] = useState([]);
+  const [teamList, setTeamList] = useState([])
   const id = useParams();
   const current = new Date();
+  let navigate = useNavigate()
+
 
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
+
+  useEffect(() => {
+    const getTeamlist = () => {
+      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
+        mode: "cors",
+      }).then((response) => response.json()).then((response) => setTeamList(response.teams))
+    };
+    getTeamlist()
+  }, []);
 
   useEffect(() => {
     const getSchedule = () => {
@@ -77,8 +89,24 @@ export const Schedule = () => {
       .catch((err) => console.error(err));
   };
 
+  const handleDropdown = (value) => {
+    navigate(`${value.target.value}`);
+    value = "";
+  }
+
   return (
     <>
+    <select onChange={handleDropdown}>
+      <option default value='0'>Select Team</option>
+    {teamList.sort((a,b) => {
+    return a.name > b.name;
+}).map((team) => {
+        return (
+          <option key={team.id} value={team.id}>{team.name}</option>
+        )
+      })}
+    </select>
+
       <div id="schedule-container">
         {schedule.map((games) => {
           return (
@@ -89,6 +117,7 @@ export const Schedule = () => {
                   month: "short",
                   year: "2-digit",
                   day: "numeric",
+                  
                 })}
               </h1>
               <table id="schedule-day-container">

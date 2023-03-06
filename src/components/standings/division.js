@@ -9,7 +9,7 @@ export const Division = (props) => {
   const [standings, setStandings] = useState([]);
   useEffect(() => {
     const todaysGames = () => {
-      fetch("https://statsapi.web.nhl.com/api/v1/standings", {
+      fetch(`https://statsapi.web.nhl.com/api/v1/standings?season=${props.year}&expand=standings.record`, {
         mode: "cors",
       })
         .then((response) => response.json())

@@ -10,16 +10,18 @@ export const Standings = (props) => {
   const [table, setTable] = useState("division");
   const [roster, setRoster] = useContext(RosterContext)
   const [leaders, setLeaders] = useContext(LeadersContext)
+  const [year, setYear] = useState(20222023)
   const onChange = (e) => {
     setTable(e);
   };
 
+  
   if (table === "division") {
     return (
       <>
         <StandingsNav onChange={onChange} />
 
-        <Division name=""/>
+        <Division name="" year={year}/>
       </>
     );
   } else if (table === "wildcard") {

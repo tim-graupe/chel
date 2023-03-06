@@ -5,10 +5,10 @@ import {
   PreviewContext,
   GameCenterContext,
 } from "../../dispatch/dispatch";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 export const TeamSchedule = () => {
-  const location = useLocation();
+  const [teamList, setTeamList] = useState([]);
   const [teamSchedule, setTeamSchedule] = useContext(TeamContext);
   const [preview, setPreview] = useContext(PreviewContext);
   const { gameCenter, setGameCenter, content, setContent } =
@@ -17,9 +17,22 @@ export const TeamSchedule = () => {
   const { id } = useParams();
   const [team, setTeam] = useState(id);
   const current = new Date();
+  const navigate = useNavigate();
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
   }-${current.getDate()}`;
+
+  useEffect(() => {
+    const getTeamlist = () => {
+      fetch("https://statsapi.web.nhl.com/api/v1/teams", {
+        mode: "cors",
+      })
+        .then((response) => response.json())
+        .then((response) => setTeamList(response.teams));
+    };
+    getTeamlist();
+  }, []);
+
   useEffect(() => {
     const getSchedule = () => {
       fetch(
@@ -39,7 +52,12 @@ export const TeamSchedule = () => {
     if (teamSchedule === null || id !== team) {
       getTeamSchedule(id);
     }
-  }, [id])
+  }, [id]);
+
+  const handleDropdown = (value) => {
+    navigate(`/schedule/${value.target.value}`);
+    value = "";
+  };
 
   const getGameInfo = (gamePk) => {
     fetch(`https://statsapi.web.nhl.com/api/v1/game/${gamePk}/feed/live`, {
@@ -88,6 +106,21 @@ export const TeamSchedule = () => {
   } else
     return (
       <div id="schedule-container">
+        <select onChange={handleDropdown}>
+          <option default value="0">
+            Select Team
+          </option>
+          {teamList.sort((a,b) => {
+    return a.name > b.name;
+}).map((team) => {
+            return (
+              <option key={team.id} value={team.id}>
+                {team.name}
+              </option>
+            );
+          })}
+        </select>
+
         {teamSchedule.map((games) => {
           return (
             <div key={games.date}>
