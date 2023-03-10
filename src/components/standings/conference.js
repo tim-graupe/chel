@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../../style sheets/standings.css";
-export function Conference(props) {
+export function Conference() {
+  const [eastern, setEastern] = useState([]);
+  const [western, setWestern] = useState([]);
   const [currentConf, setCurrentConf] = useState([]);
 
   useEffect(() => {
-    getConference();
+    getEastern();
+    getWestern();
   }, []);
-  const getConference = () => {
-    if (props.name === "Eastern") {
-    fetch("https://statsapi.web.nhl.com/api/v1/standings?expand=standings.conference", {
+  const getEastern = () => {
+    fetch("https://statsapi.web.nhl.com/api/v1/standings", {
       mode: "cors",
     })
       .then((response) => response.json())
       .then((response) =>
         setCurrentConf(
-          currentConf
+          eastern
             .concat(
               response.records[0].teamRecords,
               response.records[1].teamRecords
@@ -23,30 +25,27 @@ export function Conference(props) {
         )
       )
       .catch((err) => console.error(err));
-            } else {
-              fetch("https://statsapi.web.nhl.com/api/v1/standings?expand=standings.conference", {
-                mode: "cors",
-              })
-                .then((response) => response.json())
-                .then((response) =>
-                  setCurrentConf(
-                    currentConf
-                      .concat(
-                        response.records[2].teamRecords,
-                        response.records[3].teamRecords
-                      )
-                      .sort((a, b) => b.pointsPercentage - a.pointsPercentage)
-                  )
-                )
-                .catch((err) => console.error(err));
-
-
-
-            }
+  };
+  const getWestern = () => {
+    fetch("https://statsapi.web.nhl.com/api/v1/standings", {
+      mode: "cors",
+    })
+      .then((response) => response.json())
+      .then((response) =>
+        setWestern(
+          western
+            .concat(
+              response.records[2].teamRecords,
+              response.records[3].teamRecords
+            )
+            .sort((a, b) => b.points - a.points)
+        )
+      )
+      .catch((err) => console.error(err));
   };
   return (
     <div id="table-container">
-      {/* <button
+      <button
         onClick={() => {
           setWestern(currentConf);
           setCurrentConf(eastern);
@@ -61,7 +60,7 @@ export function Conference(props) {
         }}
       >
         Western
-      </button> */}
+      </button>
       <table className="standings-table">
         <thead>
           <tr>

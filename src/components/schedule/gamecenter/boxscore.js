@@ -5,7 +5,7 @@ export const Boxscore = () => {
   const game = useContext(GameCenterContext);
   return (
     <>
-      <table id="live-game-scoreboard">
+      <table id="live-game-scoreboard" className="bs-tables">
         <thead>
           <tr>
             <th>
@@ -28,20 +28,18 @@ export const Boxscore = () => {
         <tbody>
           <tr>
             <td>
-              
               <img
                 src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.gameCenter.gameCenter.gameData.teams.away.id}.svg`}
                 className="schedule-logos"
                 alt="team-pic"
               />
               {game.gameCenter.gameCenter.gameData.teams.away.teamName}
-              </td>
-              <td>
+            </td>
+            <td>
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.away
                   .teamStats.teamSkaterStats.shots
               }
-              
             </td>
             {game.gameCenter.gameCenter.liveData.linescore.periods.map(
               (period) => {
@@ -51,20 +49,18 @@ export const Boxscore = () => {
           </tr>
           <tr>
             <td>
-              
               <img
                 src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.gameCenter.gameCenter.gameData.teams.home.id}.svg`}
                 className="schedule-logos"
                 alt="team-pic"
               />
               {game.gameCenter.gameCenter.gameData.teams.home.teamName}
-              </td>
-              <td>
+            </td>
+            <td>
               {
                 game.gameCenter.gameCenter.liveData.boxscore.teams.home
                   .teamStats.teamSkaterStats.shots
               }
-              
             </td>
             {game.gameCenter.gameCenter.liveData.linescore.periods.map(
               (period) => {
@@ -75,7 +71,7 @@ export const Boxscore = () => {
         </tbody>
       </table>
 
-      <table id="scorers">
+      <table id="scorers" className="bs-tables">
         <caption>Scoring</caption>
         <thead>
           <tr>
@@ -133,7 +129,8 @@ export const Boxscore = () => {
         </tbody>
       </table>
 
-      <table id="shots-on-goal-table">
+      <table id="shots-on-goal-table" className="bs-tables">
+        <caption>Shots on Goal</caption>
         <thead>
           <tr>
             <th>Period</th>
@@ -180,7 +177,7 @@ export const Boxscore = () => {
           </tr>
         </tbody>
       </table>
-      <table id="live-team-stats-table">
+      <table id="live-team-stats-table" className="bs-tables">
         <thead>
           <tr>
             <th>Category</th>

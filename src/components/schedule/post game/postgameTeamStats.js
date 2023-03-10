@@ -31,7 +31,7 @@ export const TeamStats = () => {
 
     return (
       <div id="gamecenter-team-stats-container">
-        <table className="post-game-skater-stats">
+        <table id="post-game-skater-stats" className="bs-tables">
           <thead>
             <tr>
               <th></th>
@@ -169,7 +169,7 @@ export const TeamStats = () => {
 
         <table
           id="post-game-skater-stats-away"
-          className="post-game-skater-stats"
+           className="bs-tables"
         >
           <caption>
             {stats.gameCenter.gameCenter.gameData.teams.away.teamName}
@@ -319,7 +319,7 @@ export const TeamStats = () => {
 
         <table
           id="post-game-skater-stats-home"
-          className="post-game-skater-stats"
+           className="bs-tables"
         >
           <caption>
             {stats.gameCenter.gameCenter.gameData.teams.home.teamName}

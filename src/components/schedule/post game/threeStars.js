@@ -38,7 +38,7 @@ export const ThreeStars = () => {
     return <></>;
   }
   return (
-    <table id="stars-of-the-game">
+    <table id="stars-of-the-game" className="bs-tables">
       <thead>
         <tr>Stars of the Game</tr>
       </thead>

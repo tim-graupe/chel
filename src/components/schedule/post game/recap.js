@@ -29,7 +29,7 @@ export const Recap = () => {
     media.content.content.editorial.recap.items[0].media.playbacks === undefined
   ) {
     return (
-      <>
+      <div id="gamecenter-team-stats-container">
         {media.content.content.editorial.recap.items.map((item) => {
           return (
             <div key={item.headline} id="recap-container">
@@ -44,7 +44,7 @@ export const Recap = () => {
             </div>
           );
         })}
-      </>
+      </div>
     );
   } else {
     return (

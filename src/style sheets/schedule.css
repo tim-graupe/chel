@@ -306,8 +306,13 @@ td {
 }
 
 
-
-
+.bs-tables{
+    min-width: 100%;
+}
+#gamecenter-team-stats-container, #recap-container, .pbp-events{
+    width: 66%;
+    padding-left: 25%;
+}
 @media screen and (max-width: 1000px) {
 
     #schedule-container {
@@ -335,15 +340,15 @@ td {
         min-width: 200px;
     } */
 
+
     #live-game-scoreboard {
         min-width: 100%
     }
 
-    #recap-container {
+    #gamecenter-team-stats-container, #recap-container{
         max-width: 100%;
-        width: auto;
+        padding-left: 0
     }
-
     #recap-video {
         width: 100%;
     }
