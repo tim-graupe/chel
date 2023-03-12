@@ -71,7 +71,7 @@ export const Preview = () => {
         </section>
         <section className="preview-col" id="preview-mid-col">
           <PlayersToWatch />
-
+          
           <Goalies teams={teams} />
 
           <ScheduleRoster teams={teams} />

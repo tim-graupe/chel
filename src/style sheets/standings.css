@@ -1,35 +1,34 @@
-#division-row {
+
+#division-row{
     text-align: left;
 }
 
 
-#table-container {
-    margin: auto;
-    border: 3px solid;
-    padding: 10px;
-    width: 60%;
-}
-
-.standings-table {
-    width: 100%;
-    table-layout: fixed;
-    overflow-wrap: break-word;
+table.standings-table{
+    margin-left: auto; 
+    margin-right: auto;
+    width: 50%;
+    
 }
 
 
 /* tr {
     color: white;
 } */
-.logos {
+.logos{
     max-width: 33%;
     float: left;
 }
 
-@media screen and (max-width: 1000px) {
-    .standings-table {
-        overflow-x: auto;
-        display: block;
-    }
-    
+@media screen and (max-width: 1000px){
+.standings-table {
+    width: auto;
+    overflow-x: scroll;
+}
+
+.standings-table > th, td {
+  text-align: left;
+  padding: 8px;
+}
 
 }

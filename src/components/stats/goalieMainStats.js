@@ -71,10 +71,10 @@ export const GoalieMainStats = () => {
                       <td>{season.ot}</td>
                       <td>{season.goalsAgainst}</td>
                       <td>{season.shotsAgainst}</td>
-                      <td>{season.savePercentage.toFixed(3)}</td>
                       <td>
                         {Math.round(season.goalAgainstAverage * 100) / 100}
                       </td>
+                      <td>{season.savePercentage.toFixed(3)}</td>
                       <td>{season.shutouts}</td>
                       <td>{season.timeOnIce}</td>
                     </tr>
@@ -91,10 +91,10 @@ export const GoalieMainStats = () => {
                       <td>{season.ot}</td>
                       <td>{season.goalsAgainst}</td>
                       <td>{season.shotsAgainst}</td>
-                      <td>{season.savePercentage.toFixed(3)}</td>
                       <td>
                         {Math.round(season.goalAgainstAverage * 100) / 100}
                       </td>
+                      <td>{season.savePercentage.toFixed(3)}</td>
                       <td>{season.shutouts}</td>
                       <td>{season.timeOnIce}</td>
                     </tr>

@@ -97,7 +97,6 @@ export const Gamelog = (props) => {
                     {new Date(`${game.date}`).toLocaleString("en-US", {
                   timeZone: "UTC",
                   month: "short",
-                  year: "2-digit",
                   day: "numeric",
                     })}
                   </td>
