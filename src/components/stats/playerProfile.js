@@ -145,7 +145,10 @@ useEffect(() => {
             </table>
             </div>
           </div>
+          <div className="player-stats-container">
           <LastFive />
+          </div>
+        
         </div>
         
 
@@ -160,7 +163,7 @@ useEffect(() => {
                   setTab('career')
                 }}>Career</button>
                 
-                <section id="player-stats-container">
+                <section className="player-stats-container">
                 {tab === 'stats' ? <PlayerStats/> : 
         tab === 'game-log' ?
         <Gamelog/> :
