@@ -51,34 +51,38 @@ export const DaysScores = (props) => {
       {props.scores[0].games.map((game) => {
         if (
           game.status.abstractGameState === "Preview" &&
-          game.tickets !== undefined &&
-          game.broadcasts !== undefined
+          game.tickets !== undefined
         ) {
           return (
             <div className="scores-boxes" key={game.gamePk}>
               <div className="scores-boxes-teams">
-                <h2 className="scores-boxes-teams-away">
-                  {game.teams.away.team.name}
-                </h2>
-                <div>
-                  {game.teams.away.leagueRecord.wins} -{" "}
-                  {game.teams.away.leagueRecord.losses} -{" "}
-                  {game.teams.away.leagueRecord.ot}
+                <div className="scores-boxes-teams-away">
+                  <div>
+                    {" "}
+                    <h2>{game.teams.away.team.name}</h2>
+                    {game.teams.away.leagueRecord.wins} -{" "}
+                    {game.teams.away.leagueRecord.losses} -{" "}
+                    {game.teams.away.leagueRecord.ot}
+                  </div>
                 </div>
-                <h2 className="scores-boxes-teams-home">
-                  {game.teams.home.team.name}
-                </h2>
-                <div>
-                  {game.teams.home.leagueRecord.wins} -{" "}
-                  {game.teams.home.leagueRecord.losses} -{" "}
-                  {game.teams.home.leagueRecord.ot}
+                <div className="scores-boxes-teams-home">
+                  <div>
+                    {" "}
+                    <h2>{game.teams.home.team.name}</h2>
+                    {game.teams.home.leagueRecord.wins} -{" "}
+                    {game.teams.home.leagueRecord.losses} -{" "}
+                    {game.teams.home.leagueRecord.ot}
+                  </div>
                 </div>
               </div>
-              <div className="broadcast-details">
-                {game.broadcasts.map((broadcast) => {
-                  return <p key={broadcast.id}>{broadcast.name}</p>;
-                })}
-              </div>
+              {/* Conditional rendering of Broadcasts */}
+              {game.broadcasts ? (
+                <div className="broadcast-details">
+                  {game.broadcasts.map((broadcast) => {
+                    return <p key={broadcast.id}>{broadcast.name}</p>;
+                  })}
+                </div>
+              ) : null}
               <div className="scores-boxes-content">
                 <Link
                   className="link-style"
@@ -95,15 +99,18 @@ export const DaysScores = (props) => {
                   Preview{" "}
                 </Link>
 
-                <a className="link-style" href={game.tickets[0].ticketLink}>
-                  Tickets
-                </a>
+                {/* Conditional rendering of Tickets link */}
+                {game.tickets && game.tickets[0] ? (
+                  <a className="link-style" href={game.tickets[0].ticketLink}>
+                    Tickets
+                  </a>
+                ) : null}
               </div>
             </div>
           );
         } else if (
-          (game.tickets === undefined || game.broadcasts === undefined) &&
-          game.status.abstractGameState !== "Final"
+          game.status.abstractGameState !== "Final" &&
+          (game.tickets === undefined || game.broadcasts === undefined)
         ) {
           return (
             <div key={game.gamePk} className="scores-boxes">
@@ -126,7 +133,15 @@ export const DaysScores = (props) => {
                     {game.teams.home.leagueRecord.ot}
                   </div>
                 </div>
-              </div>
+              </div>{" "}
+              {/* Conditional rendering of Broadcasts */}
+              {game.broadcasts ? (
+                <div className="broadcast-details">
+                  {game.broadcasts.map((broadcast) => {
+                    return <p key={broadcast.id}>{broadcast.name}</p>;
+                  })}
+                </div>
+              ) : null}
               <div id="scores-boxes-content">
                 <Link
                   className="link-style"
@@ -142,6 +157,13 @@ export const DaysScores = (props) => {
                 >
                   Preview{" "}
                 </Link>
+
+                {/* Conditional rendering of Tickets link */}
+                {game.tickets && game.tickets[0] ? (
+                  <a className="link-style" href={game.tickets[0].ticketLink}>
+                    Tickets
+                  </a>
+                ) : null}
               </div>
             </div>
           );

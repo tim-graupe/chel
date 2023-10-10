@@ -13,11 +13,10 @@ export const Schedule = () => {
   const { gameCenter, setGameCenter, content, setContent } =
     useContext(GameCenterContext);
   const [schedule, setSchedule] = useState([]);
-  const [teamList, setTeamList] = useState([])
+  const [teamList, setTeamList] = useState([]);
   const id = useParams();
   const current = new Date();
-  let navigate = useNavigate()
-
+  let navigate = useNavigate();
 
   const date = `${current.getFullYear()}-${
     current.getMonth() + 1
@@ -27,15 +26,17 @@ export const Schedule = () => {
     const getTeamlist = () => {
       fetch("https://statsapi.web.nhl.com/api/v1/teams", {
         mode: "cors",
-      }).then((response) => response.json()).then((response) => setTeamList(response.teams))
+      })
+        .then((response) => response.json())
+        .then((response) => setTeamList(response.teams));
     };
-    getTeamlist()
+    getTeamlist();
   }, []);
 
   useEffect(() => {
     const getSchedule = () => {
       fetch(
-        `https://statsapi.web.nhl.com/api/v1/schedule?startDate=${date}&endDate=2023-04-16&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore`,
+        `https://statsapi.web.nhl.com/api/v1/schedule?startDate=2023-10-12&endDate=2024-04-16&expand=schedule.ticket&expand=schedule.broadcasts&expand=schedule.linescore`,
         {
           mode: "cors",
         }
@@ -92,49 +93,38 @@ export const Schedule = () => {
   const handleDropdown = (value) => {
     navigate(`${value.target.value}`);
     value = "";
-  }
+  };
 
   return (
     <>
-    <select onChange={handleDropdown}>
-      <option default value='0'>Select Team</option>
-    {teamList.sort((a,b) => {
-    return a.name > b.name;
-}).map((team) => {
-        return (
-          <option key={team.id} value={team.id}>{team.name}</option>
-        )
-      })}
-    </select>
+      <select onChange={handleDropdown}>
+        <option default value="0">
+          Select Team
+        </option>
+        {teamList
+          .sort((a, b) => {
+            return a.name > b.name;
+          })
+          .map((team) => {
+            return (
+              <option key={team.id} value={team.id}>
+                {team.name}
+              </option>
+            );
+          })}
+      </select>
 
       <div id="schedule-container">
         {schedule.map((games) => {
           return (
             <div key={games.date}>
-              <h1>
-                {new Date(`${games.date}`).toLocaleString("en-US", {
-                  timeZone: "UTC",
-                  month: "short",
-                  year: "2-digit",
-                  day: "numeric",
-                  
-                })}
-              </h1>
+              <h1>{/* ... */}</h1>
               <table id="schedule-day-container">
-                <thead>
-                  <tr>
-                    <th>Matchup</th>
-                    <th>Time / Result</th>
-                    <th>Game Info</th>
-                  </tr>
-                </thead>
+                <thead>{/* ... */}</thead>
                 <tbody>
                   {games.games.map((game) => {
                     const time = new Date(game.gameDate);
-                    if (
-                      game.status.abstractGameState === "Preview" &&
-                      game.tickets !== undefined
-                    ) {
+                    if (game.status.abstractGameState === "Preview") {
                       return (
                         <tr key={game.gamePk}>
                           <td>
@@ -177,102 +167,25 @@ export const Schedule = () => {
                             </Link>
                           </td>
 
-                          <td>
-                            <a
-                              className="link-style"
-                              href={game.tickets[0].ticketLink}
-                            >
-                              Tickets
-                            </a>
-                          </td>
-                        </tr>
-                      );
-                    } else if (
-                      game.status.abstractGameState === "Preview" &&
-                      game.broadcasts === undefined
-                    ) {
-                      return (
-                        <tr key={game.gamePk}>
-                          <td>
-                            <Link
-                              className="link-style"
-                              to={`/schedule/${game.teams.away.team.id}`}
-                            >
-                              {game.teams.away.team.name}
-                            </Link>{" "}
-                            @
-                            <Link
-                              className="link-style"
-                              to={`/schedule/${game.teams.home.team.id}`}
-                              onClick={() => {
-                                getTeamSchedule(id);
-                              }}
-                            >
-                              {" "}
-                              {game.teams.home.team.name}{" "}
-                            </Link>
-                          </td>
-
-                          <td>{`${time.getHours()}:${
-                            time.getMinutes() < 2
-                              ? "00"
-                              : "" + time.getMinutes()
-                          }`}</td>
-                          <td>
-                            <Link
-                              className="link-style"
-                              to={`/game/${game.gamePk}/away/${game.teams.away.team.id}/home/${game.teams.home.team.id}`}
-                              onClick={() => {
-                                getPreviewStats(
-                                  game.teams.away.team.id,
-                                  game.teams.home.team.id
-                                );
-
-                                setGameCenter(game);
-                              }}
-                            >
-                              Preview{" "}
-                            </Link>
-                          </td>
+                          {/* Conditional rendering of Tickets link */}
+                          {game.tickets && game.tickets[0] ? (
+                            <td>
+                              <a
+                                className="link-style"
+                                href={game.tickets[0].ticketLink}
+                              >
+                                Tickets
+                              </a>
+                            </td>
+                          ) : null}
                         </tr>
                       );
                     } else if (game.status.abstractGameState === "Live") {
                       return (
                         <tr key={game.gamePk}>
-                          <td>
-                            <Link
-                              className="link-style"
-                              to={`/schedule/${game.teams.away.team.id}`}
-                            >
-                              {game.teams.away.team.name}
-                            </Link>
-                            @
-                            <Link
-                              className="link-style"
-                              to={`/schedule/${game.teams.home.team.id}`}
-                              onClick={() => {
-                                getTeamSchedule(id);
-                              }}
-                            >
-                              {" "}
-                              {game.teams.home.team.name}{" "}
-                            </Link>
-                          </td>
+                          <td>{/* ... */}</td>
 
-                          <td id="score-box">
-                            {/* {game.status.abstractGameState}{" "} */}
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.away.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />
-                            {game.teams.away.score} {game.teams.home.score}
-                            <img
-                              src={`https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/${game.teams.home.team.id}.svg`}
-                              className="schedule-logos"
-                              alt="team-pic"
-                            />{" "}
-                          </td>
+                          <td id="score-box">{/* ... */}</td>
 
                           <td>
                             <Link
@@ -286,13 +199,7 @@ export const Schedule = () => {
                             >
                               GameCenter
                             </Link>{" "}
-                            {/* {game.broadcasts.map((broadcast) => {
-                              return (
-                                <div key={broadcast.type}>
-                                  {broadcast.type}: {broadcast.name}
-                                </div>
-                              );
-                            })} */}
+                            {/* ... */}
                           </td>
                         </tr>
                       );
